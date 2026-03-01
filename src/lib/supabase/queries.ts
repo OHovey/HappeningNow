@@ -1,20 +1,19 @@
 import { createServerClient } from '@/lib/supabase/server';
-import type { Event, MigrationRoute, MigrationRouteWithGeoJSON } from '@/lib/supabase/types';
+import type { Event, EventWithCoords, MigrationRoute, MigrationRouteWithGeoJSON } from '@/lib/supabase/types';
 
 /**
- * Fetch a single event by slug.
- * Returns the event row or null if not found.
+ * Fetch a single event by slug with extracted coordinates.
+ * Uses the get_event_with_coords RPC to extract PostGIS geometry as lng/lat.
+ * Returns the event row with coordinates or null if not found.
  */
-export async function getEventBySlug(slug: string): Promise<Event | null> {
+export async function getEventBySlug(slug: string): Promise<EventWithCoords | null> {
   const supabase = createServerClient();
-  const { data, error } = await supabase
-    .from('events')
-    .select('*')
-    .eq('slug', slug)
-    .single();
+  const { data, error } = await supabase.rpc('get_event_with_coords', {
+    event_slug: slug,
+  });
 
-  if (error || !data) return null;
-  return data;
+  if (error || !data || data.length === 0) return null;
+  return data[0] as EventWithCoords;
 }
 
 /**

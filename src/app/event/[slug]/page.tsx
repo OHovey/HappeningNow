@@ -80,11 +80,11 @@ export default async function EventPage({
     { name: event.name },
   ];
 
-  // Note: coordinates are not directly available from the events table
-  // because PostGIS geometry is stored as WKB. For now, coordinates
-  // are omitted from the MiniMap. A future RPC or view can expose
-  // ST_X(location) and ST_Y(location) for map rendering.
-  // TODO: Add RPC to extract lat/lng from event geometry
+  // Extract coordinates from the RPC result (lng/lat from ST_X/ST_Y)
+  const coordinates: [number, number] | undefined =
+    event.lng != null && event.lat != null
+      ? [event.lng, event.lat]
+      : undefined;
 
   return (
     <>
@@ -98,7 +98,7 @@ export default async function EventPage({
 
       <Breadcrumbs items={breadcrumbItems} />
       <EventHero event={event} />
-      <EventContent event={event} />
+      <EventContent event={event} coordinates={coordinates} />
       <NearbyEvents events={nearbyEvents} />
       <BackToMap />
     </>
