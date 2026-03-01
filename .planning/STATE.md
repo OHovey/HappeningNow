@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-03-01)
 ## Current Position
 
 Phase: 3 of 5 (Visual Differentiators)
-Plan: 1 of 3 in current phase
-Status: In progress
-Last activity: 2026-03-01 — Crowd heatmap overlay with toggle, month sync, click popup, crowd badge
+Plan: 3 of 3 in current phase
+Status: Phase 3 complete
+Last activity: 2026-03-01 — Destination calendar grid pages with crowd bars, event pills, weather, booking widget
 
-Progress: [████████▓░] 47% (Phases 1-2 complete, Phase 3 Plan 1 complete)
+Progress: [██████████] 60% (Phases 1-3 complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 11
+- Total plans completed: 13
 - Average duration: 3min
-- Total execution time: 0.45 hours
+- Total execution time: 0.55 hours
 
 **By Phase:**
 
@@ -45,6 +45,7 @@ Progress: [████████▓░] 47% (Phases 1-2 complete, Phase 3 Pla
 | Phase 02 P04 | 4min | 2 tasks | 8 files |
 | Phase 02 P05 | 1min | 2 tasks | 4 files |
 | Phase 03 P01 | 4min | 2 tasks | 8 files |
+| Phase 03 P03 | 3min | 2 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -99,6 +100,10 @@ Recent decisions affecting current work:
 - [03-01]: Browser Supabase client used for destination fetch in MapView (client component)
 - [03-01]: setData used for month sync instead of setFilter because crowd_score property changes per month
 - [03-01]: weather_data type fixed from {temp, rain, sunshine} to {temp_c, rain_days, sunshine_hours}
+- [03-03]: computeBestMonths weights crowd 60% / weather 40%, temp comfort at 23C
+- [03-03]: DestinationHero uses gradient background (no hero images in seed data)
+- [03-03]: BookingWidget uses next/script lazyOnload for Lighthouse perf; booking_destination_id nullable with fallback
+- [03-03]: CalendarGrid responsive: cols-3/4/6/12 breakpoints; event pills expand inline with affiliate links
 
 ### Pending Todos
 
@@ -114,5 +119,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-01
-Stopped at: Completed 03-01-PLAN.md (Crowd Heatmap Overlay)
+Stopped at: Completed 03-03-PLAN.md (Destination Calendar Grid Pages)
 Resume file: None

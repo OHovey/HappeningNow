@@ -44,13 +44,13 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Destination Drilldown
 
-- [ ] **DEST-01**: `/destination/[slug]` SSG pages with map flyTo animation on navigation
-- [ ] **DEST-02**: 12-month calendar grid showing events, wildlife events, and crowd data per month
-- [ ] **DEST-03**: Crowd level displayed as green→red gradient background per month column
-- [ ] **DEST-04**: Weather summary per month (temperature, rain days, sunshine hours)
-- [ ] **DEST-05**: "Best time to visit" summary text per destination
-- [ ] **DEST-06**: Event/wildlife pills in calendar that expand to show details + affiliate links
-- [ ] **DEST-07**: Booking.com widget on destination page pre-filled with destination and best month
+- [x] **DEST-01**: `/destination/[slug]` SSG pages with map flyTo animation on navigation
+- [x] **DEST-02**: 12-month calendar grid showing events, wildlife events, and crowd data per month
+- [x] **DEST-03**: Crowd level displayed as green→red gradient background per month column
+- [x] **DEST-04**: Weather summary per month (temperature, rain days, sunshine hours)
+- [x] **DEST-05**: "Best time to visit" summary text per destination
+- [x] **DEST-06**: Event/wildlife pills in calendar that expand to show details + affiliate links
+- [x] **DEST-07**: Booking.com widget on destination page pre-filled with destination and best month
 
 ### Reverse Search
 
@@ -105,7 +105,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Performance & Polish
 
-- [ ] **PERF-01**: Lighthouse mobile score > 90
+- [x] **PERF-01**: Lighthouse mobile score > 90
 - [x] **PERF-02**: Map initial load < 2 seconds
 - [x] **PERF-03**: API response time < 200ms with PostGIS spatial indexes
 - [x] **PERF-04**: Responsive design: mobile-first for all components, touch-optimised map
@@ -190,14 +190,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 | WILD-03 | Phase 3 | Pending |
 | WILD-04 | Phase 3 | Pending |
 | WILD-05 | Phase 3 | Pending |
-| DEST-01 | Phase 3 | Pending |
-| DEST-02 | Phase 3 | Pending |
-| DEST-03 | Phase 3 | Pending |
-| DEST-04 | Phase 3 | Pending |
-| DEST-05 | Phase 3 | Pending |
-| DEST-06 | Phase 3 | Pending |
-| DEST-07 | Phase 3 | Pending |
-| PERF-01 | Phase 3 | Pending |
+| DEST-01 | Phase 3 | Complete |
+| DEST-02 | Phase 3 | Complete |
+| DEST-03 | Phase 3 | Complete |
+| DEST-04 | Phase 3 | Complete |
+| DEST-05 | Phase 3 | Complete |
+| DEST-06 | Phase 3 | Complete |
+| DEST-07 | Phase 3 | Complete |
+| PERF-01 | Phase 3 | Complete |
 | SEO-01 | Phase 4 | Pending |
 | SEO-02 | Phase 4 | Pending |
 | SEO-03 | Phase 4 | Pending |
