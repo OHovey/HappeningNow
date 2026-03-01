@@ -23,7 +23,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **MAP-05**: Category toggle buttons (Festivals / Wildlife / All) show/hide marker layers
 - [x] **MAP-06**: "What's happening this week" default view on page load showing current week's events
 - [x] **MAP-07**: Month picker dropdown above the map for direct month selection
-- [ ] **MAP-08**: Click any event marker opens side panel with event details, photo, dates, description, and affiliate CTAs
+- [x] **MAP-08**: Click any event marker opens side panel with event details, photo, dates, description, and affiliate CTAs
 - [x] **MAP-09**: Map controls: zoom, locate me, fullscreen
 
 ### Crowd Heatmap
@@ -86,9 +86,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Affiliate & Monetisation
 
-- [ ] **AFFL-01**: Booking.com affiliate deep links with destination ID + dates on event panels and detail pages
-- [ ] **AFFL-02**: GetYourGuide/Viator affiliate deep links for experiences/tours on event and wildlife pages
-- [ ] **AFFL-03**: Affiliate CTAs contextually placed at moment of discovery intent (side panel, detail pages, search results)
+- [x] **AFFL-01**: Booking.com affiliate deep links with destination ID + dates on event panels and detail pages
+- [x] **AFFL-02**: GetYourGuide/Viator affiliate deep links for experiences/tours on event and wildlife pages
+- [x] **AFFL-03**: Affiliate CTAs contextually placed at moment of discovery intent (side panel, detail pages, search results)
 
 ### Email & Growth
 
@@ -164,11 +164,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MAP-05 | Phase 1 | Complete |
 | MAP-06 | Phase 1 | Complete |
 | MAP-07 | Phase 1 | Complete |
-| MAP-08 | Phase 1 | Pending |
+| MAP-08 | Phase 1 | Complete |
 | MAP-09 | Phase 1 | Complete |
-| AFFL-01 | Phase 1 | Pending |
-| AFFL-02 | Phase 1 | Pending |
-| AFFL-03 | Phase 1 | Pending |
+| AFFL-01 | Phase 1 | Complete |
+| AFFL-02 | Phase 1 | Complete |
+| AFFL-03 | Phase 1 | Complete |
 | EMAIL-01 | Phase 1 | Pending |
 | EMAIL-02 | Phase 1 | Pending |
 | EMAIL-03 | Phase 1 | Pending |

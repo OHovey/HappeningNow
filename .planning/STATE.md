@@ -10,24 +10,24 @@ See: .planning/PROJECT.md (updated 2026-03-01)
 ## Current Position
 
 Phase: 1 of 5 (Map Foundation)
-Plan: 6 of 7 in current phase
+Plan: 7 of 7 in current phase
 Status: Executing
-Last activity: 2026-03-01 — Completed 01-05 Timeline & category filters
+Last activity: 2026-03-01 — Completed 01-06 Event detail panel & affiliate CTAs
 
-Progress: [████░░░░░░] 14%
+Progress: [█████░░░░░] 17%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
+- Total plans completed: 5
 - Average duration: 3min
-- Total execution time: 0.22 hours
+- Total execution time: 0.27 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-map-foundation | 4 | 13min | 3min |
+| 01-map-foundation | 5 | 16min | 3min |
 
 **Recent Trend:**
 - Last 5 plans: -
@@ -36,6 +36,7 @@ Progress: [████░░░░░░] 14%
 *Updated after each plan completion*
 | Phase 01 P03 | 18min | 2 tasks | 7 files |
 | Phase 01 P05 | 3min | 2 tasks | 6 files |
+| Phase 01 P06 | 3min | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -61,6 +62,8 @@ Recent decisions affecting current work:
 - [01-04]: Two-layer SSR isolation: 'use client' MapShell + next/dynamic ssr:false MapView
 - [01-05]: Source-level filtering (filterGeoJSON + setData) not layer setFilter -- keeps cluster counts accurate
 - [01-05]: At least one category must remain active -- prevents empty map confusion
+- [01-06]: Affiliate URL builders omit tracking params when env vars missing -- CTAs always visible
+- [01-06]: GeoJSON feature properties used directly from map click (no re-fetch from Supabase)
 
 ### Pending Todos
 
@@ -76,5 +79,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-01
-Stopped at: Completed 01-05-PLAN.md (Timeline & category filters)
+Stopped at: Completed 01-06-PLAN.md (Event detail panel & affiliate CTAs)
 Resume file: None
