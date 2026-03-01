@@ -36,11 +36,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Wildlife & Migration Tracker
 
-- [ ] **WILD-01**: Wildlife events appear alongside festival events on the Timeline Map as first-class content
-- [ ] **WILD-02**: Animated migration route paths on map (curved lines per species)
-- [ ] **WILD-03**: Pulse dot moves along each active route to show animal position based on selected month
-- [ ] **WILD-04**: Species toggle controls (Whales / Wildebeest / Butterflies / Birds / All)
-- [ ] **WILD-05**: Click route or dot shows popup with best viewing spots, peak dates, and tour affiliate links
+- [x] **WILD-01**: Wildlife events appear alongside festival events on the Timeline Map as first-class content
+- [x] **WILD-02**: Animated migration route paths on map (curved lines per species)
+- [x] **WILD-03**: Pulse dot moves along each active route to show animal position based on selected month
+- [x] **WILD-04**: Species toggle controls (Whales / Wildebeest / Butterflies / Birds / All)
+- [x] **WILD-05**: Click route or dot shows popup with best viewing spots, peak dates, and tour affiliate links
 
 ### Destination Drilldown
 
@@ -185,11 +185,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CROWD-03 | Phase 3 | Complete |
 | CROWD-04 | Phase 3 | Complete |
 | CROWD-05 | Phase 3 | Complete |
-| WILD-01 | Phase 3 | Pending |
-| WILD-02 | Phase 3 | Pending |
-| WILD-03 | Phase 3 | Pending |
-| WILD-04 | Phase 3 | Pending |
-| WILD-05 | Phase 3 | Pending |
+| WILD-01 | Phase 3 | Complete |
+| WILD-02 | Phase 3 | Complete |
+| WILD-03 | Phase 3 | Complete |
+| WILD-04 | Phase 3 | Complete |
+| WILD-05 | Phase 3 | Complete |
 | DEST-01 | Phase 3 | Complete |
 | DEST-02 | Phase 3 | Complete |
 | DEST-03 | Phase 3 | Complete |
