@@ -1,0 +1,602 @@
+[
+  {
+    "species": "Wildebeest",
+    "name": "Great Wildebeest Migration",
+    "slug": "great-wildebeest-migration",
+    "description": "Circular migration of 1.5 million wildebeest through the Serengeti-Mara ecosystem following seasonal rains.",
+    "route_coordinates": [
+      [
+        34.8,
+        -3
+      ],
+      [
+        34.5,
+        -2.5
+      ],
+      [
+        34.3,
+        -2
+      ],
+      [
+        34.5,
+        -1.8
+      ],
+      [
+        35,
+        -1.5
+      ],
+      [
+        35.3,
+        -1.3
+      ],
+      [
+        35.1,
+        -1.5
+      ],
+      [
+        34.8,
+        -2
+      ],
+      [
+        34.9,
+        -2.5
+      ],
+      [
+        34.8,
+        -3
+      ]
+    ],
+    "peak_months": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "image_url": null
+  },
+  {
+    "species": "Humpback Whale",
+    "name": "North Pacific Humpback Migration",
+    "slug": "north-pacific-humpback-migration",
+    "description": "Humpback whales migrate from Alaska feeding grounds to Hawaiian breeding waters, covering 5,000 km.",
+    "route_coordinates": [
+      [
+        -150,
+        58
+      ],
+      [
+        -152,
+        55
+      ],
+      [
+        -155,
+        50
+      ],
+      [
+        -157,
+        45
+      ],
+      [
+        -158,
+        40
+      ],
+      [
+        -158.5,
+        35
+      ],
+      [
+        -157.5,
+        30
+      ],
+      [
+        -156.5,
+        25
+      ],
+      [
+        -156.3,
+        20.8
+      ]
+    ],
+    "peak_months": [
+      12,
+      1,
+      2,
+      3
+    ],
+    "image_url": null
+  },
+  {
+    "species": "Monarch Butterfly",
+    "name": "Monarch Butterfly Migration",
+    "slug": "monarch-butterfly-migration",
+    "description": "Multi-generational 4,800 km migration from Canada and eastern US to overwintering sites in central Mexico.",
+    "route_coordinates": [
+      [
+        -80,
+        45
+      ],
+      [
+        -82,
+        42
+      ],
+      [
+        -85,
+        38
+      ],
+      [
+        -88,
+        35
+      ],
+      [
+        -92,
+        32
+      ],
+      [
+        -95,
+        30
+      ],
+      [
+        -98,
+        28
+      ],
+      [
+        -100,
+        25
+      ],
+      [
+        -100.3,
+        19.6
+      ]
+    ],
+    "peak_months": [
+      9,
+      10,
+      11,
+      3,
+      4
+    ],
+    "image_url": null
+  },
+  {
+    "species": "Arctic Tern",
+    "name": "Arctic Tern Pole-to-Pole Migration",
+    "slug": "arctic-tern-pole-to-pole-migration",
+    "description": "The longest migration of any animal, flying from Arctic to Antarctic and back — up to 71,000 km annually.",
+    "route_coordinates": [
+      [
+        -20,
+        65
+      ],
+      [
+        -20,
+        55
+      ],
+      [
+        -18,
+        45
+      ],
+      [
+        -17,
+        35
+      ],
+      [
+        -16,
+        28
+      ],
+      [
+        -16,
+        15
+      ],
+      [
+        -10,
+        0
+      ],
+      [
+        0,
+        -15
+      ],
+      [
+        5,
+        -30
+      ],
+      [
+        2,
+        -45
+      ],
+      [
+        0,
+        -60
+      ],
+      [
+        -5,
+        -70
+      ]
+    ],
+    "peak_months": [
+      4,
+      5,
+      9,
+      10
+    ],
+    "image_url": null
+  },
+  {
+    "species": "Gray Whale",
+    "name": "Eastern Pacific Gray Whale Migration",
+    "slug": "eastern-pacific-gray-whale-migration",
+    "description": "Gray whales travel 16,000 km from Arctic feeding grounds to Baja California lagoons for calving.",
+    "route_coordinates": [
+      [
+        -169,
+        65
+      ],
+      [
+        -165,
+        60
+      ],
+      [
+        -155,
+        55
+      ],
+      [
+        -145,
+        50
+      ],
+      [
+        -130,
+        45
+      ],
+      [
+        -125,
+        40
+      ],
+      [
+        -120,
+        35
+      ],
+      [
+        -117,
+        32
+      ],
+      [
+        -115,
+        28
+      ],
+      [
+        -114.6,
+        27.6
+      ]
+    ],
+    "peak_months": [
+      1,
+      2,
+      3,
+      12
+    ],
+    "image_url": null
+  },
+  {
+    "species": "Caribou",
+    "name": "Porcupine Caribou Herd Migration",
+    "slug": "porcupine-caribou-herd-migration",
+    "description": "170,000 caribou travel 2,400 km between winter ranges in Yukon and calving grounds on Alaska's coastal plain.",
+    "route_coordinates": [
+      [
+        -138,
+        63
+      ],
+      [
+        -140,
+        64
+      ],
+      [
+        -141,
+        66
+      ],
+      [
+        -142,
+        67.5
+      ],
+      [
+        -143,
+        68.5
+      ],
+      [
+        -144,
+        69.5
+      ],
+      [
+        -145.5,
+        69.8
+      ]
+    ],
+    "peak_months": [
+      5,
+      6,
+      7
+    ],
+    "image_url": null
+  },
+  {
+    "species": "Sockeye Salmon",
+    "name": "Adams River Sockeye Salmon Run",
+    "slug": "adams-river-sockeye-salmon-run",
+    "description": "Sockeye salmon return from the Pacific Ocean to spawn in British Columbia's Adams River, turning it crimson.",
+    "route_coordinates": [
+      [
+        -130,
+        50
+      ],
+      [
+        -128,
+        50.5
+      ],
+      [
+        -126,
+        50.5
+      ],
+      [
+        -124,
+        50.8
+      ],
+      [
+        -122.5,
+        51
+      ],
+      [
+        -121,
+        51
+      ],
+      [
+        -119.6,
+        50.9
+      ]
+    ],
+    "peak_months": [
+      10
+    ],
+    "image_url": null
+  },
+  {
+    "species": "Lesser Flamingo",
+    "name": "East African Flamingo Migration",
+    "slug": "east-african-flamingo-migration",
+    "description": "Flamingos move between alkaline lakes in the Great Rift Valley following algal blooms.",
+    "route_coordinates": [
+      [
+        36.1,
+        -0.4
+      ],
+      [
+        36,
+        -0.8
+      ],
+      [
+        35.8,
+        -1.5
+      ],
+      [
+        36,
+        -2
+      ],
+      [
+        36,
+        -2.4
+      ],
+      [
+        35.5,
+        -3
+      ],
+      [
+        35,
+        -3.5
+      ]
+    ],
+    "peak_months": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "image_url": null
+  },
+  {
+    "species": "Green Sea Turtle",
+    "name": "Green Turtle Ascension Island Migration",
+    "slug": "green-turtle-ascension-island-migration",
+    "description": "Green turtles swim 2,300 km from Brazil to tiny Ascension Island to nest, one of the longest turtle migrations.",
+    "route_coordinates": [
+      [
+        -38,
+        -7
+      ],
+      [
+        -35,
+        -8
+      ],
+      [
+        -30,
+        -8.5
+      ],
+      [
+        -25,
+        -8.5
+      ],
+      [
+        -20,
+        -8.2
+      ],
+      [
+        -14.4,
+        -7.9
+      ]
+    ],
+    "peak_months": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "image_url": null
+  },
+  {
+    "species": "African Elephant",
+    "name": "Mali Desert Elephant Migration",
+    "slug": "mali-desert-elephant-migration",
+    "description": "Mali's desert elephants walk a 500 km circular route through the Sahel following ancient water sources.",
+    "route_coordinates": [
+      [
+        -3,
+        15
+      ],
+      [
+        -2.5,
+        15.5
+      ],
+      [
+        -2,
+        16
+      ],
+      [
+        -1.5,
+        16.5
+      ],
+      [
+        -1,
+        16
+      ],
+      [
+        -1.5,
+        15.5
+      ],
+      [
+        -2,
+        15.2
+      ],
+      [
+        -2.5,
+        15
+      ],
+      [
+        -3,
+        15
+      ]
+    ],
+    "peak_months": [
+      5,
+      6,
+      10,
+      11
+    ],
+    "image_url": null
+  },
+  {
+    "species": "Humpback Whale",
+    "name": "Southern Hemisphere Humpback Migration - East Australia",
+    "slug": "southern-hemisphere-humpback-migration-east-australia",
+    "description": "Humpback whales migrate from Antarctic feeding grounds to tropical Queensland waters for breeding.",
+    "route_coordinates": [
+      [
+        155,
+        -65
+      ],
+      [
+        154,
+        -55
+      ],
+      [
+        153.5,
+        -45
+      ],
+      [
+        153,
+        -35
+      ],
+      [
+        153.2,
+        -27
+      ],
+      [
+        152,
+        -20
+      ],
+      [
+        149,
+        -17
+      ]
+    ],
+    "peak_months": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "image_url": null
+  },
+  {
+    "species": "Straw-colored Fruit Bat",
+    "name": "Kasanka Fruit Bat Migration",
+    "slug": "kasanka-fruit-bat-migration",
+    "description": "Ten million straw-colored fruit bats converge on a tiny swamp forest in Zambia — the world's largest mammal migration.",
+    "route_coordinates": [
+      [
+        25,
+        -5
+      ],
+      [
+        27,
+        -8
+      ],
+      [
+        28.5,
+        -10
+      ],
+      [
+        29.2,
+        -12.6
+      ]
+    ],
+    "peak_months": [
+      10,
+      11,
+      12
+    ],
+    "image_url": null
+  },
+  {
+    "species": "Red Crab",
+    "name": "Christmas Island Red Crab Migration",
+    "slug": "christmas-island-red-crab-migration",
+    "description": "50 million red crabs march from forest to coast on Christmas Island to spawn in the Indian Ocean.",
+    "route_coordinates": [
+      [
+        105.55,
+        -10.42
+      ],
+      [
+        105.6,
+        -10.44
+      ],
+      [
+        105.63,
+        -10.47
+      ],
+      [
+        105.65,
+        -10.5
+      ],
+      [
+        105.63,
+        -10.52
+      ]
+    ],
+    "peak_months": [
+      10,
+      11,
+      12
+    ],
+    "image_url": null
+  }
+]

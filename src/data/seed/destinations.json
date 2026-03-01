@@ -1,0 +1,2606 @@
+[
+  {
+    "name": "Bangkok",
+    "slug": "bangkok",
+    "country": "Thailand",
+    "region": "Asia",
+    "longitude": 100.5018,
+    "latitude": 13.7563,
+    "crowd_data": {
+      "1": 6,
+      "2": 6,
+      "3": 7,
+      "4": 7,
+      "5": 5,
+      "6": 4,
+      "7": 4,
+      "8": 4,
+      "9": 4,
+      "10": 5,
+      "11": 7,
+      "12": 8
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 27,
+        "rain_days": 1,
+        "sunshine_hours": 270
+      },
+      "2": {
+        "temp_c": 29,
+        "rain_days": 1,
+        "sunshine_hours": 250
+      },
+      "3": {
+        "temp_c": 30,
+        "rain_days": 3,
+        "sunshine_hours": 270
+      },
+      "4": {
+        "temp_c": 31,
+        "rain_days": 5,
+        "sunshine_hours": 250
+      },
+      "5": {
+        "temp_c": 30,
+        "rain_days": 13,
+        "sunshine_hours": 200
+      },
+      "6": {
+        "temp_c": 30,
+        "rain_days": 14,
+        "sunshine_hours": 180
+      },
+      "7": {
+        "temp_c": 29,
+        "rain_days": 15,
+        "sunshine_hours": 170
+      },
+      "8": {
+        "temp_c": 29,
+        "rain_days": 16,
+        "sunshine_hours": 170
+      },
+      "9": {
+        "temp_c": 29,
+        "rain_days": 17,
+        "sunshine_hours": 160
+      },
+      "10": {
+        "temp_c": 28,
+        "rain_days": 14,
+        "sunshine_hours": 190
+      },
+      "11": {
+        "temp_c": 28,
+        "rain_days": 4,
+        "sunshine_hours": 240
+      },
+      "12": {
+        "temp_c": 27,
+        "rain_days": 1,
+        "sunshine_hours": 270
+      }
+    }
+  },
+  {
+    "name": "Barcelona",
+    "slug": "barcelona",
+    "country": "Spain",
+    "region": "Europe",
+    "longitude": 2.1734,
+    "latitude": 41.3851,
+    "crowd_data": {
+      "1": 4,
+      "2": 4,
+      "3": 5,
+      "4": 6,
+      "5": 7,
+      "6": 8,
+      "7": 9,
+      "8": 9,
+      "9": 8,
+      "10": 6,
+      "11": 4,
+      "12": 5
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 10,
+        "rain_days": 5,
+        "sunshine_hours": 170
+      },
+      "2": {
+        "temp_c": 11,
+        "rain_days": 4,
+        "sunshine_hours": 180
+      },
+      "3": {
+        "temp_c": 13,
+        "rain_days": 5,
+        "sunshine_hours": 220
+      },
+      "4": {
+        "temp_c": 15,
+        "rain_days": 6,
+        "sunshine_hours": 240
+      },
+      "5": {
+        "temp_c": 18,
+        "rain_days": 5,
+        "sunshine_hours": 280
+      },
+      "6": {
+        "temp_c": 22,
+        "rain_days": 4,
+        "sunshine_hours": 310
+      },
+      "7": {
+        "temp_c": 25,
+        "rain_days": 2,
+        "sunshine_hours": 340
+      },
+      "8": {
+        "temp_c": 25,
+        "rain_days": 4,
+        "sunshine_hours": 310
+      },
+      "9": {
+        "temp_c": 22,
+        "rain_days": 5,
+        "sunshine_hours": 260
+      },
+      "10": {
+        "temp_c": 18,
+        "rain_days": 7,
+        "sunshine_hours": 210
+      },
+      "11": {
+        "temp_c": 14,
+        "rain_days": 5,
+        "sunshine_hours": 170
+      },
+      "12": {
+        "temp_c": 11,
+        "rain_days": 5,
+        "sunshine_hours": 160
+      }
+    }
+  },
+  {
+    "name": "Tokyo",
+    "slug": "tokyo",
+    "country": "Japan",
+    "region": "Asia",
+    "longitude": 139.6503,
+    "latitude": 35.6762,
+    "crowd_data": {
+      "1": 5,
+      "2": 5,
+      "3": 7,
+      "4": 8,
+      "5": 6,
+      "6": 5,
+      "7": 6,
+      "8": 6,
+      "9": 5,
+      "10": 7,
+      "11": 7,
+      "12": 6
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 6,
+        "rain_days": 5,
+        "sunshine_hours": 190
+      },
+      "2": {
+        "temp_c": 6,
+        "rain_days": 6,
+        "sunshine_hours": 170
+      },
+      "3": {
+        "temp_c": 10,
+        "rain_days": 10,
+        "sunshine_hours": 180
+      },
+      "4": {
+        "temp_c": 15,
+        "rain_days": 10,
+        "sunshine_hours": 190
+      },
+      "5": {
+        "temp_c": 20,
+        "rain_days": 10,
+        "sunshine_hours": 200
+      },
+      "6": {
+        "temp_c": 22,
+        "rain_days": 12,
+        "sunshine_hours": 150
+      },
+      "7": {
+        "temp_c": 26,
+        "rain_days": 10,
+        "sunshine_hours": 180
+      },
+      "8": {
+        "temp_c": 27,
+        "rain_days": 8,
+        "sunshine_hours": 210
+      },
+      "9": {
+        "temp_c": 24,
+        "rain_days": 11,
+        "sunshine_hours": 150
+      },
+      "10": {
+        "temp_c": 18,
+        "rain_days": 10,
+        "sunshine_hours": 160
+      },
+      "11": {
+        "temp_c": 13,
+        "rain_days": 7,
+        "sunshine_hours": 170
+      },
+      "12": {
+        "temp_c": 8,
+        "rain_days": 4,
+        "sunshine_hours": 190
+      }
+    }
+  },
+  {
+    "name": "Paris",
+    "slug": "paris",
+    "country": "France",
+    "region": "Europe",
+    "longitude": 2.3522,
+    "latitude": 48.8566,
+    "crowd_data": {
+      "1": 5,
+      "2": 5,
+      "3": 6,
+      "4": 7,
+      "5": 8,
+      "6": 9,
+      "7": 9,
+      "8": 8,
+      "9": 8,
+      "10": 7,
+      "11": 5,
+      "12": 6
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 5,
+        "rain_days": 10,
+        "sunshine_hours": 60
+      },
+      "2": {
+        "temp_c": 6,
+        "rain_days": 9,
+        "sunshine_hours": 80
+      },
+      "3": {
+        "temp_c": 9,
+        "rain_days": 10,
+        "sunshine_hours": 130
+      },
+      "4": {
+        "temp_c": 12,
+        "rain_days": 9,
+        "sunshine_hours": 170
+      },
+      "5": {
+        "temp_c": 16,
+        "rain_days": 10,
+        "sunshine_hours": 200
+      },
+      "6": {
+        "temp_c": 19,
+        "rain_days": 9,
+        "sunshine_hours": 230
+      },
+      "7": {
+        "temp_c": 21,
+        "rain_days": 8,
+        "sunshine_hours": 240
+      },
+      "8": {
+        "temp_c": 21,
+        "rain_days": 7,
+        "sunshine_hours": 230
+      },
+      "9": {
+        "temp_c": 18,
+        "rain_days": 8,
+        "sunshine_hours": 180
+      },
+      "10": {
+        "temp_c": 13,
+        "rain_days": 9,
+        "sunshine_hours": 120
+      },
+      "11": {
+        "temp_c": 8,
+        "rain_days": 10,
+        "sunshine_hours": 70
+      },
+      "12": {
+        "temp_c": 5,
+        "rain_days": 10,
+        "sunshine_hours": 50
+      }
+    }
+  },
+  {
+    "name": "New York City",
+    "slug": "new-york-city",
+    "country": "United States",
+    "region": "North America",
+    "longitude": -74.006,
+    "latitude": 40.7128,
+    "crowd_data": {
+      "1": 5,
+      "2": 5,
+      "3": 6,
+      "4": 7,
+      "5": 8,
+      "6": 8,
+      "7": 9,
+      "8": 8,
+      "9": 7,
+      "10": 7,
+      "11": 7,
+      "12": 8
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 1,
+        "rain_days": 10,
+        "sunshine_hours": 170
+      },
+      "2": {
+        "temp_c": 2,
+        "rain_days": 9,
+        "sunshine_hours": 170
+      },
+      "3": {
+        "temp_c": 6,
+        "rain_days": 11,
+        "sunshine_hours": 210
+      },
+      "4": {
+        "temp_c": 12,
+        "rain_days": 11,
+        "sunshine_hours": 230
+      },
+      "5": {
+        "temp_c": 18,
+        "rain_days": 11,
+        "sunshine_hours": 260
+      },
+      "6": {
+        "temp_c": 23,
+        "rain_days": 10,
+        "sunshine_hours": 290
+      },
+      "7": {
+        "temp_c": 26,
+        "rain_days": 10,
+        "sunshine_hours": 300
+      },
+      "8": {
+        "temp_c": 25,
+        "rain_days": 10,
+        "sunshine_hours": 280
+      },
+      "9": {
+        "temp_c": 21,
+        "rain_days": 8,
+        "sunshine_hours": 250
+      },
+      "10": {
+        "temp_c": 15,
+        "rain_days": 8,
+        "sunshine_hours": 220
+      },
+      "11": {
+        "temp_c": 9,
+        "rain_days": 9,
+        "sunshine_hours": 170
+      },
+      "12": {
+        "temp_c": 3,
+        "rain_days": 10,
+        "sunshine_hours": 150
+      }
+    }
+  },
+  {
+    "name": "Rio de Janeiro",
+    "slug": "rio-de-janeiro",
+    "country": "Brazil",
+    "region": "South America",
+    "longitude": -43.1729,
+    "latitude": -22.9068,
+    "crowd_data": {
+      "1": 7,
+      "2": 9,
+      "3": 7,
+      "4": 5,
+      "5": 4,
+      "6": 3,
+      "7": 4,
+      "8": 4,
+      "9": 5,
+      "10": 5,
+      "11": 6,
+      "12": 8
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 27,
+        "rain_days": 11,
+        "sunshine_hours": 210
+      },
+      "2": {
+        "temp_c": 27,
+        "rain_days": 9,
+        "sunshine_hours": 210
+      },
+      "3": {
+        "temp_c": 27,
+        "rain_days": 10,
+        "sunshine_hours": 200
+      },
+      "4": {
+        "temp_c": 25,
+        "rain_days": 8,
+        "sunshine_hours": 190
+      },
+      "5": {
+        "temp_c": 23,
+        "rain_days": 6,
+        "sunshine_hours": 190
+      },
+      "6": {
+        "temp_c": 22,
+        "rain_days": 4,
+        "sunshine_hours": 190
+      },
+      "7": {
+        "temp_c": 21,
+        "rain_days": 3,
+        "sunshine_hours": 200
+      },
+      "8": {
+        "temp_c": 22,
+        "rain_days": 4,
+        "sunshine_hours": 200
+      },
+      "9": {
+        "temp_c": 22,
+        "rain_days": 6,
+        "sunshine_hours": 170
+      },
+      "10": {
+        "temp_c": 23,
+        "rain_days": 9,
+        "sunshine_hours": 170
+      },
+      "11": {
+        "temp_c": 24,
+        "rain_days": 10,
+        "sunshine_hours": 180
+      },
+      "12": {
+        "temp_c": 26,
+        "rain_days": 12,
+        "sunshine_hours": 190
+      }
+    }
+  },
+  {
+    "name": "Cape Town",
+    "slug": "cape-town",
+    "country": "South Africa",
+    "region": "Africa",
+    "longitude": 18.4241,
+    "latitude": -33.9249,
+    "crowd_data": {
+      "1": 8,
+      "2": 8,
+      "3": 7,
+      "4": 5,
+      "5": 4,
+      "6": 3,
+      "7": 3,
+      "8": 4,
+      "9": 5,
+      "10": 6,
+      "11": 7,
+      "12": 8
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 23,
+        "rain_days": 2,
+        "sunshine_hours": 340
+      },
+      "2": {
+        "temp_c": 23,
+        "rain_days": 2,
+        "sunshine_hours": 310
+      },
+      "3": {
+        "temp_c": 22,
+        "rain_days": 3,
+        "sunshine_hours": 280
+      },
+      "4": {
+        "temp_c": 19,
+        "rain_days": 5,
+        "sunshine_hours": 230
+      },
+      "5": {
+        "temp_c": 16,
+        "rain_days": 8,
+        "sunshine_hours": 190
+      },
+      "6": {
+        "temp_c": 14,
+        "rain_days": 10,
+        "sunshine_hours": 160
+      },
+      "7": {
+        "temp_c": 13,
+        "rain_days": 11,
+        "sunshine_hours": 160
+      },
+      "8": {
+        "temp_c": 14,
+        "rain_days": 10,
+        "sunshine_hours": 180
+      },
+      "9": {
+        "temp_c": 15,
+        "rain_days": 8,
+        "sunshine_hours": 210
+      },
+      "10": {
+        "temp_c": 18,
+        "rain_days": 5,
+        "sunshine_hours": 260
+      },
+      "11": {
+        "temp_c": 20,
+        "rain_days": 3,
+        "sunshine_hours": 310
+      },
+      "12": {
+        "temp_c": 22,
+        "rain_days": 2,
+        "sunshine_hours": 340
+      }
+    }
+  },
+  {
+    "name": "Bali",
+    "slug": "bali",
+    "country": "Indonesia",
+    "region": "Asia",
+    "longitude": 115.092,
+    "latitude": -8.3405,
+    "crowd_data": {
+      "1": 5,
+      "2": 5,
+      "3": 5,
+      "4": 6,
+      "5": 5,
+      "6": 6,
+      "7": 8,
+      "8": 9,
+      "9": 7,
+      "10": 6,
+      "11": 5,
+      "12": 7
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 27,
+        "rain_days": 15,
+        "sunshine_hours": 190
+      },
+      "2": {
+        "temp_c": 27,
+        "rain_days": 14,
+        "sunshine_hours": 190
+      },
+      "3": {
+        "temp_c": 27,
+        "rain_days": 12,
+        "sunshine_hours": 220
+      },
+      "4": {
+        "temp_c": 27,
+        "rain_days": 8,
+        "sunshine_hours": 250
+      },
+      "5": {
+        "temp_c": 27,
+        "rain_days": 5,
+        "sunshine_hours": 270
+      },
+      "6": {
+        "temp_c": 26,
+        "rain_days": 4,
+        "sunshine_hours": 270
+      },
+      "7": {
+        "temp_c": 26,
+        "rain_days": 3,
+        "sunshine_hours": 280
+      },
+      "8": {
+        "temp_c": 26,
+        "rain_days": 2,
+        "sunshine_hours": 290
+      },
+      "9": {
+        "temp_c": 27,
+        "rain_days": 3,
+        "sunshine_hours": 280
+      },
+      "10": {
+        "temp_c": 27,
+        "rain_days": 6,
+        "sunshine_hours": 270
+      },
+      "11": {
+        "temp_c": 27,
+        "rain_days": 10,
+        "sunshine_hours": 240
+      },
+      "12": {
+        "temp_c": 27,
+        "rain_days": 14,
+        "sunshine_hours": 200
+      }
+    }
+  },
+  {
+    "name": "Marrakech",
+    "slug": "marrakech",
+    "country": "Morocco",
+    "region": "Africa",
+    "longitude": -7.9811,
+    "latitude": 31.6295,
+    "crowd_data": {
+      "1": 4,
+      "2": 4,
+      "3": 6,
+      "4": 7,
+      "5": 6,
+      "6": 5,
+      "7": 5,
+      "8": 5,
+      "9": 6,
+      "10": 7,
+      "11": 6,
+      "12": 5
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 12,
+        "rain_days": 5,
+        "sunshine_hours": 220
+      },
+      "2": {
+        "temp_c": 14,
+        "rain_days": 5,
+        "sunshine_hours": 230
+      },
+      "3": {
+        "temp_c": 17,
+        "rain_days": 5,
+        "sunshine_hours": 260
+      },
+      "4": {
+        "temp_c": 19,
+        "rain_days": 4,
+        "sunshine_hours": 280
+      },
+      "5": {
+        "temp_c": 23,
+        "rain_days": 2,
+        "sunshine_hours": 310
+      },
+      "6": {
+        "temp_c": 27,
+        "rain_days": 1,
+        "sunshine_hours": 340
+      },
+      "7": {
+        "temp_c": 31,
+        "rain_days": 0,
+        "sunshine_hours": 350
+      },
+      "8": {
+        "temp_c": 30,
+        "rain_days": 1,
+        "sunshine_hours": 340
+      },
+      "9": {
+        "temp_c": 26,
+        "rain_days": 2,
+        "sunshine_hours": 290
+      },
+      "10": {
+        "temp_c": 21,
+        "rain_days": 4,
+        "sunshine_hours": 260
+      },
+      "11": {
+        "temp_c": 16,
+        "rain_days": 5,
+        "sunshine_hours": 230
+      },
+      "12": {
+        "temp_c": 12,
+        "rain_days": 5,
+        "sunshine_hours": 210
+      }
+    }
+  },
+  {
+    "name": "Lisbon",
+    "slug": "lisbon",
+    "country": "Portugal",
+    "region": "Europe",
+    "longitude": -9.1393,
+    "latitude": 38.7223,
+    "crowd_data": {
+      "1": 3,
+      "2": 3,
+      "3": 5,
+      "4": 6,
+      "5": 7,
+      "6": 8,
+      "7": 9,
+      "8": 9,
+      "9": 8,
+      "10": 6,
+      "11": 4,
+      "12": 4
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 12,
+        "rain_days": 9,
+        "sunshine_hours": 150
+      },
+      "2": {
+        "temp_c": 13,
+        "rain_days": 8,
+        "sunshine_hours": 160
+      },
+      "3": {
+        "temp_c": 15,
+        "rain_days": 7,
+        "sunshine_hours": 210
+      },
+      "4": {
+        "temp_c": 16,
+        "rain_days": 8,
+        "sunshine_hours": 240
+      },
+      "5": {
+        "temp_c": 18,
+        "rain_days": 5,
+        "sunshine_hours": 290
+      },
+      "6": {
+        "temp_c": 22,
+        "rain_days": 2,
+        "sunshine_hours": 330
+      },
+      "7": {
+        "temp_c": 24,
+        "rain_days": 1,
+        "sunshine_hours": 360
+      },
+      "8": {
+        "temp_c": 24,
+        "rain_days": 1,
+        "sunshine_hours": 350
+      },
+      "9": {
+        "temp_c": 22,
+        "rain_days": 3,
+        "sunshine_hours": 280
+      },
+      "10": {
+        "temp_c": 19,
+        "rain_days": 7,
+        "sunshine_hours": 220
+      },
+      "11": {
+        "temp_c": 14,
+        "rain_days": 9,
+        "sunshine_hours": 160
+      },
+      "12": {
+        "temp_c": 12,
+        "rain_days": 9,
+        "sunshine_hours": 140
+      }
+    }
+  },
+  {
+    "name": "Sydney",
+    "slug": "sydney",
+    "country": "Australia",
+    "region": "Oceania",
+    "longitude": 151.2093,
+    "latitude": -33.8688,
+    "crowd_data": {
+      "1": 8,
+      "2": 7,
+      "3": 6,
+      "4": 5,
+      "5": 5,
+      "6": 5,
+      "7": 5,
+      "8": 5,
+      "9": 6,
+      "10": 7,
+      "11": 7,
+      "12": 8
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 23,
+        "rain_days": 8,
+        "sunshine_hours": 240
+      },
+      "2": {
+        "temp_c": 23,
+        "rain_days": 8,
+        "sunshine_hours": 220
+      },
+      "3": {
+        "temp_c": 22,
+        "rain_days": 9,
+        "sunshine_hours": 210
+      },
+      "4": {
+        "temp_c": 20,
+        "rain_days": 8,
+        "sunshine_hours": 200
+      },
+      "5": {
+        "temp_c": 17,
+        "rain_days": 8,
+        "sunshine_hours": 190
+      },
+      "6": {
+        "temp_c": 14,
+        "rain_days": 8,
+        "sunshine_hours": 170
+      },
+      "7": {
+        "temp_c": 13,
+        "rain_days": 6,
+        "sunshine_hours": 190
+      },
+      "8": {
+        "temp_c": 14,
+        "rain_days": 6,
+        "sunshine_hours": 210
+      },
+      "9": {
+        "temp_c": 17,
+        "rain_days": 6,
+        "sunshine_hours": 230
+      },
+      "10": {
+        "temp_c": 19,
+        "rain_days": 8,
+        "sunshine_hours": 230
+      },
+      "11": {
+        "temp_c": 20,
+        "rain_days": 8,
+        "sunshine_hours": 230
+      },
+      "12": {
+        "temp_c": 22,
+        "rain_days": 8,
+        "sunshine_hours": 240
+      }
+    }
+  },
+  {
+    "name": "Istanbul",
+    "slug": "istanbul",
+    "country": "Turkey",
+    "region": "Europe",
+    "longitude": 28.9784,
+    "latitude": 41.0082,
+    "crowd_data": {
+      "1": 3,
+      "2": 3,
+      "3": 4,
+      "4": 6,
+      "5": 7,
+      "6": 8,
+      "7": 8,
+      "8": 8,
+      "9": 7,
+      "10": 6,
+      "11": 4,
+      "12": 4
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 6,
+        "rain_days": 12,
+        "sunshine_hours": 80
+      },
+      "2": {
+        "temp_c": 6,
+        "rain_days": 10,
+        "sunshine_hours": 90
+      },
+      "3": {
+        "temp_c": 8,
+        "rain_days": 10,
+        "sunshine_hours": 140
+      },
+      "4": {
+        "temp_c": 13,
+        "rain_days": 8,
+        "sunshine_hours": 190
+      },
+      "5": {
+        "temp_c": 17,
+        "rain_days": 7,
+        "sunshine_hours": 250
+      },
+      "6": {
+        "temp_c": 22,
+        "rain_days": 5,
+        "sunshine_hours": 300
+      },
+      "7": {
+        "temp_c": 25,
+        "rain_days": 3,
+        "sunshine_hours": 330
+      },
+      "8": {
+        "temp_c": 25,
+        "rain_days": 3,
+        "sunshine_hours": 310
+      },
+      "9": {
+        "temp_c": 21,
+        "rain_days": 5,
+        "sunshine_hours": 260
+      },
+      "10": {
+        "temp_c": 16,
+        "rain_days": 8,
+        "sunshine_hours": 180
+      },
+      "11": {
+        "temp_c": 12,
+        "rain_days": 9,
+        "sunshine_hours": 110
+      },
+      "12": {
+        "temp_c": 8,
+        "rain_days": 12,
+        "sunshine_hours": 70
+      }
+    }
+  },
+  {
+    "name": "Dubai",
+    "slug": "dubai",
+    "country": "United Arab Emirates",
+    "region": "Asia",
+    "longitude": 55.2708,
+    "latitude": 25.2048,
+    "crowd_data": {
+      "1": 8,
+      "2": 8,
+      "3": 7,
+      "4": 5,
+      "5": 3,
+      "6": 2,
+      "7": 2,
+      "8": 2,
+      "9": 3,
+      "10": 5,
+      "11": 7,
+      "12": 9
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 19,
+        "rain_days": 1,
+        "sunshine_hours": 270
+      },
+      "2": {
+        "temp_c": 20,
+        "rain_days": 1,
+        "sunshine_hours": 260
+      },
+      "3": {
+        "temp_c": 23,
+        "rain_days": 1,
+        "sunshine_hours": 280
+      },
+      "4": {
+        "temp_c": 27,
+        "rain_days": 0,
+        "sunshine_hours": 300
+      },
+      "5": {
+        "temp_c": 32,
+        "rain_days": 0,
+        "sunshine_hours": 340
+      },
+      "6": {
+        "temp_c": 34,
+        "rain_days": 0,
+        "sunshine_hours": 360
+      },
+      "7": {
+        "temp_c": 36,
+        "rain_days": 0,
+        "sunshine_hours": 350
+      },
+      "8": {
+        "temp_c": 36,
+        "rain_days": 0,
+        "sunshine_hours": 340
+      },
+      "9": {
+        "temp_c": 33,
+        "rain_days": 0,
+        "sunshine_hours": 320
+      },
+      "10": {
+        "temp_c": 29,
+        "rain_days": 0,
+        "sunshine_hours": 300
+      },
+      "11": {
+        "temp_c": 25,
+        "rain_days": 0,
+        "sunshine_hours": 280
+      },
+      "12": {
+        "temp_c": 21,
+        "rain_days": 1,
+        "sunshine_hours": 260
+      }
+    }
+  },
+  {
+    "name": "Nairobi",
+    "slug": "nairobi",
+    "country": "Kenya",
+    "region": "Africa",
+    "longitude": 36.8219,
+    "latitude": -1.2921,
+    "crowd_data": {
+      "1": 6,
+      "2": 6,
+      "3": 5,
+      "4": 4,
+      "5": 3,
+      "6": 5,
+      "7": 7,
+      "8": 8,
+      "9": 8,
+      "10": 7,
+      "11": 4,
+      "12": 5
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 19,
+        "rain_days": 4,
+        "sunshine_hours": 270
+      },
+      "2": {
+        "temp_c": 20,
+        "rain_days": 4,
+        "sunshine_hours": 270
+      },
+      "3": {
+        "temp_c": 20,
+        "rain_days": 8,
+        "sunshine_hours": 240
+      },
+      "4": {
+        "temp_c": 19,
+        "rain_days": 15,
+        "sunshine_hours": 180
+      },
+      "5": {
+        "temp_c": 18,
+        "rain_days": 12,
+        "sunshine_hours": 190
+      },
+      "6": {
+        "temp_c": 16,
+        "rain_days": 4,
+        "sunshine_hours": 190
+      },
+      "7": {
+        "temp_c": 15,
+        "rain_days": 3,
+        "sunshine_hours": 180
+      },
+      "8": {
+        "temp_c": 16,
+        "rain_days": 3,
+        "sunshine_hours": 190
+      },
+      "9": {
+        "temp_c": 18,
+        "rain_days": 3,
+        "sunshine_hours": 230
+      },
+      "10": {
+        "temp_c": 19,
+        "rain_days": 8,
+        "sunshine_hours": 230
+      },
+      "11": {
+        "temp_c": 18,
+        "rain_days": 12,
+        "sunshine_hours": 200
+      },
+      "12": {
+        "temp_c": 18,
+        "rain_days": 7,
+        "sunshine_hours": 240
+      }
+    }
+  },
+  {
+    "name": "Reykjavik",
+    "slug": "reykjavik",
+    "country": "Iceland",
+    "region": "Europe",
+    "longitude": -21.9426,
+    "latitude": 64.1466,
+    "crowd_data": {
+      "1": 3,
+      "2": 3,
+      "3": 4,
+      "4": 5,
+      "5": 6,
+      "6": 8,
+      "7": 9,
+      "8": 8,
+      "9": 6,
+      "10": 4,
+      "11": 3,
+      "12": 3
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 1,
+        "rain_days": 13,
+        "sunshine_hours": 20
+      },
+      "2": {
+        "temp_c": 1,
+        "rain_days": 12,
+        "sunshine_hours": 50
+      },
+      "3": {
+        "temp_c": 2,
+        "rain_days": 13,
+        "sunshine_hours": 110
+      },
+      "4": {
+        "temp_c": 4,
+        "rain_days": 11,
+        "sunshine_hours": 170
+      },
+      "5": {
+        "temp_c": 7,
+        "rain_days": 10,
+        "sunshine_hours": 210
+      },
+      "6": {
+        "temp_c": 10,
+        "rain_days": 10,
+        "sunshine_hours": 210
+      },
+      "7": {
+        "temp_c": 12,
+        "rain_days": 9,
+        "sunshine_hours": 200
+      },
+      "8": {
+        "temp_c": 11,
+        "rain_days": 10,
+        "sunshine_hours": 180
+      },
+      "9": {
+        "temp_c": 9,
+        "rain_days": 11,
+        "sunshine_hours": 130
+      },
+      "10": {
+        "temp_c": 5,
+        "rain_days": 12,
+        "sunshine_hours": 80
+      },
+      "11": {
+        "temp_c": 3,
+        "rain_days": 12,
+        "sunshine_hours": 30
+      },
+      "12": {
+        "temp_c": 1,
+        "rain_days": 13,
+        "sunshine_hours": 10
+      }
+    }
+  },
+  {
+    "name": "Cusco",
+    "slug": "cusco",
+    "country": "Peru",
+    "region": "South America",
+    "longitude": -71.9785,
+    "latitude": -13.517,
+    "crowd_data": {
+      "1": 5,
+      "2": 5,
+      "3": 5,
+      "4": 5,
+      "5": 6,
+      "6": 8,
+      "7": 9,
+      "8": 8,
+      "9": 7,
+      "10": 6,
+      "11": 5,
+      "12": 5
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 12,
+        "rain_days": 18,
+        "sunshine_hours": 140
+      },
+      "2": {
+        "temp_c": 12,
+        "rain_days": 15,
+        "sunshine_hours": 140
+      },
+      "3": {
+        "temp_c": 12,
+        "rain_days": 12,
+        "sunshine_hours": 170
+      },
+      "4": {
+        "temp_c": 12,
+        "rain_days": 6,
+        "sunshine_hours": 220
+      },
+      "5": {
+        "temp_c": 11,
+        "rain_days": 2,
+        "sunshine_hours": 270
+      },
+      "6": {
+        "temp_c": 10,
+        "rain_days": 1,
+        "sunshine_hours": 280
+      },
+      "7": {
+        "temp_c": 10,
+        "rain_days": 1,
+        "sunshine_hours": 280
+      },
+      "8": {
+        "temp_c": 11,
+        "rain_days": 2,
+        "sunshine_hours": 270
+      },
+      "9": {
+        "temp_c": 12,
+        "rain_days": 5,
+        "sunshine_hours": 240
+      },
+      "10": {
+        "temp_c": 13,
+        "rain_days": 8,
+        "sunshine_hours": 220
+      },
+      "11": {
+        "temp_c": 13,
+        "rain_days": 12,
+        "sunshine_hours": 200
+      },
+      "12": {
+        "temp_c": 12,
+        "rain_days": 16,
+        "sunshine_hours": 160
+      }
+    }
+  },
+  {
+    "name": "Rome",
+    "slug": "rome",
+    "country": "Italy",
+    "region": "Europe",
+    "longitude": 12.4964,
+    "latitude": 41.9028,
+    "crowd_data": {
+      "1": 4,
+      "2": 4,
+      "3": 5,
+      "4": 7,
+      "5": 8,
+      "6": 9,
+      "7": 9,
+      "8": 8,
+      "9": 8,
+      "10": 7,
+      "11": 5,
+      "12": 5
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 8,
+        "rain_days": 7,
+        "sunshine_hours": 120
+      },
+      "2": {
+        "temp_c": 9,
+        "rain_days": 7,
+        "sunshine_hours": 140
+      },
+      "3": {
+        "temp_c": 12,
+        "rain_days": 7,
+        "sunshine_hours": 180
+      },
+      "4": {
+        "temp_c": 14,
+        "rain_days": 8,
+        "sunshine_hours": 220
+      },
+      "5": {
+        "temp_c": 19,
+        "rain_days": 5,
+        "sunshine_hours": 280
+      },
+      "6": {
+        "temp_c": 23,
+        "rain_days": 3,
+        "sunshine_hours": 320
+      },
+      "7": {
+        "temp_c": 26,
+        "rain_days": 1,
+        "sunshine_hours": 350
+      },
+      "8": {
+        "temp_c": 26,
+        "rain_days": 2,
+        "sunshine_hours": 330
+      },
+      "9": {
+        "temp_c": 23,
+        "rain_days": 4,
+        "sunshine_hours": 260
+      },
+      "10": {
+        "temp_c": 18,
+        "rain_days": 7,
+        "sunshine_hours": 200
+      },
+      "11": {
+        "temp_c": 13,
+        "rain_days": 8,
+        "sunshine_hours": 150
+      },
+      "12": {
+        "temp_c": 9,
+        "rain_days": 8,
+        "sunshine_hours": 110
+      }
+    }
+  },
+  {
+    "name": "Hanoi",
+    "slug": "hanoi",
+    "country": "Vietnam",
+    "region": "Asia",
+    "longitude": 105.8342,
+    "latitude": 21.0278,
+    "crowd_data": {
+      "1": 5,
+      "2": 6,
+      "3": 5,
+      "4": 4,
+      "5": 4,
+      "6": 3,
+      "7": 3,
+      "8": 3,
+      "9": 5,
+      "10": 6,
+      "11": 6,
+      "12": 6
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 17,
+        "rain_days": 7,
+        "sunshine_hours": 70
+      },
+      "2": {
+        "temp_c": 18,
+        "rain_days": 8,
+        "sunshine_hours": 50
+      },
+      "3": {
+        "temp_c": 21,
+        "rain_days": 10,
+        "sunshine_hours": 60
+      },
+      "4": {
+        "temp_c": 24,
+        "rain_days": 10,
+        "sunshine_hours": 90
+      },
+      "5": {
+        "temp_c": 28,
+        "rain_days": 11,
+        "sunshine_hours": 150
+      },
+      "6": {
+        "temp_c": 30,
+        "rain_days": 12,
+        "sunshine_hours": 170
+      },
+      "7": {
+        "temp_c": 30,
+        "rain_days": 13,
+        "sunshine_hours": 180
+      },
+      "8": {
+        "temp_c": 29,
+        "rain_days": 14,
+        "sunshine_hours": 170
+      },
+      "9": {
+        "temp_c": 28,
+        "rain_days": 10,
+        "sunshine_hours": 170
+      },
+      "10": {
+        "temp_c": 25,
+        "rain_days": 7,
+        "sunshine_hours": 160
+      },
+      "11": {
+        "temp_c": 22,
+        "rain_days": 5,
+        "sunshine_hours": 130
+      },
+      "12": {
+        "temp_c": 18,
+        "rain_days": 5,
+        "sunshine_hours": 90
+      }
+    }
+  },
+  {
+    "name": "Amsterdam",
+    "slug": "amsterdam",
+    "country": "Netherlands",
+    "region": "Europe",
+    "longitude": 4.9041,
+    "latitude": 52.3676,
+    "crowd_data": {
+      "1": 4,
+      "2": 4,
+      "3": 5,
+      "4": 7,
+      "5": 8,
+      "6": 8,
+      "7": 8,
+      "8": 8,
+      "9": 7,
+      "10": 6,
+      "11": 4,
+      "12": 5
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 4,
+        "rain_days": 12,
+        "sunshine_hours": 60
+      },
+      "2": {
+        "temp_c": 4,
+        "rain_days": 10,
+        "sunshine_hours": 80
+      },
+      "3": {
+        "temp_c": 7,
+        "rain_days": 11,
+        "sunshine_hours": 130
+      },
+      "4": {
+        "temp_c": 10,
+        "rain_days": 9,
+        "sunshine_hours": 180
+      },
+      "5": {
+        "temp_c": 14,
+        "rain_days": 9,
+        "sunshine_hours": 230
+      },
+      "6": {
+        "temp_c": 16,
+        "rain_days": 9,
+        "sunshine_hours": 230
+      },
+      "7": {
+        "temp_c": 18,
+        "rain_days": 10,
+        "sunshine_hours": 220
+      },
+      "8": {
+        "temp_c": 18,
+        "rain_days": 10,
+        "sunshine_hours": 210
+      },
+      "9": {
+        "temp_c": 15,
+        "rain_days": 10,
+        "sunshine_hours": 160
+      },
+      "10": {
+        "temp_c": 12,
+        "rain_days": 11,
+        "sunshine_hours": 110
+      },
+      "11": {
+        "temp_c": 7,
+        "rain_days": 12,
+        "sunshine_hours": 60
+      },
+      "12": {
+        "temp_c": 4,
+        "rain_days": 12,
+        "sunshine_hours": 50
+      }
+    }
+  },
+  {
+    "name": "Kyoto",
+    "slug": "kyoto",
+    "country": "Japan",
+    "region": "Asia",
+    "longitude": 135.7681,
+    "latitude": 35.0116,
+    "crowd_data": {
+      "1": 4,
+      "2": 4,
+      "3": 7,
+      "4": 9,
+      "5": 6,
+      "6": 4,
+      "7": 5,
+      "8": 5,
+      "9": 5,
+      "10": 7,
+      "11": 9,
+      "12": 5
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 5,
+        "rain_days": 6,
+        "sunshine_hours": 130
+      },
+      "2": {
+        "temp_c": 5,
+        "rain_days": 6,
+        "sunshine_hours": 130
+      },
+      "3": {
+        "temp_c": 9,
+        "rain_days": 9,
+        "sunshine_hours": 170
+      },
+      "4": {
+        "temp_c": 15,
+        "rain_days": 9,
+        "sunshine_hours": 190
+      },
+      "5": {
+        "temp_c": 20,
+        "rain_days": 9,
+        "sunshine_hours": 200
+      },
+      "6": {
+        "temp_c": 24,
+        "rain_days": 12,
+        "sunshine_hours": 160
+      },
+      "7": {
+        "temp_c": 28,
+        "rain_days": 11,
+        "sunshine_hours": 190
+      },
+      "8": {
+        "temp_c": 29,
+        "rain_days": 8,
+        "sunshine_hours": 210
+      },
+      "9": {
+        "temp_c": 25,
+        "rain_days": 10,
+        "sunshine_hours": 160
+      },
+      "10": {
+        "temp_c": 18,
+        "rain_days": 8,
+        "sunshine_hours": 180
+      },
+      "11": {
+        "temp_c": 13,
+        "rain_days": 5,
+        "sunshine_hours": 160
+      },
+      "12": {
+        "temp_c": 7,
+        "rain_days": 5,
+        "sunshine_hours": 140
+      }
+    }
+  },
+  {
+    "name": "Buenos Aires",
+    "slug": "buenos-aires",
+    "country": "Argentina",
+    "region": "South America",
+    "longitude": -58.3816,
+    "latitude": -34.6037,
+    "crowd_data": {
+      "1": 5,
+      "2": 5,
+      "3": 6,
+      "4": 5,
+      "5": 5,
+      "6": 4,
+      "7": 4,
+      "8": 4,
+      "9": 5,
+      "10": 6,
+      "11": 7,
+      "12": 6
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 25,
+        "rain_days": 8,
+        "sunshine_hours": 280
+      },
+      "2": {
+        "temp_c": 24,
+        "rain_days": 7,
+        "sunshine_hours": 250
+      },
+      "3": {
+        "temp_c": 22,
+        "rain_days": 8,
+        "sunshine_hours": 220
+      },
+      "4": {
+        "temp_c": 17,
+        "rain_days": 8,
+        "sunshine_hours": 190
+      },
+      "5": {
+        "temp_c": 14,
+        "rain_days": 7,
+        "sunshine_hours": 170
+      },
+      "6": {
+        "temp_c": 11,
+        "rain_days": 6,
+        "sunshine_hours": 150
+      },
+      "7": {
+        "temp_c": 10,
+        "rain_days": 6,
+        "sunshine_hours": 160
+      },
+      "8": {
+        "temp_c": 12,
+        "rain_days": 7,
+        "sunshine_hours": 180
+      },
+      "9": {
+        "temp_c": 14,
+        "rain_days": 7,
+        "sunshine_hours": 200
+      },
+      "10": {
+        "temp_c": 17,
+        "rain_days": 9,
+        "sunshine_hours": 230
+      },
+      "11": {
+        "temp_c": 20,
+        "rain_days": 8,
+        "sunshine_hours": 260
+      },
+      "12": {
+        "temp_c": 24,
+        "rain_days": 8,
+        "sunshine_hours": 280
+      }
+    }
+  },
+  {
+    "name": "Prague",
+    "slug": "prague",
+    "country": "Czech Republic",
+    "region": "Europe",
+    "longitude": 14.4378,
+    "latitude": 50.0755,
+    "crowd_data": {
+      "1": 3,
+      "2": 3,
+      "3": 5,
+      "4": 6,
+      "5": 7,
+      "6": 8,
+      "7": 8,
+      "8": 8,
+      "9": 7,
+      "10": 6,
+      "11": 4,
+      "12": 5
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 0,
+        "rain_days": 6,
+        "sunshine_hours": 60
+      },
+      "2": {
+        "temp_c": 1,
+        "rain_days": 5,
+        "sunshine_hours": 80
+      },
+      "3": {
+        "temp_c": 5,
+        "rain_days": 6,
+        "sunshine_hours": 140
+      },
+      "4": {
+        "temp_c": 10,
+        "rain_days": 6,
+        "sunshine_hours": 180
+      },
+      "5": {
+        "temp_c": 15,
+        "rain_days": 8,
+        "sunshine_hours": 220
+      },
+      "6": {
+        "temp_c": 18,
+        "rain_days": 8,
+        "sunshine_hours": 230
+      },
+      "7": {
+        "temp_c": 20,
+        "rain_days": 8,
+        "sunshine_hours": 230
+      },
+      "8": {
+        "temp_c": 20,
+        "rain_days": 7,
+        "sunshine_hours": 220
+      },
+      "9": {
+        "temp_c": 15,
+        "rain_days": 6,
+        "sunshine_hours": 170
+      },
+      "10": {
+        "temp_c": 10,
+        "rain_days": 5,
+        "sunshine_hours": 120
+      },
+      "11": {
+        "temp_c": 5,
+        "rain_days": 6,
+        "sunshine_hours": 60
+      },
+      "12": {
+        "temp_c": 1,
+        "rain_days": 6,
+        "sunshine_hours": 50
+      }
+    }
+  },
+  {
+    "name": "Jaipur",
+    "slug": "jaipur",
+    "country": "India",
+    "region": "Asia",
+    "longitude": 75.7873,
+    "latitude": 26.9124,
+    "crowd_data": {
+      "1": 7,
+      "2": 7,
+      "3": 6,
+      "4": 4,
+      "5": 3,
+      "6": 2,
+      "7": 2,
+      "8": 2,
+      "9": 3,
+      "10": 6,
+      "11": 8,
+      "12": 8
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 15,
+        "rain_days": 1,
+        "sunshine_hours": 270
+      },
+      "2": {
+        "temp_c": 18,
+        "rain_days": 1,
+        "sunshine_hours": 270
+      },
+      "3": {
+        "temp_c": 24,
+        "rain_days": 1,
+        "sunshine_hours": 290
+      },
+      "4": {
+        "temp_c": 30,
+        "rain_days": 1,
+        "sunshine_hours": 310
+      },
+      "5": {
+        "temp_c": 34,
+        "rain_days": 2,
+        "sunshine_hours": 320
+      },
+      "6": {
+        "temp_c": 34,
+        "rain_days": 5,
+        "sunshine_hours": 250
+      },
+      "7": {
+        "temp_c": 30,
+        "rain_days": 13,
+        "sunshine_hours": 180
+      },
+      "8": {
+        "temp_c": 28,
+        "rain_days": 12,
+        "sunshine_hours": 190
+      },
+      "9": {
+        "temp_c": 29,
+        "rain_days": 5,
+        "sunshine_hours": 250
+      },
+      "10": {
+        "temp_c": 27,
+        "rain_days": 2,
+        "sunshine_hours": 290
+      },
+      "11": {
+        "temp_c": 22,
+        "rain_days": 0,
+        "sunshine_hours": 280
+      },
+      "12": {
+        "temp_c": 16,
+        "rain_days": 1,
+        "sunshine_hours": 270
+      }
+    }
+  },
+  {
+    "name": "Serengeti",
+    "slug": "serengeti",
+    "country": "Tanzania",
+    "region": "Africa",
+    "longitude": 34.8333,
+    "latitude": -2.3333,
+    "crowd_data": {
+      "1": 7,
+      "2": 8,
+      "3": 6,
+      "4": 4,
+      "5": 3,
+      "6": 6,
+      "7": 8,
+      "8": 9,
+      "9": 8,
+      "10": 7,
+      "11": 5,
+      "12": 6
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 22,
+        "rain_days": 8,
+        "sunshine_hours": 230
+      },
+      "2": {
+        "temp_c": 22,
+        "rain_days": 7,
+        "sunshine_hours": 230
+      },
+      "3": {
+        "temp_c": 22,
+        "rain_days": 11,
+        "sunshine_hours": 200
+      },
+      "4": {
+        "temp_c": 21,
+        "rain_days": 15,
+        "sunshine_hours": 170
+      },
+      "5": {
+        "temp_c": 20,
+        "rain_days": 8,
+        "sunshine_hours": 220
+      },
+      "6": {
+        "temp_c": 19,
+        "rain_days": 2,
+        "sunshine_hours": 270
+      },
+      "7": {
+        "temp_c": 18,
+        "rain_days": 1,
+        "sunshine_hours": 280
+      },
+      "8": {
+        "temp_c": 19,
+        "rain_days": 2,
+        "sunshine_hours": 270
+      },
+      "9": {
+        "temp_c": 20,
+        "rain_days": 3,
+        "sunshine_hours": 260
+      },
+      "10": {
+        "temp_c": 21,
+        "rain_days": 7,
+        "sunshine_hours": 240
+      },
+      "11": {
+        "temp_c": 22,
+        "rain_days": 12,
+        "sunshine_hours": 210
+      },
+      "12": {
+        "temp_c": 22,
+        "rain_days": 10,
+        "sunshine_hours": 220
+      }
+    }
+  },
+  {
+    "name": "Queenstown",
+    "slug": "queenstown",
+    "country": "New Zealand",
+    "region": "Oceania",
+    "longitude": 168.6626,
+    "latitude": -45.0312,
+    "crowd_data": {
+      "1": 8,
+      "2": 7,
+      "3": 6,
+      "4": 5,
+      "5": 4,
+      "6": 6,
+      "7": 8,
+      "8": 8,
+      "9": 6,
+      "10": 5,
+      "11": 5,
+      "12": 7
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 16,
+        "rain_days": 8,
+        "sunshine_hours": 230
+      },
+      "2": {
+        "temp_c": 15,
+        "rain_days": 7,
+        "sunshine_hours": 200
+      },
+      "3": {
+        "temp_c": 13,
+        "rain_days": 8,
+        "sunshine_hours": 170
+      },
+      "4": {
+        "temp_c": 10,
+        "rain_days": 7,
+        "sunshine_hours": 150
+      },
+      "5": {
+        "temp_c": 7,
+        "rain_days": 7,
+        "sunshine_hours": 120
+      },
+      "6": {
+        "temp_c": 4,
+        "rain_days": 7,
+        "sunshine_hours": 100
+      },
+      "7": {
+        "temp_c": 3,
+        "rain_days": 7,
+        "sunshine_hours": 110
+      },
+      "8": {
+        "temp_c": 5,
+        "rain_days": 7,
+        "sunshine_hours": 130
+      },
+      "9": {
+        "temp_c": 8,
+        "rain_days": 7,
+        "sunshine_hours": 160
+      },
+      "10": {
+        "temp_c": 10,
+        "rain_days": 8,
+        "sunshine_hours": 180
+      },
+      "11": {
+        "temp_c": 13,
+        "rain_days": 7,
+        "sunshine_hours": 210
+      },
+      "12": {
+        "temp_c": 15,
+        "rain_days": 8,
+        "sunshine_hours": 220
+      }
+    }
+  },
+  {
+    "name": "Cancun",
+    "slug": "cancun",
+    "country": "Mexico",
+    "region": "North America",
+    "longitude": -86.8515,
+    "latitude": 21.1619,
+    "crowd_data": {
+      "1": 7,
+      "2": 7,
+      "3": 9,
+      "4": 7,
+      "5": 5,
+      "6": 4,
+      "7": 6,
+      "8": 5,
+      "9": 3,
+      "10": 3,
+      "11": 5,
+      "12": 7
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 24,
+        "rain_days": 4,
+        "sunshine_hours": 220
+      },
+      "2": {
+        "temp_c": 25,
+        "rain_days": 3,
+        "sunshine_hours": 230
+      },
+      "3": {
+        "temp_c": 26,
+        "rain_days": 2,
+        "sunshine_hours": 260
+      },
+      "4": {
+        "temp_c": 28,
+        "rain_days": 2,
+        "sunshine_hours": 270
+      },
+      "5": {
+        "temp_c": 29,
+        "rain_days": 5,
+        "sunshine_hours": 270
+      },
+      "6": {
+        "temp_c": 29,
+        "rain_days": 10,
+        "sunshine_hours": 240
+      },
+      "7": {
+        "temp_c": 29,
+        "rain_days": 9,
+        "sunshine_hours": 260
+      },
+      "8": {
+        "temp_c": 29,
+        "rain_days": 10,
+        "sunshine_hours": 250
+      },
+      "9": {
+        "temp_c": 29,
+        "rain_days": 12,
+        "sunshine_hours": 220
+      },
+      "10": {
+        "temp_c": 27,
+        "rain_days": 10,
+        "sunshine_hours": 220
+      },
+      "11": {
+        "temp_c": 26,
+        "rain_days": 5,
+        "sunshine_hours": 220
+      },
+      "12": {
+        "temp_c": 24,
+        "rain_days": 4,
+        "sunshine_hours": 210
+      }
+    }
+  },
+  {
+    "name": "Chiang Mai",
+    "slug": "chiang-mai",
+    "country": "Thailand",
+    "region": "Asia",
+    "longitude": 98.9853,
+    "latitude": 18.7883,
+    "crowd_data": {
+      "1": 6,
+      "2": 6,
+      "3": 5,
+      "4": 5,
+      "5": 3,
+      "6": 3,
+      "7": 3,
+      "8": 3,
+      "9": 3,
+      "10": 4,
+      "11": 7,
+      "12": 8
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 22,
+        "rain_days": 1,
+        "sunshine_hours": 280
+      },
+      "2": {
+        "temp_c": 24,
+        "rain_days": 1,
+        "sunshine_hours": 270
+      },
+      "3": {
+        "temp_c": 28,
+        "rain_days": 2,
+        "sunshine_hours": 280
+      },
+      "4": {
+        "temp_c": 30,
+        "rain_days": 5,
+        "sunshine_hours": 260
+      },
+      "5": {
+        "temp_c": 28,
+        "rain_days": 13,
+        "sunshine_hours": 200
+      },
+      "6": {
+        "temp_c": 27,
+        "rain_days": 14,
+        "sunshine_hours": 180
+      },
+      "7": {
+        "temp_c": 27,
+        "rain_days": 16,
+        "sunshine_hours": 170
+      },
+      "8": {
+        "temp_c": 26,
+        "rain_days": 18,
+        "sunshine_hours": 160
+      },
+      "9": {
+        "temp_c": 27,
+        "rain_days": 14,
+        "sunshine_hours": 180
+      },
+      "10": {
+        "temp_c": 26,
+        "rain_days": 9,
+        "sunshine_hours": 220
+      },
+      "11": {
+        "temp_c": 24,
+        "rain_days": 3,
+        "sunshine_hours": 260
+      },
+      "12": {
+        "temp_c": 22,
+        "rain_days": 1,
+        "sunshine_hours": 270
+      }
+    }
+  },
+  {
+    "name": "Santorini",
+    "slug": "santorini",
+    "country": "Greece",
+    "region": "Europe",
+    "longitude": 25.4615,
+    "latitude": 36.3932,
+    "crowd_data": {
+      "1": 2,
+      "2": 2,
+      "3": 3,
+      "4": 5,
+      "5": 7,
+      "6": 9,
+      "7": 10,
+      "8": 10,
+      "9": 8,
+      "10": 5,
+      "11": 3,
+      "12": 2
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 11,
+        "rain_days": 8,
+        "sunshine_hours": 130
+      },
+      "2": {
+        "temp_c": 11,
+        "rain_days": 6,
+        "sunshine_hours": 150
+      },
+      "3": {
+        "temp_c": 13,
+        "rain_days": 5,
+        "sunshine_hours": 200
+      },
+      "4": {
+        "temp_c": 16,
+        "rain_days": 3,
+        "sunshine_hours": 260
+      },
+      "5": {
+        "temp_c": 20,
+        "rain_days": 1,
+        "sunshine_hours": 320
+      },
+      "6": {
+        "temp_c": 24,
+        "rain_days": 0,
+        "sunshine_hours": 370
+      },
+      "7": {
+        "temp_c": 26,
+        "rain_days": 0,
+        "sunshine_hours": 390
+      },
+      "8": {
+        "temp_c": 26,
+        "rain_days": 0,
+        "sunshine_hours": 370
+      },
+      "9": {
+        "temp_c": 24,
+        "rain_days": 1,
+        "sunshine_hours": 310
+      },
+      "10": {
+        "temp_c": 20,
+        "rain_days": 3,
+        "sunshine_hours": 240
+      },
+      "11": {
+        "temp_c": 16,
+        "rain_days": 5,
+        "sunshine_hours": 170
+      },
+      "12": {
+        "temp_c": 13,
+        "rain_days": 7,
+        "sunshine_hours": 130
+      }
+    }
+  },
+  {
+    "name": "Kruger National Park",
+    "slug": "kruger-national-park",
+    "country": "South Africa",
+    "region": "Africa",
+    "longitude": 31.5,
+    "latitude": -24,
+    "crowd_data": {
+      "1": 5,
+      "2": 5,
+      "3": 5,
+      "4": 5,
+      "5": 6,
+      "6": 7,
+      "7": 8,
+      "8": 8,
+      "9": 8,
+      "10": 7,
+      "11": 5,
+      "12": 5
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 26,
+        "rain_days": 11,
+        "sunshine_hours": 240
+      },
+      "2": {
+        "temp_c": 25,
+        "rain_days": 10,
+        "sunshine_hours": 230
+      },
+      "3": {
+        "temp_c": 24,
+        "rain_days": 8,
+        "sunshine_hours": 240
+      },
+      "4": {
+        "temp_c": 22,
+        "rain_days": 4,
+        "sunshine_hours": 260
+      },
+      "5": {
+        "temp_c": 19,
+        "rain_days": 2,
+        "sunshine_hours": 280
+      },
+      "6": {
+        "temp_c": 16,
+        "rain_days": 1,
+        "sunshine_hours": 280
+      },
+      "7": {
+        "temp_c": 16,
+        "rain_days": 0,
+        "sunshine_hours": 290
+      },
+      "8": {
+        "temp_c": 18,
+        "rain_days": 1,
+        "sunshine_hours": 280
+      },
+      "9": {
+        "temp_c": 21,
+        "rain_days": 2,
+        "sunshine_hours": 270
+      },
+      "10": {
+        "temp_c": 23,
+        "rain_days": 5,
+        "sunshine_hours": 260
+      },
+      "11": {
+        "temp_c": 24,
+        "rain_days": 8,
+        "sunshine_hours": 250
+      },
+      "12": {
+        "temp_c": 25,
+        "rain_days": 10,
+        "sunshine_hours": 240
+      }
+    }
+  },
+  {
+    "name": "Maldives",
+    "slug": "maldives",
+    "country": "Maldives",
+    "region": "Asia",
+    "longitude": 73.5093,
+    "latitude": 4.1755,
+    "crowd_data": {
+      "1": 9,
+      "2": 9,
+      "3": 8,
+      "4": 7,
+      "5": 4,
+      "6": 3,
+      "7": 3,
+      "8": 3,
+      "9": 4,
+      "10": 5,
+      "11": 7,
+      "12": 9
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 28,
+        "rain_days": 3,
+        "sunshine_hours": 270
+      },
+      "2": {
+        "temp_c": 29,
+        "rain_days": 2,
+        "sunshine_hours": 280
+      },
+      "3": {
+        "temp_c": 29,
+        "rain_days": 3,
+        "sunshine_hours": 280
+      },
+      "4": {
+        "temp_c": 30,
+        "rain_days": 6,
+        "sunshine_hours": 260
+      },
+      "5": {
+        "temp_c": 29,
+        "rain_days": 12,
+        "sunshine_hours": 210
+      },
+      "6": {
+        "temp_c": 28,
+        "rain_days": 11,
+        "sunshine_hours": 210
+      },
+      "7": {
+        "temp_c": 28,
+        "rain_days": 10,
+        "sunshine_hours": 220
+      },
+      "8": {
+        "temp_c": 28,
+        "rain_days": 10,
+        "sunshine_hours": 220
+      },
+      "9": {
+        "temp_c": 28,
+        "rain_days": 11,
+        "sunshine_hours": 210
+      },
+      "10": {
+        "temp_c": 28,
+        "rain_days": 12,
+        "sunshine_hours": 210
+      },
+      "11": {
+        "temp_c": 28,
+        "rain_days": 8,
+        "sunshine_hours": 230
+      },
+      "12": {
+        "temp_c": 28,
+        "rain_days": 5,
+        "sunshine_hours": 250
+      }
+    }
+  },
+  {
+    "name": "Dubrovnik",
+    "slug": "dubrovnik",
+    "country": "Croatia",
+    "region": "Europe",
+    "longitude": 18.0944,
+    "latitude": 42.6507,
+    "crowd_data": {
+      "1": 2,
+      "2": 2,
+      "3": 3,
+      "4": 5,
+      "5": 7,
+      "6": 9,
+      "7": 10,
+      "8": 10,
+      "9": 7,
+      "10": 5,
+      "11": 3,
+      "12": 3
+    },
+    "weather_data": {
+      "1": {
+        "temp_c": 9,
+        "rain_days": 11,
+        "sunshine_hours": 120
+      },
+      "2": {
+        "temp_c": 10,
+        "rain_days": 10,
+        "sunshine_hours": 130
+      },
+      "3": {
+        "temp_c": 12,
+        "rain_days": 10,
+        "sunshine_hours": 170
+      },
+      "4": {
+        "temp_c": 15,
+        "rain_days": 9,
+        "sunshine_hours": 210
+      },
+      "5": {
+        "temp_c": 19,
+        "rain_days": 7,
+        "sunshine_hours": 270
+      },
+      "6": {
+        "temp_c": 23,
+        "rain_days": 4,
+        "sunshine_hours": 320
+      },
+      "7": {
+        "temp_c": 26,
+        "rain_days": 2,
+        "sunshine_hours": 360
+      },
+      "8": {
+        "temp_c": 26,
+        "rain_days": 3,
+        "sunshine_hours": 340
+      },
+      "9": {
+        "temp_c": 22,
+        "rain_days": 5,
+        "sunshine_hours": 270
+      },
+      "10": {
+        "temp_c": 18,
+        "rain_days": 9,
+        "sunshine_hours": 200
+      },
+      "11": {
+        "temp_c": 14,
+        "rain_days": 11,
+        "sunshine_hours": 140
+      },
+      "12": {
+        "temp_c": 10,
+        "rain_days": 12,
+        "sunshine_hours": 100
+      }
+    }
+  }
+]
