@@ -182,6 +182,10 @@ export interface Database {
         Args: Record<string, never>;
         Returns: DestinationWithCoords[];
       };
+      get_all_routes_with_geojson: {
+        Args: Record<string, never>;
+        Returns: MigrationRouteWithGeoJSON[];
+      };
     };
     Enums: Record<string, never>;
   };

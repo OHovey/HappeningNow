@@ -19,12 +19,25 @@ import {
   crowdHeatmapLayer,
   toggleHeatmapVisibility,
 } from '@/lib/map/heatmap';
+import {
+  buildRouteSources,
+  createRouteLayerPair,
+  createDotLayer,
+  createDotPulseLayer,
+} from '@/lib/map/migration-layers';
 import { crowdScoreToLabel } from '@/lib/crowd-colors';
-import type { GeoJSONEventProperties, DestinationWithCoords } from '@/lib/supabase/types';
+import type {
+  GeoJSONEventProperties,
+  DestinationWithCoords,
+  MigrationRouteWithGeoJSON,
+} from '@/lib/supabase/types';
 import { createBrowserClient } from '@/lib/supabase/client';
+import { buildGetYourGuideLink, formatMonthRange } from '@/lib/affiliates';
 import TimelineScrubber from '@/components/map/TimelineScrubber';
 import CategoryToggles from '@/components/map/CategoryToggles';
 import CrowdHeatmapToggle from '@/components/map/CrowdHeatmapToggle';
+import SpeciesToggles from '@/components/map/SpeciesToggles';
+import SpeciesLegend from '@/components/map/SpeciesLegend';
 import BottomSheet from '@/components/ui/BottomSheet';
 import EventPanel from '@/components/panel/EventPanel';
 
@@ -40,8 +53,10 @@ export default function MapView() {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const cleanupRef = useRef<(() => void) | null>(null);
+  const routePulseCleanupRef = useRef<(() => void) | null>(null);
   const popupRef = useRef<maplibregl.Popup | null>(null);
   const destinationsRef = useRef<DestinationWithCoords[]>([]);
+  const migrationRoutesRef = useRef<MigrationRouteWithGeoJSON[]>([]);
 
   const [selectedMonth, setSelectedMonth] = useState<number>(getCurrentMonth());
   const [activeCategories, setActiveCategories] = useState<string[]>([
@@ -52,9 +67,12 @@ export default function MapView() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<GeoJSONEventProperties | null>(null);
+  const [selectedRoute, setSelectedRoute] = useState<MigrationRouteWithGeoJSON | null>(null);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [heatmapEnabled, setHeatmapEnabled] = useState(false);
   const [destinations, setDestinations] = useState<DestinationWithCoords[]>([]);
+  const [migrationRoutes, setMigrationRoutes] = useState<MigrationRouteWithGeoJSON[]>([]);
+  const [activeSpecies, setActiveSpecies] = useState<string[]>([]);
 
   /**
    * Fetch events from the bbox API for the current map viewport.
@@ -122,6 +140,100 @@ export default function MapView() {
     }
   }, []);
 
+  /**
+   * Fetch all migration routes with GeoJSON for route rendering.
+   */
+  const fetchMigrationRoutes = useCallback(async () => {
+    try {
+      const supabase = createBrowserClient();
+      const { data, error: rpcError } = await supabase.rpc(
+        'get_all_routes_with_geojson' as never,
+      );
+      if (rpcError) {
+        console.error('Failed to fetch migration routes:', rpcError);
+        return;
+      }
+      const routes = (data ?? []) as unknown as MigrationRouteWithGeoJSON[];
+      setMigrationRoutes(routes);
+      migrationRoutesRef.current = routes;
+
+      // Set all species as active by default
+      const speciesList = [...new Set(routes.map((r) => r.species))];
+      setActiveSpecies(speciesList);
+
+      return routes;
+    } catch (err) {
+      console.error('Failed to fetch migration routes:', err);
+      return [];
+    }
+  }, []);
+
+  /**
+   * Add migration route sources and layers to the map.
+   */
+  const addRouteLayers = useCallback(
+    (map: maplibregl.Map, routes: MigrationRouteWithGeoJSON[], month: number) => {
+      // Collect all dot-pulse layer IDs for animation
+      const pulseLayerIds: string[] = [];
+
+      for (const route of routes) {
+        if (!route.route_geojson?.coordinates?.length) continue;
+
+        const { completedSource, upcomingSource, dotSource } = buildRouteSources(route, month);
+
+        // Add sources
+        map.addSource(`route-${route.id}-completed`, {
+          type: 'geojson',
+          data: completedSource,
+        });
+        map.addSource(`route-${route.id}-upcoming`, {
+          type: 'geojson',
+          data: upcomingSource,
+        });
+        map.addSource(`route-${route.id}-dot`, {
+          type: 'geojson',
+          data: dotSource,
+        });
+
+        // Add layers (insert below 'clusters' to maintain z-order: heatmap -> routes -> dots -> events)
+        const { completedLayer, upcomingLayer } = createRouteLayerPair(route.id, route.species);
+        map.addLayer(completedLayer, 'clusters');
+        map.addLayer(upcomingLayer, 'clusters');
+
+        const dotLayer = createDotLayer(route.id, route.species);
+        map.addLayer(dotLayer, 'clusters');
+
+        const dotPulse = createDotPulseLayer(route.id, route.species);
+        map.addLayer(dotPulse, 'clusters');
+        pulseLayerIds.push(dotPulse.id);
+      }
+
+      // Start pulse animation for all route dots
+      if (pulseLayerIds.length > 0) {
+        let animationId: number;
+
+        function animate(timestamp: number) {
+          const sinVal = Math.sin(timestamp / 750);
+          const opacity = 0.2 + 0.15 * sinVal;
+          const radius = 10 + 4 * sinVal;
+
+          for (const layerId of pulseLayerIds) {
+            if (map.getLayer(layerId)) {
+              map.setPaintProperty(layerId, 'circle-opacity', opacity);
+              map.setPaintProperty(layerId, 'circle-radius', radius);
+            }
+          }
+
+          animationId = requestAnimationFrame(animate);
+        }
+
+        animationId = requestAnimationFrame(animate);
+        routePulseCleanupRef.current = () => cancelAnimationFrame(animationId);
+      }
+    },
+    [],
+  );
+
   // Initialize map
   useEffect(() => {
     if (!containerRef.current) return;
@@ -163,6 +275,13 @@ export default function MapView() {
       // Fetch destinations for heatmap
       fetchDestinations();
 
+      // Fetch migration routes and add layers
+      fetchMigrationRoutes().then((routes) => {
+        if (routes && routes.length > 0 && map.isStyleLoaded()) {
+          addRouteLayers(map, routes, getCurrentMonth());
+        }
+      });
+
       // Cluster click handler
       map.on('click', 'clusters', (e) => {
         const features = map.queryRenderedFeatures(e.point, {
@@ -193,6 +312,7 @@ export default function MapView() {
 
         const props = features[0].properties as GeoJSONEventProperties;
         setSelectedEvent(props);
+        setSelectedRoute(null);
         setIsBottomSheetOpen(true);
       });
 
@@ -300,10 +420,23 @@ export default function MapView() {
         map.getCanvas().style.cursor = '';
       });
 
-      // Click on map background (not on a marker) -- close bottom sheet
+      // Click on map background (not on a marker or route) -- close bottom sheet
       map.on('click', (e) => {
+        // Build dynamic list of all interactive layers
+        const interactiveLayers = ['event-circles', 'clusters'];
+        const routes = migrationRoutesRef.current;
+        for (const r of routes) {
+          interactiveLayers.push(
+            `route-${r.id}-completed`,
+            `route-${r.id}-upcoming`,
+            `route-${r.id}-dot`,
+            `route-${r.id}-dot-pulse`,
+          );
+        }
+        // Filter to only layers that exist
+        const existingLayers = interactiveLayers.filter((l) => map.getLayer(l));
         const features = map.queryRenderedFeatures(e.point, {
-          layers: ['event-circles', 'clusters'],
+          layers: existingLayers,
         });
         if (features.length === 0) {
           setIsBottomSheetOpen(false);
@@ -344,6 +477,7 @@ export default function MapView() {
     return () => {
       popupRef.current?.remove();
       cleanupRef.current?.();
+      routePulseCleanupRef.current?.();
       delete (window as unknown as Record<string, unknown>).__findQuieterAlternative;
       map.remove();
     };
@@ -439,6 +573,100 @@ export default function MapView() {
     }
   }, [heatmapEnabled]);
 
+  // Update migration route sources when selectedMonth changes (dot position + trail split)
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !map.isStyleLoaded() || migrationRoutes.length === 0) return;
+
+    for (const route of migrationRoutes) {
+      if (!route.route_geojson?.coordinates?.length) continue;
+
+      const { completedSource, upcomingSource, dotSource } = buildRouteSources(route, selectedMonth);
+
+      const completedSrc = map.getSource(`route-${route.id}-completed`) as maplibregl.GeoJSONSource | undefined;
+      const upcomingSrc = map.getSource(`route-${route.id}-upcoming`) as maplibregl.GeoJSONSource | undefined;
+      const dotSrc = map.getSource(`route-${route.id}-dot`) as maplibregl.GeoJSONSource | undefined;
+
+      if (completedSrc) completedSrc.setData(completedSource);
+      if (upcomingSrc) upcomingSrc.setData(upcomingSource);
+      if (dotSrc) dotSrc.setData(dotSource);
+    }
+  }, [selectedMonth, migrationRoutes]);
+
+  // Toggle species visibility when activeSpecies changes
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !map.isStyleLoaded() || migrationRoutes.length === 0) return;
+
+    for (const route of migrationRoutes) {
+      const visibility = activeSpecies.includes(route.species) ? 'visible' : 'none';
+      const layerIds = [
+        `route-${route.id}-completed`,
+        `route-${route.id}-upcoming`,
+        `route-${route.id}-dot`,
+        `route-${route.id}-dot-pulse`,
+      ];
+      for (const layerId of layerIds) {
+        if (map.getLayer(layerId)) {
+          map.setLayoutProperty(layerId, 'visibility', visibility);
+        }
+      }
+    }
+  }, [activeSpecies, migrationRoutes]);
+
+  // Add click handlers for route layers once routes are loaded
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || migrationRoutes.length === 0) return;
+
+    const handlers: Array<{ layer: string; handler: (e: maplibregl.MapMouseEvent) => void }> = [];
+
+    for (const route of migrationRoutes) {
+      if (!route.route_geojson?.coordinates?.length) continue;
+
+      const clickableLayerIds = [
+        `route-${route.id}-completed`,
+        `route-${route.id}-upcoming`,
+        `route-${route.id}-dot`,
+      ];
+
+      for (const layerId of clickableLayerIds) {
+        const handler = () => {
+          setSelectedRoute(route);
+          setSelectedEvent(null);
+          setIsBottomSheetOpen(true);
+        };
+
+        // Only attach if layer exists
+        if (map.getLayer(layerId)) {
+          map.on('click', layerId, handler);
+          handlers.push({ layer: layerId, handler });
+
+          // Cursor changes
+          map.on('mouseenter', layerId, () => {
+            map.getCanvas().style.cursor = 'pointer';
+          });
+          map.on('mouseleave', layerId, () => {
+            map.getCanvas().style.cursor = '';
+          });
+        }
+      }
+    }
+
+    return () => {
+      for (const { layer, handler } of handlers) {
+        if (map.getLayer(layer)) {
+          map.off('click', layer, handler);
+        }
+      }
+    };
+  }, [migrationRoutes]);
+
+  // Derive unique species list from migration routes
+  const allSpecies = [...new Set(migrationRoutes.map((r) => r.species))];
+  // Visible species for the legend
+  const visibleSpecies = allSpecies.filter((s) => activeSpecies.includes(s));
+
   return (
     <div className="relative h-screen w-full">
       {/* Map container */}
@@ -475,7 +703,7 @@ export default function MapView() {
         </div>
       )}
 
-      {/* Category toggles and heatmap toggle - top left */}
+      {/* Category toggles, heatmap toggle, and species toggles - top left */}
       <div className="absolute left-3 top-3 z-10 flex flex-col gap-2">
         <CategoryToggles
           activeCategories={activeCategories}
@@ -485,7 +713,21 @@ export default function MapView() {
           enabled={heatmapEnabled}
           onToggle={setHeatmapEnabled}
         />
+        {allSpecies.length > 0 && (
+          <SpeciesToggles
+            activeSpecies={activeSpecies}
+            allSpecies={allSpecies}
+            onSpeciesChange={setActiveSpecies}
+          />
+        )}
       </div>
+
+      {/* Species legend - bottom right */}
+      {visibleSpecies.length > 0 && (
+        <div className="absolute bottom-20 right-3 z-10">
+          <SpeciesLegend species={visibleSpecies} />
+        </div>
+      )}
 
       {/* Timeline scrubber - bottom */}
       <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/30 to-transparent pb-3 pt-6">
@@ -500,6 +742,9 @@ export default function MapView() {
         {selectedEvent && (
           <EventPanel event={selectedEvent} onClose={() => setIsBottomSheetOpen(false)} />
         )}
+        {selectedRoute && (
+          <MigrationRoutePanel route={selectedRoute} onClose={() => setIsBottomSheetOpen(false)} />
+        )}
       </BottomSheet>
     </div>
   );
@@ -512,4 +757,131 @@ function getVolumeDescription(score: number): string {
   if (score <= 6) return 'Moderate tourist activity';
   if (score <= 8) return 'Heavy tourist crowds';
   return 'Extremely busy period';
+}
+
+// ---------------------------------------------------------------------------
+// Migration Route detail panel for bottom sheet
+// ---------------------------------------------------------------------------
+
+interface MigrationRoutePanelProps {
+  route: MigrationRouteWithGeoJSON;
+  onClose: () => void;
+}
+
+function MigrationRoutePanel({ route, onClose }: MigrationRoutePanelProps) {
+  const peakText =
+    route.peak_months?.length === 1
+      ? formatMonthRange(route.peak_months[0], route.peak_months[0])
+      : route.peak_months?.length
+        ? formatMonthRange(route.peak_months[0], route.peak_months[route.peak_months.length - 1])
+        : '';
+
+  const speciesLabel = route.species.charAt(0).toUpperCase() + route.species.slice(1);
+
+  const gygUrl = buildGetYourGuideLink({
+    query: `${route.name} wildlife tour`,
+  });
+
+  return (
+    <div className="pb-6">
+      {/* Hero image / placeholder */}
+      <div className="relative h-48 w-full overflow-hidden">
+        {route.image_url ? (
+          <img
+            src={route.image_url}
+            alt={route.name}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-green-400 to-green-600">
+            <span className="text-4xl opacity-30" aria-hidden="true">
+              {'~'}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Content */}
+      <div className="space-y-4 px-5 pt-4">
+        {/* Route name */}
+        <h2 className="text-xl font-bold text-gray-900">{route.name}</h2>
+
+        {/* Species and peak dates */}
+        <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500">
+          <span className="inline-flex items-center gap-1">
+            <svg
+              className="h-3.5 w-3.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            {speciesLabel}
+          </span>
+          {peakText && (
+            <span className="inline-flex items-center gap-1">
+              <svg
+                className="h-3.5 w-3.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+              Peak: {peakText}
+            </span>
+          )}
+        </div>
+
+        {/* Description */}
+        {route.description && (
+          <p className="text-sm leading-relaxed text-gray-600">
+            {route.description}
+          </p>
+        )}
+
+        {/* GYG affiliate CTA */}
+        <div className="space-y-3">
+          <a
+            href={gygUrl}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-orange-500 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600 active:bg-orange-700"
+          >
+            <svg
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            Find wildlife tours
+          </a>
+          <p className="text-center text-xs text-gray-400">
+            We may earn a commission from these links
+          </p>
+        </div>
+      </div>
+    </div>
+  );
 }
