@@ -97,6 +97,12 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **EMAIL-03**: Interest-based tagging on subscribe (festivals / wildlife / region preferences)
 - [ ] **EMAIL-04**: Alert signup: "Alert me about events in [region]"
 
+### AI Discoverability
+
+- [ ] **AIDX-01**: llms.txt file at site root describing site purpose, data structure, and key pages for LLM crawlers
+- [ ] **AIDX-02**: llms-full.txt with comprehensive structured data about events, destinations, and wildlife for AI model ingestion
+- [ ] **AIDX-03**: Clean, semantic HTML structure optimised for AI content extraction (clear headings, data attributes, structured tables)
+
 ### Performance & Polish
 
 - [ ] **PERF-01**: Lighthouse mobile score > 90
@@ -147,13 +153,81 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| *(populated during roadmap creation)* | | |
+| FOUND-01 | Phase 1 | Pending |
+| FOUND-02 | Phase 1 | Pending |
+| FOUND-03 | Phase 1 | Pending |
+| FOUND-04 | Phase 1 | Pending |
+| MAP-01 | Phase 1 | Pending |
+| MAP-02 | Phase 1 | Pending |
+| MAP-03 | Phase 1 | Pending |
+| MAP-04 | Phase 1 | Pending |
+| MAP-05 | Phase 1 | Pending |
+| MAP-06 | Phase 1 | Pending |
+| MAP-07 | Phase 1 | Pending |
+| MAP-08 | Phase 1 | Pending |
+| MAP-09 | Phase 1 | Pending |
+| AFFL-01 | Phase 1 | Pending |
+| AFFL-02 | Phase 1 | Pending |
+| AFFL-03 | Phase 1 | Pending |
+| EMAIL-01 | Phase 1 | Pending |
+| EMAIL-02 | Phase 1 | Pending |
+| EMAIL-03 | Phase 1 | Pending |
+| PERF-04 | Phase 1 | Pending |
+| PERF-05 | Phase 1 | Pending |
+| PERF-06 | Phase 1 | Pending |
+| PAGE-03 | Phase 2 | Pending |
+| PAGE-04 | Phase 2 | Pending |
+| PAGE-05 | Phase 2 | Pending |
+| PERF-02 | Phase 2 | Pending |
+| PERF-03 | Phase 2 | Pending |
+| CROWD-01 | Phase 3 | Pending |
+| CROWD-02 | Phase 3 | Pending |
+| CROWD-03 | Phase 3 | Pending |
+| CROWD-04 | Phase 3 | Pending |
+| CROWD-05 | Phase 3 | Pending |
+| WILD-01 | Phase 3 | Pending |
+| WILD-02 | Phase 3 | Pending |
+| WILD-03 | Phase 3 | Pending |
+| WILD-04 | Phase 3 | Pending |
+| WILD-05 | Phase 3 | Pending |
+| DEST-01 | Phase 3 | Pending |
+| DEST-02 | Phase 3 | Pending |
+| DEST-03 | Phase 3 | Pending |
+| DEST-04 | Phase 3 | Pending |
+| DEST-05 | Phase 3 | Pending |
+| DEST-06 | Phase 3 | Pending |
+| DEST-07 | Phase 3 | Pending |
+| PERF-01 | Phase 3 | Pending |
+| SEO-01 | Phase 4 | Pending |
+| SEO-02 | Phase 4 | Pending |
+| SEO-03 | Phase 4 | Pending |
+| SEO-04 | Phase 4 | Pending |
+| SEO-05 | Phase 4 | Pending |
+| SEO-06 | Phase 4 | Pending |
+| SEO-07 | Phase 4 | Pending |
+| SEO-08 | Phase 4 | Pending |
+| SEO-09 | Phase 4 | Pending |
+| SEO-10 | Phase 4 | Pending |
+| SEO-11 | Phase 4 | Pending |
+| SEO-12 | Phase 4 | Pending |
+| PAGE-01 | Phase 4 | Pending |
+| PAGE-02 | Phase 4 | Pending |
+| AIDX-01 | Phase 4 | Pending |
+| AIDX-02 | Phase 4 | Pending |
+| AIDX-03 | Phase 4 | Pending |
+| SRCH-01 | Phase 5 | Pending |
+| SRCH-02 | Phase 5 | Pending |
+| SRCH-03 | Phase 5 | Pending |
+| SRCH-04 | Phase 5 | Pending |
+| SRCH-05 | Phase 5 | Pending |
+| SRCH-06 | Phase 5 | Pending |
+| EMAIL-04 | Phase 5 | Pending |
 
 **Coverage:**
-- v1 requirements: 54 total
-- Mapped to phases: 0
-- Unmapped: 54
+- v1 requirements: 57 total
+- Mapped to phases: 57
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-01*
-*Last updated: 2026-03-01 after initial definition*
+*Last updated: 2026-03-01 — traceability populated during roadmap creation*
