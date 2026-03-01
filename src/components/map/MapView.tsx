@@ -15,8 +15,11 @@ import {
 import { startPulseAnimation } from '@/lib/map/animations';
 import { filterGeoJSON, getCurrentMonth } from '@/lib/map/filters';
 import { createBrowserClient } from '@/lib/supabase/client';
+import type { GeoJSONEventProperties } from '@/lib/supabase/types';
 import TimelineScrubber from '@/components/map/TimelineScrubber';
 import CategoryToggles from '@/components/map/CategoryToggles';
+import BottomSheet from '@/components/ui/BottomSheet';
+import EventPanel from '@/components/panel/EventPanel';
 
 const EMPTY_GEOJSON: GeoJSON.FeatureCollection = {
   type: 'FeatureCollection',
@@ -36,6 +39,8 @@ export default function MapView() {
   const [allGeoJSON, setAllGeoJSON] = useState<GeoJSON.FeatureCollection | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<GeoJSONEventProperties | null>(null);
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
   // Fetch GeoJSON from Supabase
   const fetchData = useCallback(async () => {
@@ -111,6 +116,28 @@ export default function MapView() {
             zoom,
           });
         });
+      });
+
+      // Event marker click handler — open bottom sheet
+      map.on('click', 'event-circles', (e) => {
+        const features = map.queryRenderedFeatures(e.point, {
+          layers: ['event-circles'],
+        });
+        if (!features.length) return;
+
+        const props = features[0].properties as GeoJSONEventProperties;
+        setSelectedEvent(props);
+        setIsBottomSheetOpen(true);
+      });
+
+      // Click on map background (not on a marker) — close bottom sheet
+      map.on('click', (e) => {
+        const features = map.queryRenderedFeatures(e.point, {
+          layers: ['event-circles', 'clusters'],
+        });
+        if (features.length === 0) {
+          setIsBottomSheetOpen(false);
+        }
       });
 
       // Cursor changes on hover
@@ -213,6 +240,13 @@ export default function MapView() {
           onMonthChange={setSelectedMonth}
         />
       </div>
+
+      {/* Event detail bottom sheet */}
+      <BottomSheet isOpen={isBottomSheetOpen} onClose={() => setIsBottomSheetOpen(false)}>
+        {selectedEvent && (
+          <EventPanel event={selectedEvent} onClose={() => setIsBottomSheetOpen(false)} />
+        )}
+      </BottomSheet>
     </div>
   );
 }
