@@ -54,6 +54,12 @@ export interface MigrationRoute {
   created_at: string;
 }
 
+/** Event with extracted lng/lat coordinates (from get_event_with_coords RPC). */
+export interface EventWithCoords extends Omit<Event, 'location'> {
+  lng: number;
+  lat: number;
+}
+
 /** MigrationRoute with parsed GeoJSON route geometry (from RPC). */
 export interface MigrationRouteWithGeoJSON extends Omit<MigrationRoute, 'route'> {
   route_geojson: {
@@ -147,6 +153,10 @@ export interface Database {
           filter_category: string | null;
         };
         Returns: EventGeoJSON;
+      };
+      get_event_with_coords: {
+        Args: { event_slug: string };
+        Returns: EventWithCoords[];
       };
       get_wildlife_with_route: {
         Args: { route_slug: string };
