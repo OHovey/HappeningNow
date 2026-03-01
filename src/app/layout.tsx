@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://happeningnow.travel"),
   title: "HappeningNow — Explore What's Happening Around the World",
   description:
     "An animated timeline map showing festivals, wildlife spectacles, and crowd levels worldwide. Scrub through months to discover what's happening and when.",
