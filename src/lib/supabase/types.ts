@@ -54,6 +54,14 @@ export interface MigrationRoute {
   created_at: string;
 }
 
+/** MigrationRoute with parsed GeoJSON route geometry (from RPC). */
+export interface MigrationRouteWithGeoJSON extends Omit<MigrationRoute, 'route'> {
+  route_geojson: {
+    type: 'LineString';
+    coordinates: number[][];
+  } | null;
+}
+
 // ---------------------------------------------------------------------------
 // GeoJSON types for map rendering
 // ---------------------------------------------------------------------------
@@ -139,6 +147,10 @@ export interface Database {
           filter_category: string | null;
         };
         Returns: EventGeoJSON;
+      };
+      get_wildlife_with_route: {
+        Args: { route_slug: string };
+        Returns: MigrationRouteWithGeoJSON[];
       };
     };
     Enums: Record<string, never>;

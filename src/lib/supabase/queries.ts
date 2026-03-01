@@ -1,5 +1,5 @@
 import { createServerClient } from '@/lib/supabase/server';
-import type { Event, MigrationRoute } from '@/lib/supabase/types';
+import type { Event, MigrationRoute, MigrationRouteWithGeoJSON } from '@/lib/supabase/types';
 
 /**
  * Fetch a single event by slug.
@@ -117,20 +117,19 @@ function expandMonthRange(start: number, end: number): number[] {
 }
 
 /**
- * Fetch a single migration route by slug.
+ * Fetch a single migration route by slug with route geometry as GeoJSON.
+ * Uses the get_wildlife_with_route RPC to extract PostGIS geometry as GeoJSON coordinates.
  */
 export async function getWildlifeBySlug(
   slug: string,
-): Promise<MigrationRoute | null> {
+): Promise<MigrationRouteWithGeoJSON | null> {
   const supabase = createServerClient();
-  const { data, error } = await supabase
-    .from('migration_routes')
-    .select('*')
-    .eq('slug', slug)
-    .single();
+  const { data, error } = await supabase.rpc('get_wildlife_with_route', {
+    route_slug: slug,
+  });
 
-  if (error || !data) return null;
-  return data;
+  if (error || !data || data.length === 0) return null;
+  return data[0] as MigrationRouteWithGeoJSON;
 }
 
 /**
