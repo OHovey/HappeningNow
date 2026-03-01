@@ -19,10 +19,10 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **MAP-01**: MapLibre GL JS renders interactive world map with OpenFreeMap tiles (client-only via next/dynamic)
 - [x] **MAP-02**: Event markers display as colour-coded pulsing dots (orange=festivals, green=wildlife, blue=other) sized by event scale
 - [x] **MAP-03**: Marker clustering at low zoom levels — numbered circles that expand on click/zoom
-- [ ] **MAP-04**: Timeline scrubber (horizontal 12-month slider) filters events with smooth animated transitions using setFilter() on pre-loaded data
-- [ ] **MAP-05**: Category toggle buttons (Festivals / Wildlife / All) show/hide marker layers
-- [ ] **MAP-06**: "What's happening this week" default view on page load showing current week's events
-- [ ] **MAP-07**: Month picker dropdown above the map for direct month selection
+- [x] **MAP-04**: Timeline scrubber (horizontal 12-month slider) filters events with smooth animated transitions using setFilter() on pre-loaded data
+- [x] **MAP-05**: Category toggle buttons (Festivals / Wildlife / All) show/hide marker layers
+- [x] **MAP-06**: "What's happening this week" default view on page load showing current week's events
+- [x] **MAP-07**: Month picker dropdown above the map for direct month selection
 - [ ] **MAP-08**: Click any event marker opens side panel with event details, photo, dates, description, and affiliate CTAs
 - [x] **MAP-09**: Map controls: zoom, locate me, fullscreen
 
@@ -108,7 +108,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **PERF-01**: Lighthouse mobile score > 90
 - [ ] **PERF-02**: Map initial load < 2 seconds
 - [ ] **PERF-03**: API response time < 200ms with PostGIS spatial indexes
-- [ ] **PERF-04**: Responsive design: mobile-first for all components, touch-optimised map
+- [x] **PERF-04**: Responsive design: mobile-first for all components, touch-optimised map
 - [x] **PERF-05**: Error boundaries and loading states throughout
 - [x] **PERF-06**: Analytics integration (Plausible or Umami — privacy-focused, no cookie banner)
 
@@ -160,10 +160,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MAP-01 | Phase 1 | Complete |
 | MAP-02 | Phase 1 | Complete |
 | MAP-03 | Phase 1 | Complete |
-| MAP-04 | Phase 1 | Pending |
-| MAP-05 | Phase 1 | Pending |
-| MAP-06 | Phase 1 | Pending |
-| MAP-07 | Phase 1 | Pending |
+| MAP-04 | Phase 1 | Complete |
+| MAP-05 | Phase 1 | Complete |
+| MAP-06 | Phase 1 | Complete |
+| MAP-07 | Phase 1 | Complete |
 | MAP-08 | Phase 1 | Pending |
 | MAP-09 | Phase 1 | Complete |
 | AFFL-01 | Phase 1 | Pending |
@@ -172,7 +172,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | EMAIL-01 | Phase 1 | Pending |
 | EMAIL-02 | Phase 1 | Pending |
 | EMAIL-03 | Phase 1 | Pending |
-| PERF-04 | Phase 1 | Pending |
+| PERF-04 | Phase 1 | Complete |
 | PERF-05 | Phase 1 | Complete |
 | PERF-06 | Phase 1 | Complete |
 | PAGE-03 | Phase 2 | Pending |

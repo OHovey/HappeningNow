@@ -10,24 +10,24 @@ See: .planning/PROJECT.md (updated 2026-03-01)
 ## Current Position
 
 Phase: 1 of 5 (Map Foundation)
-Plan: 5 of 7 in current phase
+Plan: 6 of 7 in current phase
 Status: Executing
-Last activity: 2026-03-01 — Completed 01-04 Interactive map with MapLibre
+Last activity: 2026-03-01 — Completed 01-05 Timeline & category filters
 
-Progress: [███░░░░░░░] 11%
+Progress: [████░░░░░░] 14%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
+- Total plans completed: 4
 - Average duration: 3min
-- Total execution time: 0.17 hours
+- Total execution time: 0.22 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-map-foundation | 3 | 10min | 3min |
+| 01-map-foundation | 4 | 13min | 3min |
 
 **Recent Trend:**
 - Last 5 plans: -
@@ -35,6 +35,7 @@ Progress: [███░░░░░░░] 11%
 
 *Updated after each plan completion*
 | Phase 01 P03 | 18min | 2 tasks | 7 files |
+| Phase 01 P05 | 3min | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -58,6 +59,8 @@ Recent decisions affecting current work:
 - [01-03]: Dry-run mode works without Supabase credentials for CI validation
 - [01-04]: Layer definitions as pure config objects (LayerSpecification) not imperative addLayer calls -- composable and testable
 - [01-04]: Two-layer SSR isolation: 'use client' MapShell + next/dynamic ssr:false MapView
+- [01-05]: Source-level filtering (filterGeoJSON + setData) not layer setFilter -- keeps cluster counts accurate
+- [01-05]: At least one category must remain active -- prevents empty map confusion
 
 ### Pending Todos
 
@@ -73,5 +76,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-01
-Stopped at: Completed 01-04-PLAN.md (Interactive map)
+Stopped at: Completed 01-05-PLAN.md (Timeline & category filters)
 Resume file: None
