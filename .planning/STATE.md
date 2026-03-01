@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-03-01)
 ## Current Position
 
 Phase: 2 of 5 (Database and Affiliate Infrastructure)
-Plan: 2 of 4 in current phase
+Plan: 3 of 4 in current phase
 Status: Executing Phase 2
-Last activity: 2026-03-01 — Completed 02-02 Shared Detail Page Components
+Last activity: 2026-03-01 — Completed 02-03 Event Detail Pages
 
-Progress: [███████░░░] 30%
+Progress: [████████░░] 35%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
+- Total plans completed: 9
 - Average duration: 3min
-- Total execution time: 0.35 hours
+- Total execution time: 0.38 hours
 
 **By Phase:**
 
@@ -41,6 +41,7 @@ Progress: [███████░░░] 30%
 | Phase 01 P08 | 1min | 2 tasks | 2 files |
 | Phase 02 P01 | 4min | 3 tasks | 9 files |
 | Phase 02 P02 | 2min | 2 tasks | 5 files |
+| Phase 02 P03 | 2min | 2 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -79,6 +80,9 @@ Recent decisions affecting current work:
 - [02-02]: Test file uses .tsx extension for JSX support (project convention)
 - [02-02]: Viewport saved to localStorage with exported saveViewport/getSavedViewport helpers
 - [02-02]: MiniMap set to interactive:false for detail page embedding
+- [02-03]: metadataBase added to layout.tsx for absolute OG image URL resolution
+- [02-03]: Event coordinates deferred -- PostGIS WKB not extractable via supabase-js; needs future RPC
+- [02-03]: Nearby events: region first, country second, temporal overlap as fallback
 
 ### Pending Todos
 
@@ -94,5 +98,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-01
-Stopped at: Completed 02-02-PLAN.md (Shared Detail Page Components)
+Stopped at: Completed 02-03-PLAN.md (Event Detail Pages)
 Resume file: None

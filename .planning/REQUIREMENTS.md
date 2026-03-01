@@ -65,8 +65,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **PAGE-01**: `/event/[slug]` SSG detail pages with full event information
 - [ ] **PAGE-02**: `/wildlife/[slug]` SSG detail pages with viewing info, best times, tour links
-- [ ] **PAGE-03**: Event schema JSON-LD structured data on all event pages
-- [ ] **PAGE-04**: Open Graph meta tags for social sharing on all detail pages
+- [x] **PAGE-03**: Event schema JSON-LD structured data on all event pages
+- [x] **PAGE-04**: Open Graph meta tags for social sharing on all detail pages
 - [x] **PAGE-05**: Breadcrumb navigation on all pages
 
 ### Programmatic SEO
@@ -175,8 +175,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PERF-04 | Phase 1 | Complete |
 | PERF-05 | Phase 1 | Complete |
 | PERF-06 | Phase 1 | Complete |
-| PAGE-03 | Phase 2 | Pending |
-| PAGE-04 | Phase 2 | Pending |
+| PAGE-03 | Phase 2 | Complete |
+| PAGE-04 | Phase 2 | Complete |
 | PAGE-05 | Phase 2 | Complete |
 | PERF-02 | Phase 2 | Complete |
 | PERF-03 | Phase 2 | Complete |
