@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-03-01)
 ## Current Position
 
 Phase: 3 of 5 (Visual Differentiators)
-Plan: 0 of 3 in current phase
-Status: Not started
-Last activity: 2026-03-01 — Wildlife event MiniMap route line + amber dot fix; hide Booking.com CTA for wildlife
+Plan: 1 of 3 in current phase
+Status: In progress
+Last activity: 2026-03-01 — Crowd heatmap overlay with toggle, month sync, click popup, crowd badge
 
-Progress: [████████░░] 40% (Phases 1-2 complete)
+Progress: [████████▓░] 47% (Phases 1-2 complete, Phase 3 Plan 1 complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 10
+- Total plans completed: 11
 - Average duration: 3min
-- Total execution time: 0.38 hours
+- Total execution time: 0.45 hours
 
 **By Phase:**
 
@@ -44,6 +44,7 @@ Progress: [████████░░] 40% (Phases 1-2 complete)
 | Phase 02 P03 | 2min | 2 tasks | 10 files |
 | Phase 02 P04 | 4min | 2 tasks | 8 files |
 | Phase 02 P05 | 1min | 2 tasks | 4 files |
+| Phase 03 P01 | 4min | 2 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -94,6 +95,10 @@ Recent decisions affecting current work:
 - [02-05]: computeActivePosition extracted from WildlifeContent to shared src/lib/route-utils.ts for reuse in EventContent
 - [02-05]: Booking.com CTA hidden for wildlife events (category === 'wildlife') in AffiliateLinks.tsx; only GetYourGuide shown
 - [02-05]: /wildlife/[slug] redirects to /event/[slug] when slug matches a wildlife event but not a migration route
+- [03-01]: Heatmap layer added BEFORE cluster/event layers for correct z-order (heatmap below events)
+- [03-01]: Browser Supabase client used for destination fetch in MapView (client component)
+- [03-01]: setData used for month sync instead of setFilter because crowd_score property changes per month
+- [03-01]: weather_data type fixed from {temp, rain, sunshine} to {temp_c, rain_days, sunshine_hours}
 
 ### Pending Todos
 
@@ -109,5 +114,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-01
-Stopped at: Phase 2 fully complete and verified. Wildlife event MiniMap route fix deployed. Ready for Phase 3 planning.
+Stopped at: Completed 03-01-PLAN.md (Crowd Heatmap Overlay)
 Resume file: None

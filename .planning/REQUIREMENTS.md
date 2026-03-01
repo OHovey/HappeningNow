@@ -28,11 +28,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Crowd Heatmap
 
-- [ ] **CROWD-01**: Crowd heatmap overlay toggle on main map (green→amber→red colour ramp)
-- [ ] **CROWD-02**: Heatmap synced to month scrubber — changes as user drags through months
-- [ ] **CROWD-03**: Heatmap renders below event markers (z-order) so events remain clickable
-- [ ] **CROWD-04**: Click heatmap region shows crowd detail popup with score, tourist numbers, and "quiet alternatives nearby" link
-- [ ] **CROWD-05**: Crowd indicators added to event popup ("Peak crowds" / "Low season — great timing!")
+- [x] **CROWD-01**: Crowd heatmap overlay toggle on main map (green→amber→red colour ramp)
+- [x] **CROWD-02**: Heatmap synced to month scrubber — changes as user drags through months
+- [x] **CROWD-03**: Heatmap renders below event markers (z-order) so events remain clickable
+- [x] **CROWD-04**: Click heatmap region shows crowd detail popup with score, tourist numbers, and "quiet alternatives nearby" link
+- [x] **CROWD-05**: Crowd indicators added to event popup ("Peak crowds" / "Low season — great timing!")
 
 ### Wildlife & Migration Tracker
 
@@ -180,11 +180,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PAGE-05 | Phase 2 | Complete |
 | PERF-02 | Phase 2 | Complete |
 | PERF-03 | Phase 2 | Complete |
-| CROWD-01 | Phase 3 | Pending |
-| CROWD-02 | Phase 3 | Pending |
-| CROWD-03 | Phase 3 | Pending |
-| CROWD-04 | Phase 3 | Pending |
-| CROWD-05 | Phase 3 | Pending |
+| CROWD-01 | Phase 3 | Complete |
+| CROWD-02 | Phase 3 | Complete |
+| CROWD-03 | Phase 3 | Complete |
+| CROWD-04 | Phase 3 | Complete |
+| CROWD-05 | Phase 3 | Complete |
 | WILD-01 | Phase 3 | Pending |
 | WILD-02 | Phase 3 | Pending |
 | WILD-03 | Phase 3 | Pending |
