@@ -113,6 +113,23 @@ export default function EventPanel({ event, onClose }: EventPanelProps) {
           )}
         </div>
 
+        {/* Crowd indicator text */}
+        {event.crowd_level && (
+          <p
+            className={`text-sm font-medium ${
+              event.crowd_level === 'quiet'
+                ? 'text-green-600'
+                : event.crowd_level === 'moderate'
+                  ? 'text-amber-600'
+                  : 'text-red-600'
+            }`}
+          >
+            {event.crowd_level === 'quiet' && 'Low season \u2014 great timing!'}
+            {event.crowd_level === 'moderate' && 'Moderate crowds expected'}
+            {event.crowd_level === 'busy' && 'Peak crowds \u2014 book early!'}
+          </p>
+        )}
+
         {/* Description */}
         {event.description && (
           <p className="text-sm leading-relaxed text-gray-600">
