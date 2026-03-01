@@ -39,6 +39,7 @@ Progress: [███████░░░] 30%
 | Phase 01 P06 | 3min | 2 tasks | 7 files |
 | Phase 01 P07 | 2min | 2 tasks | 5 files |
 | Phase 01 P08 | 1min | 2 tasks | 2 files |
+| Phase 02 P01 | 4min | 3 tasks | 9 files |
 | Phase 02 P02 | 2min | 2 tasks | 5 files |
 
 ## Accumulated Context
@@ -70,6 +71,11 @@ Recent decisions affecting current work:
 - [01-07]: Placeholder TAG_IDS (value 0) skip tagging calls -- form works without Kit dashboard config
 - [01-07]: Interest checkboxes pre-check based on eventCategory for contextual subscriber segmentation
 - [01-08]: TAG_IDS uses parseInt with fallback 0 -- existing guard means no behavioral change without env vars
+- [02-01]: Zod installed as direct dependency for Route Handler validation
+- [02-01]: 350ms debounce for moveend (within 300-500ms user constraint)
+- [02-01]: AbortController per request prevents stale data from race conditions
+- [02-01]: Filter changes trigger bbox re-fetch plus client-side refinement
+- [02-01]: Awin wrapping opt-in via params; direct aid= links remain default until approval
 - [02-02]: Test file uses .tsx extension for JSX support (project convention)
 - [02-02]: Viewport saved to localStorage with exported saveViewport/getSavedViewport helpers
 - [02-02]: MiniMap set to interactive:false for detail page embedding

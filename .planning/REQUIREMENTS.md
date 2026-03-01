@@ -106,8 +106,8 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Performance & Polish
 
 - [ ] **PERF-01**: Lighthouse mobile score > 90
-- [ ] **PERF-02**: Map initial load < 2 seconds
-- [ ] **PERF-03**: API response time < 200ms with PostGIS spatial indexes
+- [x] **PERF-02**: Map initial load < 2 seconds
+- [x] **PERF-03**: API response time < 200ms with PostGIS spatial indexes
 - [x] **PERF-04**: Responsive design: mobile-first for all components, touch-optimised map
 - [x] **PERF-05**: Error boundaries and loading states throughout
 - [x] **PERF-06**: Analytics integration (Plausible or Umami — privacy-focused, no cookie banner)
@@ -178,8 +178,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PAGE-03 | Phase 2 | Pending |
 | PAGE-04 | Phase 2 | Pending |
 | PAGE-05 | Phase 2 | Complete |
-| PERF-02 | Phase 2 | Pending |
-| PERF-03 | Phase 2 | Pending |
+| PERF-02 | Phase 2 | Complete |
+| PERF-03 | Phase 2 | Complete |
 | CROWD-01 | Phase 3 | Pending |
 | CROWD-02 | Phase 3 | Pending |
 | CROWD-03 | Phase 3 | Pending |
