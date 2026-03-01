@@ -11,12 +11,23 @@ const MONTH_NAMES = [
   'July', 'August', 'September', 'October', 'November', 'December',
 ];
 
-interface BookingLinkParams {
+/** Maximum days in the future Booking.com accepts for checkin */
+const BOOKING_MAX_FUTURE_DAYS = 500;
+
+/** Default stay duration in days */
+const BOOKING_DEFAULT_STAY_DAYS = 7;
+
+/** Maximum stay duration Booking.com allows */
+const BOOKING_MAX_STAY_DAYS = 90;
+
+export interface BookingLinkParams {
   destinationId?: string | null;
   city?: string | null;
   checkin?: string;
   checkout?: string;
   startMonth?: number;
+  awinAffiliateId?: string;
+  awinMerchantId?: string;
 }
 
 interface GYGLinkParams {
@@ -25,11 +36,61 @@ interface GYGLinkParams {
 }
 
 /**
+ * Formats a Date as yyyy-mm-dd.
+ */
+function formatDate(date: Date): string {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+/**
+ * Computes a safe checkin date from a start month.
+ * - Uses the 1st of that month in the current year.
+ * - If the date is in the past, uses next year.
+ * - Clamps to max 500 days from today (Booking.com constraint).
+ */
+function computeCheckinFromMonth(startMonth: number, today: Date = new Date()): Date {
+  const year = today.getFullYear();
+  const target = new Date(year, startMonth - 1, 1);
+
+  // If the month has already passed this year, use next year
+  if (target < today) {
+    target.setFullYear(year + 1);
+  }
+
+  // Clamp to max 500 days from today
+  const maxDate = new Date(today);
+  maxDate.setDate(maxDate.getDate() + BOOKING_MAX_FUTURE_DAYS);
+  if (target > maxDate) {
+    return maxDate;
+  }
+
+  return target;
+}
+
+/**
+ * Computes checkout date from checkin.
+ * - Default: checkin + 7 days
+ * - Capped at checkin + 90 days (Booking.com max)
+ */
+function computeCheckout(checkin: Date): Date {
+  const checkout = new Date(checkin);
+  const stayDays = Math.min(BOOKING_DEFAULT_STAY_DAYS, BOOKING_MAX_STAY_DAYS);
+  checkout.setDate(checkout.getDate() + stayDays);
+  return checkout;
+}
+
+/**
  * Builds a Booking.com search results deep link.
  *
  * Uses destinationId when available, otherwise falls back to city name
  * as a free-text search. If no dates are provided, derives them from
- * the event's start month.
+ * the event's start month with safety clamping.
+ *
+ * Optionally wraps through Awin click tracking when awinAffiliateId
+ * and awinMerchantId are provided.
  */
 export function buildBookingLink(params: BookingLinkParams): string {
   const aid = typeof window !== 'undefined'
@@ -43,6 +104,7 @@ export function buildBookingLink(params: BookingLinkParams): string {
     searchParams.set('aid', aid);
   }
 
+  // Destination: prefer dest_id, fall back to free-text search (ss)
   if (params.destinationId) {
     searchParams.set('dest_id', params.destinationId);
     searchParams.set('dest_type', 'city');
@@ -50,31 +112,39 @@ export function buildBookingLink(params: BookingLinkParams): string {
     searchParams.set('ss', params.city);
   }
 
-  // Derive check-in/check-out from start month if not provided
+  // Date computation with safety
   if (params.checkin) {
     searchParams.set('checkin', params.checkin);
   } else if (params.startMonth) {
-    const year = new Date().getFullYear();
-    const month = String(params.startMonth).padStart(2, '0');
-    searchParams.set('checkin', `${year}-${month}-01`);
+    const checkinDate = computeCheckinFromMonth(params.startMonth);
+    searchParams.set('checkin', formatDate(checkinDate));
   }
 
   if (params.checkout) {
     searchParams.set('checkout', params.checkout);
-  } else if (params.startMonth) {
-    const year = new Date().getFullYear();
-    const month = params.startMonth;
-    // End of the start month
-    const lastDay = new Date(year, month, 0).getDate();
-    const monthStr = String(month).padStart(2, '0');
-    searchParams.set('checkout', `${year}-${monthStr}-${lastDay}`);
+  } else if (searchParams.has('checkin')) {
+    const checkinStr = searchParams.get('checkin')!;
+    const checkinDate = new Date(checkinStr + 'T00:00:00');
+    const checkoutDate = computeCheckout(checkinDate);
+    searchParams.set('checkout', formatDate(checkoutDate));
   }
 
   searchParams.set('no_rooms', '1');
   searchParams.set('group_adults', '2');
 
-  const qs = searchParams.toString();
-  return qs ? `${base}?${qs}` : base;
+  const bookingUrl = `${base}?${searchParams}`;
+
+  // Awin click tracking wrapper
+  if (params.awinAffiliateId && params.awinMerchantId) {
+    const awinParams = new URLSearchParams({
+      awinmid: params.awinMerchantId,
+      awinaffid: params.awinAffiliateId,
+      ued: bookingUrl,
+    });
+    return `https://www.awin1.com/cread.php?${awinParams}`;
+  }
+
+  return bookingUrl;
 }
 
 /**
