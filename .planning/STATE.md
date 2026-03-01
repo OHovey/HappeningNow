@@ -10,16 +10,16 @@ See: .planning/PROJECT.md (updated 2026-03-01)
 ## Current Position
 
 Phase: 2 of 5 (Database and Affiliate Infrastructure)
-Plan: 4 of 4 in current phase
+Plan: 5 of 5 in current phase
 Status: Phase 2 Complete
-Last activity: 2026-03-01 — Completed 02-04 Wildlife Detail Pages
+Last activity: 2026-03-01 — Completed 02-05 Event MiniMap Gap Closure
 
 Progress: [████████░░] 40%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 9
+- Total plans completed: 10
 - Average duration: 3min
 - Total execution time: 0.38 hours
 
@@ -43,6 +43,7 @@ Progress: [████████░░] 40%
 | Phase 02 P02 | 2min | 2 tasks | 5 files |
 | Phase 02 P03 | 2min | 2 tasks | 10 files |
 | Phase 02 P04 | 4min | 2 tasks | 8 files |
+| Phase 02 P05 | 1min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -87,6 +88,8 @@ Recent decisions affecting current work:
 - [02-04]: PostGIS RPC (get_wildlife_with_route) to extract LineString route as GeoJSON since supabase-js cannot query geometry directly
 - [02-04]: Month-aware active position: linear interpolation of current month within peak_months to proportional route coordinate index
 - [02-04]: Wildlife affiliate CTA uses GetYourGuide only (species-based tour search), no Booking.com since wildlife pages lack destination context
+- [02-05]: Bare ST_X/ST_Y without schema prefix, matching existing get_wildlife_with_route convention
+- [02-05]: EventWithCoords uses Omit<Event, 'location'> to replace WKB geometry with extracted lng/lat
 
 ### Pending Todos
 
@@ -102,5 +105,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-01
-Stopped at: Completed 02-04-PLAN.md (Wildlife Detail Pages) - Phase 2 Complete
+Stopped at: Completed 02-05-PLAN.md (Event MiniMap Gap Closure) - Phase 2 Complete
 Resume file: None
