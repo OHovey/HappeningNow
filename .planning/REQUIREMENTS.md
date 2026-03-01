@@ -10,7 +10,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Foundation
 
 - [ ] **FOUND-01**: Next.js 15 project with TypeScript, Tailwind CSS v4, App Router deployed to Vercel
-- [ ] **FOUND-02**: Supabase PostgreSQL with PostGIS extension, all core tables created with spatial indexes
+- [x] **FOUND-02**: Supabase PostgreSQL with PostGIS extension, all core tables created with spatial indexes
 - [ ] **FOUND-03**: Seed data: 500+ festivals, 100+ wildlife events, 30+ destinations with crowd/weather data curated and loaded
 - [ ] **FOUND-04**: Seed data: 10+ major migration routes as GeoJSON LineStrings
 
@@ -154,7 +154,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | FOUND-01 | Phase 1 | Pending |
-| FOUND-02 | Phase 1 | Pending |
+| FOUND-02 | Phase 1 | Complete |
 | FOUND-03 | Phase 1 | Pending |
 | FOUND-04 | Phase 1 | Pending |
 | MAP-01 | Phase 1 | Pending |

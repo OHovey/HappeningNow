@@ -10,24 +10,24 @@ See: .planning/PROJECT.md (updated 2026-03-01)
 ## Current Position
 
 Phase: 1 of 5 (Map Foundation)
-Plan: 0 of 7 in current phase
-Status: Ready to plan
-Last activity: 2026-03-01 — Roadmap created, all 54 v1 requirements mapped across 5 phases
+Plan: 2 of 7 in current phase
+Status: Executing
+Last activity: 2026-03-01 — Completed 01-02 Supabase database layer
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [█░░░░░░░░░] 3%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 0
-- Average duration: -
-- Total execution time: 0 hours
+- Total plans completed: 1
+- Average duration: 2min
+- Total execution time: 0.03 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
+| 01-map-foundation | 1 | 2min | 2min |
 
 **Recent Trend:**
 - Last 5 plans: -
@@ -47,6 +47,8 @@ Recent decisions affecting current work:
 - [Pre-build]: setFilter() not setData() for timeline scrubber — GPU-side filter, no jank; architectural decision not retrofittable
 - [Pre-build]: Vercel Pro required ($20/month) — Hobby tier is explicitly non-commercial; site earns affiliate revenue
 - [Pre-build]: Apply to Booking.com via Awin immediately at Phase 2 start — approval takes 2-4 weeks; do not gate Phase 2 completion on it
+- [01-02]: Singleton pattern for browser Supabase client, fresh instance per request for server client
+- [01-02]: COALESCE to empty array in GeoJSON RPC prevents null when events table is empty
 
 ### Pending Todos
 
@@ -62,5 +64,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-01
-Stopped at: Roadmap created. STATE.md and ROADMAP.md written. REQUIREMENTS.md traceability updated.
+Stopped at: Completed 01-02-PLAN.md (Supabase database layer)
 Resume file: None
