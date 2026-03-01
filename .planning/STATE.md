@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-03-01)
 
 **Core value:** The Timeline Map — an animated world map where users scrub through months and see pulsing dots for festivals, wildlife spectacles, and crowd levels appear and disappear
-**Current focus:** Phase 1 — Map Foundation
+**Current focus:** Phase 2 — Database and Affiliate Infrastructure
 
 ## Current Position
 
-Phase: 1 of 5 (Map Foundation) -- COMPLETE
-Plan: 8 of 8 in current phase -- COMPLETE
-Status: Phase 1 Complete (all gaps closed)
-Last activity: 2026-03-01 — Completed 01-08 Gap closure (verification gaps resolved)
+Phase: 2 of 5 (Database and Affiliate Infrastructure)
+Plan: 2 of 4 in current phase
+Status: Executing Phase 2
+Last activity: 2026-03-01 — Completed 02-02 Shared Detail Page Components
 
-Progress: [██████░░░░] 20%
+Progress: [███████░░░] 30%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
+- Total plans completed: 8
 - Average duration: 3min
-- Total execution time: 0.32 hours
+- Total execution time: 0.35 hours
 
 **By Phase:**
 
@@ -39,6 +39,7 @@ Progress: [██████░░░░] 20%
 | Phase 01 P06 | 3min | 2 tasks | 7 files |
 | Phase 01 P07 | 2min | 2 tasks | 5 files |
 | Phase 01 P08 | 1min | 2 tasks | 2 files |
+| Phase 02 P02 | 2min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -69,6 +70,9 @@ Recent decisions affecting current work:
 - [01-07]: Placeholder TAG_IDS (value 0) skip tagging calls -- form works without Kit dashboard config
 - [01-07]: Interest checkboxes pre-check based on eventCategory for contextual subscriber segmentation
 - [01-08]: TAG_IDS uses parseInt with fallback 0 -- existing guard means no behavioral change without env vars
+- [02-02]: Test file uses .tsx extension for JSX support (project convention)
+- [02-02]: Viewport saved to localStorage with exported saveViewport/getSavedViewport helpers
+- [02-02]: MiniMap set to interactive:false for detail page embedding
 
 ### Pending Todos
 
@@ -84,5 +88,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-01
-Stopped at: Completed 01-08-PLAN.md (Gap closure) -- Phase 1 fully verified
+Stopped at: Completed 02-02-PLAN.md (Shared Detail Page Components)
 Resume file: None
