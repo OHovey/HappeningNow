@@ -1,3 +1,5 @@
+'use client';
+
 import dynamic from 'next/dynamic';
 import { formatPeakMonths } from '@/lib/structured-data';
 import { buildGetYourGuideLink } from '@/lib/affiliates';

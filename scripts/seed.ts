@@ -368,7 +368,25 @@ async function main() {
   // Load seed data
   console.log("Loading seed data...");
   const festivals = loadJSON<SeedEvent[]>("src/data/seed/festivals.json");
-  const wildlife = loadJSON<SeedEvent[]>("src/data/seed/wildlife.json");
+  // Wildlife JSON uses shortened keys (start/end/desc/crowd) — normalize to SeedEvent shape
+  const wildlifeRaw = loadJSON<Record<string, unknown>[]>("src/data/seed/wildlife.json");
+  const wildlife: SeedEvent[] = wildlifeRaw.map((w) => ({
+    name: w.name as string,
+    slug: w.slug as string,
+    category: w.category as "festival" | "wildlife",
+    description: (w.description ?? w.desc ?? null) as string | null,
+    image_url: (w.image_url ?? null) as string | null,
+    start_month: (w.start_month ?? w.start) as number,
+    end_month: (w.end_month ?? w.end) as number,
+    longitude: w.longitude as number,
+    latitude: w.latitude as number,
+    country: (w.country ?? null) as string | null,
+    region: (w.region ?? null) as string | null,
+    scale: w.scale as number,
+    crowd_level: (w.crowd_level ?? w.crowd ?? null) as "quiet" | "moderate" | "busy" | null,
+    booking_destination_id: (w.booking_destination_id ?? null) as string | null,
+    getyourguide_location_id: (w.getyourguide_location_id ?? null) as string | null,
+  }));
   const destinations = loadJSON<SeedDestination[]>(
     "src/data/seed/destinations.json"
   );
@@ -454,9 +472,7 @@ async function main() {
   // Clear existing data
   console.log("\nClearing existing data...");
   try {
-    await executeSql(supabase, "DELETE FROM events;");
-    await executeSql(supabase, "DELETE FROM destinations;");
-    await executeSql(supabase, "DELETE FROM migration_routes;");
+    await executeSql(supabase, "TRUNCATE events, destinations, migration_routes CASCADE;");
     console.log("  Cleared.");
   } catch (err) {
     console.error("  Error clearing data:", (err as Error).message);

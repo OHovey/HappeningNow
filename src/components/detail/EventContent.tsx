@@ -1,3 +1,5 @@
+'use client';
+
 import dynamic from 'next/dynamic';
 import { formatMonthRange } from '@/lib/affiliates';
 import FtcDisclosure from '@/components/ui/FtcDisclosure';

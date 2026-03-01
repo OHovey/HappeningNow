@@ -102,6 +102,9 @@ export default function MapView() {
 
     mapRef.current = map;
 
+    // Ensure canvas picks up container dimensions after dynamic import
+    map.once('style.load', () => map.resize());
+
     map.on('load', () => {
       // Add empty source initially; data will be set when bbox fetch completes
       map.addSource('events', createEventSource(EMPTY_GEOJSON));
@@ -264,7 +267,7 @@ export default function MapView() {
   return (
     <div className="relative h-screen w-full">
       {/* Map container */}
-      <div ref={containerRef} className="absolute inset-0" />
+      <div ref={containerRef} className="absolute inset-0" style={{ width: '100%', height: '100%' }} />
 
       {/* Loading overlay */}
       {loading && (
