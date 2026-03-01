@@ -22,7 +22,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **MAP-04**: Timeline scrubber (horizontal 12-month slider) filters events with smooth animated transitions using setFilter() on pre-loaded data
 - [x] **MAP-05**: Category toggle buttons (Festivals / Wildlife / All) show/hide marker layers
 - [x] **MAP-06**: "What's happening this week" default view on page load showing current week's events
-- [x] **MAP-07**: Month picker dropdown above the map for direct month selection
+- [x] **MAP-07**: Month picker pills above the map for direct month selection (tappable month buttons, horizontally scrollable on mobile)
 - [x] **MAP-08**: Click any event marker opens side panel with event details, photo, dates, description, and affiliate CTAs
 - [x] **MAP-09**: Map controls: zoom, locate me, fullscreen
 
@@ -94,7 +94,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **EMAIL-01**: Email capture component (inline form, not intrusive popup) on all pages
 - [x] **EMAIL-02**: ConvertKit API integration for email submissions
-- [x] **EMAIL-03**: Interest-based tagging on subscribe (festivals / wildlife / region preferences)
+- [x] **EMAIL-03**: Interest-based tagging on subscribe (festivals / wildlife / region preferences) -- requires KIT_TAG_FESTIVALS and KIT_TAG_WILDLIFE env vars from Kit dashboard
 - [ ] **EMAIL-04**: Alert signup: "Alert me about events in [region]"
 
 ### AI Discoverability
