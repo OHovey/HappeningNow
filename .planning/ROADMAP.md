@@ -30,16 +30,16 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User clicks Festivals or Wildlife toggle buttons and the correct subset of markers shows or hides
   4. User clicks any event marker and sees a side panel with the event name, photo, description, dates, and Booking.com/GetYourGuide affiliate links
   5. User submits their email address on the capture form and the form confirms subscription without a page reload
-**Plans**: TBD
+**Plans**: 7 plans
 
 Plans:
-- [ ] 01-01: Project scaffold — Next.js 15 + TypeScript + Tailwind v4 + Vercel deployment with correct MapLibre SSR isolation
-- [ ] 01-02: Supabase schema — PostgreSQL + PostGIS tables, geometry columns, GiST indexes, keep-alive workflow
-- [ ] 01-03: Seed data — 500+ festivals, 100+ wildlife events, 30+ destinations, 10+ migration routes loaded to Supabase
-- [ ] 01-04: Map shell — MapLibre GL JS client island with GeoJSON SymbolLayer, clustering, and zoom/locate/fullscreen controls
-- [ ] 01-05: Timeline scrubber and category toggles — setFilter() architecture, month picker, current-week default view
-- [ ] 01-06: Event detail side panel — marker click handler, photo, description, affiliate CTAs, crowd indicator badge
-- [ ] 01-07: Email capture — ConvertKit API integration, inline form, interest tagging, mobile-responsive layout, analytics
+- [ ] 01-01-PLAN.md — Project scaffold: Next.js 15 + TypeScript + Tailwind v4 + Plausible analytics + error boundaries + Vitest
+- [ ] 01-02-PLAN.md — Supabase schema: PostgreSQL + PostGIS tables, geometry columns, GiST indexes, TypeScript client helpers
+- [ ] 01-03-PLAN.md — Seed data: 500+ festivals, 100+ wildlife events, 30+ destinations, 10+ migration routes loaded to Supabase
+- [ ] 01-04-PLAN.md — Map shell: MapLibre GL JS client island with circle layers, pulsing markers, clustering, zoom/locate/fullscreen
+- [ ] 01-05-PLAN.md — Timeline scrubber and category toggles: source-level filtering, month pills, current-month default view
+- [ ] 01-06-PLAN.md — Event detail panel: bottom sheet, hero image, crowd badge, Booking.com + GYG affiliate CTAs
+- [ ] 01-07-PLAN.md — Email capture: Kit API v4 integration, inline form in bottom sheet, interest tagging
 
 ### Phase 2: Database and Affiliate Infrastructure
 **Goal**: The PostGIS schema is production-hardened with correct spatial column types and verified query performance, the spatial events API is live, and affiliate deep links are generating correct URLs for Booking.com (via Awin) and GetYourGuide
