@@ -92,9 +92,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Email & Growth
 
-- [ ] **EMAIL-01**: Email capture component (inline form, not intrusive popup) on all pages
-- [ ] **EMAIL-02**: ConvertKit API integration for email submissions
-- [ ] **EMAIL-03**: Interest-based tagging on subscribe (festivals / wildlife / region preferences)
+- [x] **EMAIL-01**: Email capture component (inline form, not intrusive popup) on all pages
+- [x] **EMAIL-02**: ConvertKit API integration for email submissions
+- [x] **EMAIL-03**: Interest-based tagging on subscribe (festivals / wildlife / region preferences)
 - [ ] **EMAIL-04**: Alert signup: "Alert me about events in [region]"
 
 ### AI Discoverability
@@ -169,9 +169,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AFFL-01 | Phase 1 | Complete |
 | AFFL-02 | Phase 1 | Complete |
 | AFFL-03 | Phase 1 | Complete |
-| EMAIL-01 | Phase 1 | Pending |
-| EMAIL-02 | Phase 1 | Pending |
-| EMAIL-03 | Phase 1 | Pending |
+| EMAIL-01 | Phase 1 | Complete |
+| EMAIL-02 | Phase 1 | Complete |
+| EMAIL-03 | Phase 1 | Complete |
 | PERF-04 | Phase 1 | Complete |
 | PERF-05 | Phase 1 | Complete |
 | PERF-06 | Phase 1 | Complete |
