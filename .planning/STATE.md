@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-03-01)
 ## Current Position
 
 Phase: 2 of 5 (Database and Affiliate Infrastructure)
-Plan: 3 of 4 in current phase
-Status: Executing Phase 2
-Last activity: 2026-03-01 — Completed 02-03 Event Detail Pages
+Plan: 4 of 4 in current phase
+Status: Phase 2 Complete
+Last activity: 2026-03-01 — Completed 02-04 Wildlife Detail Pages
 
-Progress: [████████░░] 35%
+Progress: [████████░░] 40%
 
 ## Performance Metrics
 
@@ -42,6 +42,7 @@ Progress: [████████░░] 35%
 | Phase 02 P01 | 4min | 3 tasks | 9 files |
 | Phase 02 P02 | 2min | 2 tasks | 5 files |
 | Phase 02 P03 | 2min | 2 tasks | 10 files |
+| Phase 02 P04 | 4min | 2 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -83,6 +84,9 @@ Recent decisions affecting current work:
 - [02-03]: metadataBase added to layout.tsx for absolute OG image URL resolution
 - [02-03]: Event coordinates deferred -- PostGIS WKB not extractable via supabase-js; needs future RPC
 - [02-03]: Nearby events: region first, country second, temporal overlap as fallback
+- [02-04]: PostGIS RPC (get_wildlife_with_route) to extract LineString route as GeoJSON since supabase-js cannot query geometry directly
+- [02-04]: Month-aware active position: linear interpolation of current month within peak_months to proportional route coordinate index
+- [02-04]: Wildlife affiliate CTA uses GetYourGuide only (species-based tour search), no Booking.com since wildlife pages lack destination context
 
 ### Pending Todos
 
@@ -98,5 +102,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-01
-Stopped at: Completed 02-03-PLAN.md (Event Detail Pages)
+Stopped at: Completed 02-04-PLAN.md (Wildlife Detail Pages) - Phase 2 Complete
 Resume file: None
