@@ -13,7 +13,7 @@ HappeningNow.travel ships in five phases, each delivering a coherent, verifiable
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Map Foundation** - Interactive world map with timeline scrubber, event markers, and seed data live and explorable (completed 2026-03-01)
-- [ ] **Phase 2: Database and Affiliate Infrastructure** - Production PostGIS schema with correct spatial types, spatial query API, and affiliate link infrastructure wired
+- [x] **Phase 2: Database and Affiliate Infrastructure** - Production PostGIS schema with correct spatial types, spatial query API, and affiliate link infrastructure wired (completed 2026-03-01)
 - [ ] **Phase 3: Visual Differentiators** - Crowd heatmap, wildlife migration animations, and destination 12-month dashboard added to the working map
 - [ ] **Phase 4: Programmatic SEO** - 3,500+ statically generated SEO pages live with structured data, sitemaps, and ISR
 - [ ] **Phase 5: Growth and Data Scale** - Reverse search, email segmentation, and automated data pipeline operational
@@ -71,12 +71,12 @@ Plans:
   3. User watches a migration route animate — a dot moves along the path for the selected month, and clicking it shows best viewing spots, peak dates, and tour links
   4. User navigates to a destination page and sees a 12-column calendar grid showing events, wildlife, crowd gradient, and weather summary per month
   5. Mobile Lighthouse performance score is above 90 on the destination page and homepage
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: Crowd heatmap — MapLibre HeatmapLayer with green-to-red ramp, synced to month scrubber via setFilter(), rendered below event markers, click popup
-- [ ] 03-02: Wildlife migration animations — LineLayer per species with requestAnimationFrame dot position based on selected month, species toggles, viewing spot popup
-- [ ] 03-03: Destination drilldown pages — /destination/[slug] SSG, 12-month calendar grid, crowd gradient columns, weather summaries, best-time-to-visit text, Booking.com widget
+- [ ] 03-01-PLAN.md — Crowd heatmap overlay: shared crowd-colors utility, MapLibre heatmap layer with cool-to-warm ramp, toggle, month sync, click popup, crowd badge on events
+- [ ] 03-02-PLAN.md — Wildlife migration animations: route line layers with trail effect, animated position dots, species toggles/legend, click-to-detail
+- [ ] 03-03-PLAN.md — Destination drilldown pages: /destination/[slug] SSG, 12-month calendar grid, crowd gradient, weather, best-time-to-visit, Booking.com widget, Lighthouse > 90
 
 ### Phase 4: Programmatic SEO
 **Goal**: Search engines can discover and index 3,500+ unique, content-rich pages covering festivals by region and month, wildlife by region and species, and destination month guides — all with structured data, canonical URLs, and a submitted sitemap
@@ -122,7 +122,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Map Foundation | 8/8 | Complete    | 2026-03-01 |
-| 2. Database and Affiliate Infrastructure | 0/4 | Not started | - |
+| 2. Database and Affiliate Infrastructure | 5/5 | Complete | 2026-03-01 |
 | 3. Visual Differentiators | 0/3 | Not started | - |
 | 4. Programmatic SEO | 0/6 | Not started | - |
 | 5. Growth and Data Scale | 0/3 | Not started | - |
