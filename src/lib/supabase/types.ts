@@ -38,8 +38,14 @@ export interface Destination {
   /** Monthly crowd scores (1-10) keyed by month number */
   crowd_data: Record<string, number> | null;
   /** Monthly weather data keyed by month number */
-  weather_data: Record<string, { temp: number; rain: number; sunshine: number }> | null;
+  weather_data: Record<string, { temp_c: number; rain_days: number; sunshine_hours: number }> | null;
   created_at: string;
+}
+
+/** Destination with extracted lng/lat coordinates (from get_destinations_with_coords RPC). */
+export interface DestinationWithCoords extends Omit<Destination, 'location'> {
+  lng: number;
+  lat: number;
 }
 
 export interface MigrationRoute {
@@ -169,6 +175,10 @@ export interface Database {
       get_wildlife_with_route: {
         Args: { route_slug: string };
         Returns: MigrationRouteWithGeoJSON[];
+      };
+      get_destinations_with_coords: {
+        Args: Record<string, never>;
+        Returns: DestinationWithCoords[];
       };
     };
     Enums: Record<string, never>;

@@ -1,5 +1,5 @@
 import { createServerClient } from '@/lib/supabase/server';
-import type { Event, EventWithCoords, MigrationRouteWithGeoJSON } from '@/lib/supabase/types';
+import type { Event, EventWithCoords, DestinationWithCoords, MigrationRouteWithGeoJSON } from '@/lib/supabase/types';
 
 /**
  * Fetch a single event by slug with extracted coordinates.
@@ -113,6 +113,76 @@ function expandMonthRange(start: number, end: number): number[] {
     for (let m = 1; m <= end; m++) months.push(m);
   }
   return months;
+}
+
+// ---------------------------------------------------------------------------
+// Destination queries
+// ---------------------------------------------------------------------------
+
+/**
+ * Fetch all destinations with extracted coordinates.
+ * Uses the get_destinations_with_coords RPC to extract PostGIS geometry as lng/lat.
+ */
+export async function getAllDestinationsWithCoords(): Promise<DestinationWithCoords[]> {
+  const supabase = createServerClient();
+  const { data, error } = await supabase.rpc('get_destinations_with_coords');
+
+  if (error) {
+    console.error('Failed to fetch destinations:', error);
+    return [];
+  }
+  return (data ?? []) as DestinationWithCoords[];
+}
+
+/**
+ * Fetch a single destination by slug with coordinates.
+ */
+export async function getDestinationBySlug(slug: string): Promise<DestinationWithCoords | null> {
+  const supabase = createServerClient();
+  const { data, error } = await supabase.rpc('get_destinations_with_coords');
+
+  if (error || !data) return null;
+  const destinations = data as DestinationWithCoords[];
+  return destinations.find((d) => d.slug === slug) ?? null;
+}
+
+/**
+ * Fetch all destination slugs for generateStaticParams.
+ */
+export async function getAllDestinationSlugs(): Promise<string[]> {
+  const supabase = createServerClient();
+  const { data } = await supabase.from('destinations').select('slug');
+  return (data ?? []).map((d) => d.slug);
+}
+
+/**
+ * Fetch events matching a destination's region or country.
+ * Used for the calendar grid on destination pages.
+ */
+export async function getEventsByDestination(destination: DestinationWithCoords): Promise<Event[]> {
+  const supabase = createServerClient();
+
+  // Primary: match region
+  if (destination.region) {
+    const { data: regionEvents } = await supabase
+      .from('events')
+      .select('*')
+      .eq('region', destination.region)
+      .limit(20);
+
+    if (regionEvents && regionEvents.length > 0) {
+      return regionEvents;
+    }
+  }
+
+  // Fallback: match country
+  const { data: countryEvents } = await supabase
+    .from('events')
+    .select('*')
+    .eq('country', destination.country)
+    .limit(20);
+
+  return countryEvents ?? [];
 }
 
 /**
