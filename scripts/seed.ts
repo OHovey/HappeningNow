@@ -427,14 +427,14 @@ async function main() {
   }
 
   // Create Supabase client with service role key
-  const supabase = createClient(supabaseUrl, serviceRoleKey, {
+  const supabase = createClient(supabaseUrl!, serviceRoleKey!, {
     auth: { persistSession: false },
   });
 
   // Ensure exec_sql function exists
   console.log("\nChecking exec_sql helper function...");
   try {
-    await ensureExecSqlFunction(supabaseUrl, serviceRoleKey);
+    await ensureExecSqlFunction(supabaseUrl!, serviceRoleKey!);
     console.log("  exec_sql function ready.");
   } catch (err) {
     console.error("  Warning:", (err as Error).message);
