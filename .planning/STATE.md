@@ -10,24 +10,24 @@ See: .planning/PROJECT.md (updated 2026-03-01)
 ## Current Position
 
 Phase: 1 of 5 (Map Foundation)
-Plan: 2 of 7 in current phase
+Plan: 5 of 7 in current phase
 Status: Executing
-Last activity: 2026-03-01 — Completed 01-01 Project scaffold and 01-02 Supabase database layer
+Last activity: 2026-03-01 — Completed 01-04 Interactive map with MapLibre
 
-Progress: [██░░░░░░░░] 6%
+Progress: [███░░░░░░░] 11%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 2
-- Average duration: 4min
-- Total execution time: 0.12 hours
+- Total plans completed: 3
+- Average duration: 3min
+- Total execution time: 0.17 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-map-foundation | 2 | 7min | 4min |
+| 01-map-foundation | 3 | 10min | 3min |
 
 **Recent Trend:**
 - Last 5 plans: -
@@ -52,6 +52,8 @@ Recent decisions affecting current work:
 - [01-01]: vitest.config.mts not .ts — .mts ensures ESM resolution
 - [01-02]: Singleton pattern for browser Supabase client, fresh instance per request for server client
 - [01-02]: COALESCE to empty array in GeoJSON RPC prevents null when events table is empty
+- [01-04]: Layer definitions as pure config objects (LayerSpecification) not imperative addLayer calls -- composable and testable
+- [01-04]: Two-layer SSR isolation: 'use client' MapShell + next/dynamic ssr:false MapView
 
 ### Pending Todos
 
@@ -67,5 +69,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-01
-Stopped at: Completed 01-01-PLAN.md (Project scaffold)
+Stopped at: Completed 01-04-PLAN.md (Interactive map)
 Resume file: None

@@ -16,15 +16,15 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Map & Core Experience
 
-- [ ] **MAP-01**: MapLibre GL JS renders interactive world map with OpenFreeMap tiles (client-only via next/dynamic)
-- [ ] **MAP-02**: Event markers display as colour-coded pulsing dots (orange=festivals, green=wildlife, blue=other) sized by event scale
-- [ ] **MAP-03**: Marker clustering at low zoom levels — numbered circles that expand on click/zoom
+- [x] **MAP-01**: MapLibre GL JS renders interactive world map with OpenFreeMap tiles (client-only via next/dynamic)
+- [x] **MAP-02**: Event markers display as colour-coded pulsing dots (orange=festivals, green=wildlife, blue=other) sized by event scale
+- [x] **MAP-03**: Marker clustering at low zoom levels — numbered circles that expand on click/zoom
 - [ ] **MAP-04**: Timeline scrubber (horizontal 12-month slider) filters events with smooth animated transitions using setFilter() on pre-loaded data
 - [ ] **MAP-05**: Category toggle buttons (Festivals / Wildlife / All) show/hide marker layers
 - [ ] **MAP-06**: "What's happening this week" default view on page load showing current week's events
 - [ ] **MAP-07**: Month picker dropdown above the map for direct month selection
 - [ ] **MAP-08**: Click any event marker opens side panel with event details, photo, dates, description, and affiliate CTAs
-- [ ] **MAP-09**: Map controls: zoom, locate me, fullscreen
+- [x] **MAP-09**: Map controls: zoom, locate me, fullscreen
 
 ### Crowd Heatmap
 
@@ -157,15 +157,15 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FOUND-02 | Phase 1 | Complete |
 | FOUND-03 | Phase 1 | Pending |
 | FOUND-04 | Phase 1 | Pending |
-| MAP-01 | Phase 1 | Pending |
-| MAP-02 | Phase 1 | Pending |
-| MAP-03 | Phase 1 | Pending |
+| MAP-01 | Phase 1 | Complete |
+| MAP-02 | Phase 1 | Complete |
+| MAP-03 | Phase 1 | Complete |
 | MAP-04 | Phase 1 | Pending |
 | MAP-05 | Phase 1 | Pending |
 | MAP-06 | Phase 1 | Pending |
 | MAP-07 | Phase 1 | Pending |
 | MAP-08 | Phase 1 | Pending |
-| MAP-09 | Phase 1 | Pending |
+| MAP-09 | Phase 1 | Complete |
 | AFFL-01 | Phase 1 | Pending |
 | AFFL-02 | Phase 1 | Pending |
 | AFFL-03 | Phase 1 | Pending |
