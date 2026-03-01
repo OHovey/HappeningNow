@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-03-01)
 
 **Core value:** The Timeline Map — an animated world map where users scrub through months and see pulsing dots for festivals, wildlife spectacles, and crowd levels appear and disappear
-**Current focus:** Phase 2 — Database and Affiliate Infrastructure
+**Current focus:** Phase 3 — Visual Differentiators
 
 ## Current Position
 
-Phase: 2 of 5 (Database and Affiliate Infrastructure)
-Plan: 5 of 5 in current phase
-Status: Phase 2 Complete
-Last activity: 2026-03-01 — Completed 02-05 Event MiniMap Gap Closure
+Phase: 3 of 5 (Visual Differentiators)
+Plan: 0 of 3 in current phase
+Status: Not started
+Last activity: 2026-03-01 — Wildlife event MiniMap route line + amber dot fix; hide Booking.com CTA for wildlife
 
-Progress: [████████░░] 40%
+Progress: [████████░░] 40% (Phases 1-2 complete)
 
 ## Performance Metrics
 
@@ -90,6 +90,10 @@ Recent decisions affecting current work:
 - [02-04]: Wildlife affiliate CTA uses GetYourGuide only (species-based tour search), no Booking.com since wildlife pages lack destination context
 - [02-05]: Bare ST_X/ST_Y without schema prefix, matching existing get_wildlife_with_route convention
 - [02-05]: EventWithCoords uses Omit<Event, 'location'> to replace WKB geometry with extracted lng/lat
+- [02-05]: migration_route_id FK on events links wildlife events to their parent migration route for route rendering on event detail pages
+- [02-05]: computeActivePosition extracted from WildlifeContent to shared src/lib/route-utils.ts for reuse in EventContent
+- [02-05]: Booking.com CTA hidden for wildlife events (category === 'wildlife') in AffiliateLinks.tsx; only GetYourGuide shown
+- [02-05]: /wildlife/[slug] redirects to /event/[slug] when slug matches a wildlife event but not a migration route
 
 ### Pending Todos
 
@@ -105,5 +109,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-01
-Stopped at: Completed 02-05-PLAN.md (Event MiniMap Gap Closure) - Phase 2 Complete
+Stopped at: Phase 2 fully complete and verified. Wildlife event MiniMap route fix deployed. Ready for Phase 3 planning.
 Resume file: None
