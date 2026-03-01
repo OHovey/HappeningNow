@@ -12,7 +12,7 @@ HappeningNow.travel ships in five phases, each delivering a coherent, verifiable
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Map Foundation** - Interactive world map with timeline scrubber, event markers, and seed data live and explorable
+- [x] **Phase 1: Map Foundation** - Interactive world map with timeline scrubber, event markers, and seed data live and explorable (completed 2026-03-01)
 - [ ] **Phase 2: Database and Affiliate Infrastructure** - Production PostGIS schema with correct spatial types, spatial query API, and affiliate link infrastructure wired
 - [ ] **Phase 3: Visual Differentiators** - Crowd heatmap, wildlife migration animations, and destination 12-month dashboard added to the working map
 - [ ] **Phase 4: Programmatic SEO** - 3,500+ statically generated SEO pages live with structured data, sitemaps, and ISR
@@ -120,7 +120,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Map Foundation | 7/8 | In Progress|  |
+| 1. Map Foundation | 8/8 | Complete   | 2026-03-01 |
 | 2. Database and Affiliate Infrastructure | 0/4 | Not started | - |
 | 3. Visual Differentiators | 0/3 | Not started | - |
 | 4. Programmatic SEO | 0/6 | Not started | - |
