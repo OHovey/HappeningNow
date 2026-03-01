@@ -4,6 +4,7 @@ import type { GeoJSONEventProperties } from '@/lib/supabase/types';
 import { formatMonthRange } from '@/lib/affiliates';
 import CrowdBadge from '@/components/ui/CrowdBadge';
 import AffiliateLinks from '@/components/panel/AffiliateLinks';
+import EmailCapture from '@/components/panel/EmailCapture';
 
 interface EventPanelProps {
   event: GeoJSONEventProperties;
@@ -25,7 +26,7 @@ const CATEGORY_COLORS: Record<string, string> = {
  * 4. Date range and location subtitle
  * 5. Description
  * 6. Affiliate CTA buttons
- * 7. Spacing reserved for email capture (plan 01-07)
+ * 7. Email capture form with interest checkboxes
  */
 export default function EventPanel({ event, onClose }: EventPanelProps) {
   const dateText = formatMonthRange(event.start_month, event.end_month);
@@ -122,8 +123,11 @@ export default function EventPanel({ event, onClose }: EventPanelProps) {
         {/* Affiliate CTAs */}
         <AffiliateLinks event={event} />
 
-        {/* Reserved space for email capture (plan 01-07) */}
-        <div className="h-1" />
+        {/* Divider */}
+        <hr className="border-gray-200" />
+
+        {/* Email capture */}
+        <EmailCapture eventCategory={event.category} />
       </div>
     </div>
   );
