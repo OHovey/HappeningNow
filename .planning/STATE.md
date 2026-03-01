@@ -34,6 +34,7 @@ Progress: [███░░░░░░░] 11%
 - Trend: -
 
 *Updated after each plan completion*
+| Phase 01 P03 | 18min | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -52,6 +53,9 @@ Recent decisions affecting current work:
 - [01-01]: vitest.config.mts not .ts — .mts ensures ESM resolution
 - [01-02]: Singleton pattern for browser Supabase client, fresh instance per request for server client
 - [01-02]: COALESCE to empty array in GeoJSON RPC prevents null when events table is empty
+- [01-03]: Raw SQL via exec_sql RPC for PostGIS geometry insertion (supabase-js has no native geometry support)
+- [01-03]: Batch size 50 rows per insert to avoid Supabase timeout limits
+- [01-03]: Dry-run mode works without Supabase credentials for CI validation
 - [01-04]: Layer definitions as pure config objects (LayerSpecification) not imperative addLayer calls -- composable and testable
 - [01-04]: Two-layer SSR isolation: 'use client' MapShell + next/dynamic ssr:false MapView
 
