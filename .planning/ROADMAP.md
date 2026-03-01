@@ -30,7 +30,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User clicks Festivals or Wildlife toggle buttons and the correct subset of markers shows or hides
   4. User clicks any event marker and sees a side panel with the event name, photo, description, dates, and Booking.com/GetYourGuide affiliate links
   5. User submits their email address on the capture form and the form confirms subscription without a page reload
-**Plans**: 7 plans
+**Plans**: 8 plans
 
 Plans:
 - [ ] 01-01-PLAN.md — Project scaffold: Next.js 15 + TypeScript + Tailwind v4 + Plausible analytics + error boundaries + Vitest
@@ -40,6 +40,7 @@ Plans:
 - [ ] 01-05-PLAN.md — Timeline scrubber and category toggles: source-level filtering, month pills, current-month default view
 - [ ] 01-06-PLAN.md — Event detail panel: bottom sheet, hero image, crowd badge, Booking.com + GYG affiliate CTAs
 - [ ] 01-07-PLAN.md — Email capture: Kit API v4 integration, inline form in bottom sheet, interest tagging
+- [ ] 01-08-PLAN.md — Gap closure: update MAP-07 requirement text, env-var-driven Kit tag IDs
 
 ### Phase 2: Database and Affiliate Infrastructure
 **Goal**: The PostGIS schema is production-hardened with correct spatial column types and verified query performance, the spatial events API is live, and affiliate deep links are generating correct URLs for Booking.com (via Awin) and GetYourGuide
@@ -119,7 +120,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Map Foundation | 6/7 | In Progress|  |
+| 1. Map Foundation | 7/8 | In Progress|  |
 | 2. Database and Affiliate Infrastructure | 0/4 | Not started | - |
 | 3. Visual Differentiators | 0/3 | Not started | - |
 | 4. Programmatic SEO | 0/6 | Not started | - |
