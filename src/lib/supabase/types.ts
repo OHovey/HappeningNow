@@ -129,6 +129,17 @@ export interface Database {
         Args: Record<string, never>;
         Returns: EventGeoJSON;
       };
+      get_events_bbox: {
+        Args: {
+          min_lng: number;
+          min_lat: number;
+          max_lng: number;
+          max_lat: number;
+          filter_month: number | null;
+          filter_category: string | null;
+        };
+        Returns: EventGeoJSON;
+      };
     };
     Enums: Record<string, never>;
   };
