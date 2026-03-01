@@ -14,7 +14,6 @@ import {
 } from '@/lib/map/layers';
 import { startPulseAnimation } from '@/lib/map/animations';
 import { filterGeoJSON, getCurrentMonth } from '@/lib/map/filters';
-import { createBrowserClient } from '@/lib/supabase/client';
 import type { GeoJSONEventProperties } from '@/lib/supabase/types';
 import TimelineScrubber from '@/components/map/TimelineScrubber';
 import CategoryToggles from '@/components/map/CategoryToggles';
@@ -25,6 +24,9 @@ const EMPTY_GEOJSON: GeoJSON.FeatureCollection = {
   type: 'FeatureCollection',
   features: [],
 };
+
+/** Debounce delay for moveend events (ms) */
+const MOVEEND_DEBOUNCE_MS = 350;
 
 export default function MapView() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -42,34 +44,50 @@ export default function MapView() {
   const [selectedEvent, setSelectedEvent] = useState<GeoJSONEventProperties | null>(null);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
-  // Fetch GeoJSON from Supabase
-  const fetchData = useCallback(async () => {
-    setLoading(true);
-    setError(null);
+  /**
+   * Fetch events from the bbox API for the current map viewport.
+   * Returns parsed GeoJSON FeatureCollection.
+   */
+  const fetchBboxEvents = useCallback(
+    async (map: maplibregl.Map, signal: AbortSignal) => {
+      const bounds = map.getBounds();
+      const bbox = [
+        bounds.getWest(),  // min_lng
+        bounds.getSouth(), // min_lat
+        bounds.getEast(),  // max_lng
+        bounds.getNorth(), // max_lat
+      ].join(',');
 
-    try {
-      const supabase = createBrowserClient();
-      const { data, error: rpcError } = await supabase.rpc('get_events_geojson');
+      const params = new URLSearchParams({ bbox });
+      if (selectedMonth) params.set('month', String(selectedMonth));
+      if (activeCategories.length === 1) params.set('category', activeCategories[0]);
 
-      if (rpcError) {
-        throw new Error(rpcError.message);
+      const res = await fetch(`/api/events?${params}`, { signal });
+      if (!res.ok) throw new Error(`API error: ${res.status}`);
+      return res.json();
+    },
+    [selectedMonth, activeCategories]
+  );
+
+  /**
+   * Trigger a bbox fetch, update allGeoJSON state, and set source data
+   * with client-side filtering applied.
+   */
+  const triggerBboxFetch = useCallback(
+    async (map: maplibregl.Map, signal: AbortSignal) => {
+      try {
+        const data = await fetchBboxEvents(map, signal);
+        setAllGeoJSON(data);
+        setError(null);
+      } catch (err) {
+        if ((err as Error).name === 'AbortError') return;
+        const message = err instanceof Error ? err.message : 'Failed to load events';
+        setError(message);
+        console.error('Failed to fetch bbox events:', err);
       }
-
-      const geojson = (data as GeoJSON.FeatureCollection) ?? EMPTY_GEOJSON;
-      setAllGeoJSON(geojson);
-    } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to load events';
-      setError(message);
-      console.error('Failed to fetch events GeoJSON:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  // Fetch data on mount
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    },
+    [fetchBboxEvents]
+  );
 
   // Initialize map
   useEffect(() => {
@@ -85,7 +103,7 @@ export default function MapView() {
     mapRef.current = map;
 
     map.on('load', () => {
-      // Add empty source initially; data will be set when GeoJSON loads
+      // Add empty source initially; data will be set when bbox fetch completes
       map.addSource('events', createEventSource(EMPTY_GEOJSON));
 
       // Add layers
@@ -118,7 +136,7 @@ export default function MapView() {
         });
       });
 
-      // Event marker click handler — open bottom sheet
+      // Event marker click handler -- open bottom sheet
       map.on('click', 'event-circles', (e) => {
         const features = map.queryRenderedFeatures(e.point, {
           layers: ['event-circles'],
@@ -130,7 +148,7 @@ export default function MapView() {
         setIsBottomSheetOpen(true);
       });
 
-      // Click on map background (not on a marker) — close bottom sheet
+      // Click on map background (not on a marker) -- close bottom sheet
       map.on('click', (e) => {
         const features = map.queryRenderedFeatures(e.point, {
           layers: ['event-circles', 'clusters'],
@@ -164,22 +182,69 @@ export default function MapView() {
         'top-right'
       );
       map.addControl(new maplibregl.FullscreenControl(), 'top-right');
+
+      // Fire initial bbox fetch after map loads
+      setLoading(true);
+      const abortController = new AbortController();
+      triggerBboxFetch(map, abortController.signal).finally(() => setLoading(false));
     });
 
     return () => {
       cleanupRef.current?.();
       map.remove();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Update source data when filters or data change
+  // Debounced moveend handler -- re-fetch bbox events when user pans/zooms
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+
+    let abortController = new AbortController();
+    let timer: ReturnType<typeof setTimeout>;
+
+    const onMoveEnd = () => {
+      clearTimeout(timer);
+      abortController.abort();
+      abortController = new AbortController();
+
+      timer = setTimeout(async () => {
+        setLoading(true);
+        await triggerBboxFetch(map, abortController.signal);
+        setLoading(false);
+      }, MOVEEND_DEBOUNCE_MS);
+    };
+
+    map.on('moveend', onMoveEnd);
+    return () => {
+      map.off('moveend', onMoveEnd);
+      clearTimeout(timer);
+      abortController.abort();
+    };
+  }, [triggerBboxFetch]);
+
+  // Re-fetch when filters change (month or category)
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !map.isStyleLoaded()) return;
+
+    const abortController = new AbortController();
+    setLoading(true);
+    triggerBboxFetch(map, abortController.signal).finally(() => setLoading(false));
+
+    return () => {
+      abortController.abort();
+    };
+  }, [selectedMonth, activeCategories, triggerBboxFetch]);
+
+  // Update source data when allGeoJSON or filters change (client-side refinement)
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !allGeoJSON) return;
 
     const filtered = filterGeoJSON(allGeoJSON, selectedMonth, activeCategories);
 
-    // Wait for map to be loaded before updating source
     if (!map.isStyleLoaded()) {
       map.once('load', () => {
         const source = map.getSource('events') as maplibregl.GeoJSONSource | undefined;
@@ -216,7 +281,14 @@ export default function MapView() {
           <div className="mx-4 rounded-lg bg-red-50 px-4 py-3 shadow-lg">
             <p className="text-sm text-red-700">{error}</p>
             <button
-              onClick={fetchData}
+              onClick={() => {
+                const map = mapRef.current;
+                if (map) {
+                  setLoading(true);
+                  const ctrl = new AbortController();
+                  triggerBboxFetch(map, ctrl.signal).finally(() => setLoading(false));
+                }
+              }}
               className="mt-2 rounded bg-red-600 px-3 py-1 text-sm text-white hover:bg-red-700"
             >
               Retry
