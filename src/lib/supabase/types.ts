@@ -39,6 +39,8 @@ export interface Destination {
   crowd_data: Record<string, number> | null;
   /** Monthly weather data keyed by month number */
   weather_data: Record<string, { temp_c: number; rain_days: number; sunshine_hours: number }> | null;
+  /** Booking.com destination ID for the search widget (null if not mapped) */
+  booking_destination_id: string | null;
   created_at: string;
 }
 
