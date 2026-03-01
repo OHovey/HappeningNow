@@ -52,13 +52,14 @@ Plans:
   3. GetYourGuide affiliate deep links open the correct GYG experience search page for the event location
   4. The map initial load completes in under 2 seconds on a standard broadband connection
   5. Breadcrumb navigation appears on all detail pages and is correctly structured
-**Plans**: 4 plans
+**Plans**: 5 plans
 
 Plans:
 - [ ] 02-01-PLAN.md — Bbox RPC function, /api/events Route Handler with Zod, MapView bbox integration
 - [ ] 02-02-PLAN.md — Shared UI components: Breadcrumbs (+ JSON-LD), FTC disclosure, BackToMap, MiniMap
 - [ ] 02-03-PLAN.md — /event/[slug] SSG pages with JSON-LD Event schema, OG tags, hero, nearby events
 - [ ] 02-04-PLAN.md — /wildlife/[slug] SSG pages with JSON-LD, OG tags, migration route mini map
+- [ ] 02-05-PLAN.md — Gap closure: PostGIS RPC for event coordinates, wire MiniMap on event detail pages
 
 ### Phase 3: Visual Differentiators
 **Goal**: Users can toggle a crowd heatmap that shifts colours as they scrub through months, watch animated migration routes with a moving position dot, and visit destination pages showing a full 12-month events, crowds, and weather grid
