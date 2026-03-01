@@ -2,9 +2,10 @@
 
 import dynamic from 'next/dynamic';
 import { formatMonthRange } from '@/lib/affiliates';
+import { computeActivePosition } from '@/lib/route-utils';
 import FtcDisclosure from '@/components/ui/FtcDisclosure';
 import AffiliateLinks from '@/components/panel/AffiliateLinks';
-import type { Event, GeoJSONEventProperties } from '@/lib/supabase/types';
+import type { EventWithCoords, GeoJSONEventProperties } from '@/lib/supabase/types';
 
 const MiniMap = dynamic(() => import('@/components/detail/MiniMap'), {
   ssr: false,
@@ -17,13 +18,16 @@ const MiniMap = dynamic(() => import('@/components/detail/MiniMap'), {
 });
 
 interface EventContentProps {
-  event: Event;
+  event: EventWithCoords;
   coordinates?: [lng: number, lat: number];
 }
 
 /**
  * Event detail content: description, dates, location, mini map, and affiliate CTAs.
  * Rendered below the EventHero in a max-width container.
+ *
+ * For wildlife events linked to a migration route, renders the route line
+ * and an amber active-position dot on the MiniMap.
  */
 export default function EventContent({ event, coordinates }: EventContentProps) {
   const dateRange = formatMonthRange(event.start_month, event.end_month);
@@ -45,6 +49,22 @@ export default function EventContent({ event, coordinates }: EventContentProps) 
     booking_destination_id: event.booking_destination_id,
     getyourguide_location_id: event.getyourguide_location_id,
   };
+
+  // Extract route data for wildlife events with a linked migration route
+  const routeCoordinates = event.route_geojson?.coordinates;
+  const hasRoute = routeCoordinates && routeCoordinates.length >= 2;
+
+  // Compute active position and map center when route data is available
+  const activePosition = hasRoute && event.peak_months
+    ? computeActivePosition(routeCoordinates, event.peak_months)
+    : undefined;
+
+  const mapCenter: [number, number] | undefined = hasRoute
+    ? [
+        routeCoordinates[Math.floor(routeCoordinates.length / 2)][0],
+        routeCoordinates[Math.floor(routeCoordinates.length / 2)][1],
+      ]
+    : coordinates;
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 space-y-8">
@@ -73,10 +93,22 @@ export default function EventContent({ event, coordinates }: EventContentProps) 
       </section>
 
       {/* Mini Map */}
-      {coordinates && (
+      {mapCenter && (
         <section>
-          <h2 className="text-xl font-semibold text-gray-900 mb-3">Location</h2>
-          <MiniMap coordinates={coordinates} zoom={8} />
+          <h2 className="text-xl font-semibold text-gray-900 mb-3">
+            {hasRoute ? 'Migration Route' : 'Location'}
+          </h2>
+          <MiniMap
+            coordinates={mapCenter}
+            zoom={8}
+            routeCoordinates={hasRoute ? routeCoordinates : undefined}
+            activePosition={activePosition}
+          />
+          {hasRoute && (
+            <p className="mt-2 text-xs text-gray-500">
+              The highlighted dot shows the approximate migration position for the current month.
+            </p>
+          )}
         </section>
       )}
 

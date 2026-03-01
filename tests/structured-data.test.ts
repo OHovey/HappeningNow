@@ -19,6 +19,7 @@ function makeEvent(overrides: Partial<Event> = {}): Event {
     crowd_level: 'busy',
     booking_destination_id: null,
     getyourguide_location_id: null,
+    migration_route_id: null,
     created_at: '2026-01-01T00:00:00Z',
     ...overrides,
   };

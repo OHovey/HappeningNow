@@ -2,10 +2,10 @@ import Image from 'next/image';
 import CrowdBadge from '@/components/ui/CrowdBadge';
 import { formatMonthRange } from '@/lib/affiliates';
 import { CATEGORY_COLORS } from '@/lib/constants';
-import type { Event } from '@/lib/supabase/types';
+import type { Event, EventWithCoords } from '@/lib/supabase/types';
 
 interface EventHeroProps {
-  event: Event;
+  event: Event | EventWithCoords;
 }
 
 /**

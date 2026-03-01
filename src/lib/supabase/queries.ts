@@ -1,5 +1,5 @@
 import { createServerClient } from '@/lib/supabase/server';
-import type { Event, EventWithCoords, MigrationRoute, MigrationRouteWithGeoJSON } from '@/lib/supabase/types';
+import type { Event, EventWithCoords, MigrationRouteWithGeoJSON } from '@/lib/supabase/types';
 
 /**
  * Fetch a single event by slug with extracted coordinates.
@@ -33,7 +33,7 @@ export async function getAllEventSlugs(): Promise<string[]> {
  * Secondary criterion: temporal overlap (month ranges intersect).
  */
 export async function getNearbyEvents(
-  event: Event,
+  event: Event | EventWithCoords,
   limit: number = 4,
 ): Promise<Event[]> {
   const supabase = createServerClient();

@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic';
 import { formatPeakMonths } from '@/lib/structured-data';
 import { buildGetYourGuideLink } from '@/lib/affiliates';
+import { computeActivePosition } from '@/lib/route-utils';
 import FtcDisclosure from '@/components/ui/FtcDisclosure';
 import type { MigrationRouteWithGeoJSON } from '@/lib/supabase/types';
 
@@ -24,62 +25,6 @@ const MONTH_NAMES_SHORT = [
   '', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
 ];
-
-/**
- * Compute the month-aware active position along the migration route.
- *
- * Maps the current month to a proportional index along the route coordinates.
- * If the current month falls outside the migration window, highlights
- * the nearest endpoint.
- */
-function computeActivePosition(
-  routeCoordinates: number[][],
-  peakMonths: number[],
-): [number, number] | undefined {
-  if (!routeCoordinates || routeCoordinates.length === 0 || !peakMonths || peakMonths.length === 0) {
-    return undefined;
-  }
-
-  const currentMonth = new Date().getMonth() + 1; // 1-12
-  const firstPeak = peakMonths[0];
-  const lastPeak = peakMonths[peakMonths.length - 1];
-
-  // Check if current month falls within migration window
-  let monthIndex: number;
-  if (firstPeak <= lastPeak) {
-    // Normal range (e.g., March to August)
-    if (currentMonth < firstPeak) {
-      // Before migration - show start
-      monthIndex = 0;
-    } else if (currentMonth > lastPeak) {
-      // After migration - show end
-      monthIndex = peakMonths.length - 1;
-    } else {
-      monthIndex = currentMonth - firstPeak;
-    }
-  } else {
-    // Wrapping range (e.g., November to February)
-    const expandedMonths: number[] = [];
-    for (let m = firstPeak; m <= 12; m++) expandedMonths.push(m);
-    for (let m = 1; m <= lastPeak; m++) expandedMonths.push(m);
-
-    const idx = expandedMonths.indexOf(currentMonth);
-    if (idx === -1) {
-      // Outside migration window - nearest endpoint
-      monthIndex = 0;
-    } else {
-      monthIndex = idx;
-    }
-  }
-
-  // Map month index to route coordinate index
-  const totalMonths = peakMonths.length > 1 ? peakMonths.length - 1 : 1;
-  const fraction = Math.min(monthIndex / totalMonths, 1);
-  const coordIndex = Math.round(fraction * (routeCoordinates.length - 1));
-  const coord = routeCoordinates[coordIndex];
-
-  return coord ? [coord[0], coord[1]] : undefined;
-}
 
 /**
  * Wildlife detail content: description, peak months, migration route map,

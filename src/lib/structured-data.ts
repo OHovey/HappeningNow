@@ -1,12 +1,12 @@
 import type { WithContext, Event as EventSchema } from 'schema-dts';
 import type { Metadata } from 'next';
-import type { Event, MigrationRouteWithGeoJSON } from '@/lib/supabase/types';
+import type { Event, EventWithCoords, MigrationRouteWithGeoJSON } from '@/lib/supabase/types';
 
 /**
  * Builds Event JSON-LD structured data for a given event.
  * Handles year computation: if event start_month has passed this year, use next year.
  */
-export function buildEventJsonLd(event: Event): WithContext<EventSchema> {
+export function buildEventJsonLd(event: Event | EventWithCoords): WithContext<EventSchema> {
   const now = new Date();
   const currentYear = now.getFullYear();
   const currentMonth = now.getMonth() + 1;
@@ -45,7 +45,7 @@ export function buildEventJsonLd(event: Event): WithContext<EventSchema> {
 /**
  * Builds Next.js Metadata for an event detail page.
  */
-export function buildEventMetadata(event: Event): Metadata {
+export function buildEventMetadata(event: Event | EventWithCoords): Metadata {
   const description = event.description ?? `Discover ${event.name}`;
 
   return {

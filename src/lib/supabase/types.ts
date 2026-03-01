@@ -24,6 +24,7 @@ export interface Event {
   crowd_level: "quiet" | "moderate" | "busy" | null;
   booking_destination_id: string | null;
   getyourguide_location_id: string | null;
+  migration_route_id: string | null;
   created_at: string;
 }
 
@@ -58,6 +59,13 @@ export interface MigrationRoute {
 export interface EventWithCoords extends Omit<Event, 'location'> {
   lng: number;
   lat: number;
+  /** Route GeoJSON from linked migration_route (wildlife events only) */
+  route_geojson?: {
+    type: 'LineString';
+    coordinates: number[][];
+  } | null;
+  /** Peak viewing months from linked migration_route (wildlife events only) */
+  peak_months?: number[] | null;
 }
 
 /** MigrationRoute with parsed GeoJSON route geometry (from RPC). */

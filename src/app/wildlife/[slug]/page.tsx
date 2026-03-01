@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import type { Metadata } from 'next';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import BackToMap from '@/components/ui/BackToMap';
@@ -11,6 +11,7 @@ import {
 import {
   getWildlifeBySlug,
   getAllWildlifeSlugs,
+  getEventBySlug,
 } from '@/lib/supabase/queries';
 
 interface WildlifePageProps {
@@ -36,6 +37,10 @@ export async function generateMetadata({
   const route = await getWildlifeBySlug(slug);
 
   if (!route) {
+    const event = await getEventBySlug(slug);
+    if (event?.category === 'wildlife') {
+      redirect(`/event/${slug}`);
+    }
     return { title: 'Wildlife Not Found' };
   }
 
@@ -54,6 +59,10 @@ export default async function WildlifePage({ params }: WildlifePageProps) {
   const route = await getWildlifeBySlug(slug);
 
   if (!route) {
+    const event = await getEventBySlug(slug);
+    if (event?.category === 'wildlife') {
+      redirect(`/event/${slug}`);
+    }
     notFound();
   }
 

@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS events (
   crowd_level TEXT CHECK (crowd_level IN ('quiet', 'moderate', 'busy')),
   booking_destination_id TEXT,
   getyourguide_location_id TEXT,
+  migration_route_id UUID REFERENCES migration_routes(id) ON DELETE SET NULL,
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
