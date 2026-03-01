@@ -21,12 +21,13 @@ function headers(): HeadersInit {
 }
 
 /**
- * Replace with real tag IDs from Kit Dashboard -> Subscribers -> Tags.
- * Each key maps to a Kit tag ID used for interest-based segmentation.
+ * Tag IDs from Kit Dashboard -> Subscribers -> Tags.
+ * Set KIT_TAG_FESTIVALS and KIT_TAG_WILDLIFE environment variables.
+ * When set to 0 (default), tagging is silently skipped.
  */
 export const TAG_IDS: Record<string, number> = {
-  festivals: 0,
-  wildlife: 0,
+  festivals: parseInt(process.env.KIT_TAG_FESTIVALS || '0', 10),
+  wildlife: parseInt(process.env.KIT_TAG_WILDLIFE || '0', 10),
 };
 
 /**
