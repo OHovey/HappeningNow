@@ -9,7 +9,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Foundation
 
-- [ ] **FOUND-01**: Next.js 15 project with TypeScript, Tailwind CSS v4, App Router deployed to Vercel
+- [x] **FOUND-01**: Next.js 15 project with TypeScript, Tailwind CSS v4, App Router deployed to Vercel
 - [x] **FOUND-02**: Supabase PostgreSQL with PostGIS extension, all core tables created with spatial indexes
 - [ ] **FOUND-03**: Seed data: 500+ festivals, 100+ wildlife events, 30+ destinations with crowd/weather data curated and loaded
 - [ ] **FOUND-04**: Seed data: 10+ major migration routes as GeoJSON LineStrings
@@ -109,8 +109,8 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **PERF-02**: Map initial load < 2 seconds
 - [ ] **PERF-03**: API response time < 200ms with PostGIS spatial indexes
 - [ ] **PERF-04**: Responsive design: mobile-first for all components, touch-optimised map
-- [ ] **PERF-05**: Error boundaries and loading states throughout
-- [ ] **PERF-06**: Analytics integration (Plausible or Umami — privacy-focused, no cookie banner)
+- [x] **PERF-05**: Error boundaries and loading states throughout
+- [x] **PERF-06**: Analytics integration (Plausible or Umami — privacy-focused, no cookie banner)
 
 ## v2 Requirements
 
@@ -153,7 +153,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | Phase 1 | Pending |
+| FOUND-01 | Phase 1 | Complete |
 | FOUND-02 | Phase 1 | Complete |
 | FOUND-03 | Phase 1 | Pending |
 | FOUND-04 | Phase 1 | Pending |
@@ -173,8 +173,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | EMAIL-02 | Phase 1 | Pending |
 | EMAIL-03 | Phase 1 | Pending |
 | PERF-04 | Phase 1 | Pending |
-| PERF-05 | Phase 1 | Pending |
-| PERF-06 | Phase 1 | Pending |
+| PERF-05 | Phase 1 | Complete |
+| PERF-06 | Phase 1 | Complete |
 | PAGE-03 | Phase 2 | Pending |
 | PAGE-04 | Phase 2 | Pending |
 | PAGE-05 | Phase 2 | Pending |
