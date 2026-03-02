@@ -57,7 +57,7 @@ export function getRelatedFestivalLinks(
   if (currentCountry && currentMonth) {
     for (const m of adjacentMonths(currentMonth)) {
       links.push({
-        href: `/festivals/${slugify(currentCountry)}/${slugify(MONTH_NAMES[m])}`,
+        href: `/festivals/${slugify(currentCountry)}/${m}`,
         label: `${currentCountry} festivals in ${MONTH_NAMES[m]}`,
       });
     }
@@ -66,14 +66,14 @@ export function getRelatedFestivalLinks(
   // Region overview for current month
   if (currentRegion && currentMonth) {
     links.push({
-      href: `/festivals/${slugify(currentRegion)}/${slugify(MONTH_NAMES[currentMonth])}`,
+      href: `/festivals/${slugify(currentRegion)}/${currentMonth}`,
       label: `${currentRegion} festivals in ${MONTH_NAMES[currentMonth]}`,
     });
 
     // Region, adjacent months
     for (const m of adjacentMonths(currentMonth)) {
       links.push({
-        href: `/festivals/${slugify(currentRegion)}/${slugify(MONTH_NAMES[m])}`,
+        href: `/festivals/${slugify(currentRegion)}/${m}`,
         label: `${currentRegion} festivals in ${MONTH_NAMES[m]}`,
       });
     }
