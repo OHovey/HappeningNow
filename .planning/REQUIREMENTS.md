@@ -78,8 +78,8 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **SEO-05**: `/wildlife/[species]` pages (~50 pages) with all viewing locations per species
 - [ ] **SEO-06**: `/wildlife/[region]/[month]` pages (~180 pages) with what to see where, when
 - [ ] **SEO-07**: `/what-to-do/[destination]/[month]` pages (~2000+ pages) with combined events + crowd + weather
-- [ ] **SEO-08**: Each programmatic page includes unique AI-generated intro (2-3 sentences) with strategy to avoid AI content detection
-- [ ] **SEO-09**: Each page includes pre-filtered embedded map, event cards, affiliate links, internal links, email capture
+- [x] **SEO-08**: Each programmatic page includes unique AI-generated intro (2-3 sentences) with strategy to avoid AI content detection
+- [x] **SEO-09**: Each page includes pre-filtered embedded map, event cards, affiliate links, internal links, email capture
 - [ ] **SEO-10**: XML sitemap generated from seo_pages table
 - [ ] **SEO-11**: robots.txt and sitemap submission config
 - [ ] **SEO-12**: ISR (revalidate = 86400) for programmatic pages instead of full SSG to avoid Vercel build timeout
@@ -101,7 +101,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **AIDX-01**: llms.txt file at site root describing site purpose, data structure, and key pages for LLM crawlers
 - [ ] **AIDX-02**: llms-full.txt with comprehensive structured data about events, destinations, and wildlife for AI model ingestion
-- [ ] **AIDX-03**: Clean, semantic HTML structure optimised for AI content extraction (clear headings, data attributes, structured tables)
+- [x] **AIDX-03**: Clean, semantic HTML structure optimised for AI content extraction (clear headings, data attributes, structured tables)
 
 ### Performance & Polish
 
@@ -205,8 +205,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SEO-05 | Phase 4 | Pending |
 | SEO-06 | Phase 4 | Pending |
 | SEO-07 | Phase 4 | Pending |
-| SEO-08 | Phase 4 | Pending |
-| SEO-09 | Phase 4 | Pending |
+| SEO-08 | Phase 4 | Complete |
+| SEO-09 | Phase 4 | Complete |
 | SEO-10 | Phase 4 | Pending |
 | SEO-11 | Phase 4 | Pending |
 | SEO-12 | Phase 4 | Pending |
@@ -214,7 +214,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PAGE-02 | Phase 4 | Pending |
 | AIDX-01 | Phase 4 | Pending |
 | AIDX-02 | Phase 4 | Pending |
-| AIDX-03 | Phase 4 | Pending |
+| AIDX-03 | Phase 4 | Complete |
 | SRCH-01 | Phase 5 | Pending |
 | SRCH-02 | Phase 5 | Pending |
 | SRCH-03 | Phase 5 | Pending |
