@@ -95,7 +95,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **EMAIL-01**: Email capture component (inline form, not intrusive popup) on all pages
 - [x] **EMAIL-02**: ConvertKit API integration for email submissions
 - [x] **EMAIL-03**: Interest-based tagging on subscribe (festivals / wildlife / region preferences) -- requires KIT_TAG_FESTIVALS and KIT_TAG_WILDLIFE env vars from Kit dashboard
-- [ ] **EMAIL-04**: Alert signup: "Alert me about events in [region]"
+- [x] **EMAIL-04**: Alert signup: "Alert me about events in [region]"
 
 ### AI Discoverability
 
@@ -221,7 +221,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SRCH-04 | Phase 5 | Complete |
 | SRCH-05 | Phase 5 | Complete |
 | SRCH-06 | Phase 5 | Complete |
-| EMAIL-04 | Phase 5 | Pending |
+| EMAIL-04 | Phase 5 | Complete |
 
 **Coverage:**
 - v1 requirements: 57 total
