@@ -139,7 +139,11 @@ export default async function DestinationPage({
         />
       </div>
 
-      <BackToMap />
+      <BackToMap
+        fallbackLat={destination.lat}
+        fallbackLng={destination.lng}
+        fallbackZoom={8}
+      />
     </>
   );
 }

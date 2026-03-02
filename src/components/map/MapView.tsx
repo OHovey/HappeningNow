@@ -49,7 +49,11 @@ const EMPTY_GEOJSON: GeoJSON.FeatureCollection = {
 /** Debounce delay for moveend events (ms) */
 const MOVEEND_DEBOUNCE_MS = 350;
 
-export default function MapView() {
+interface MapViewProps {
+  flyToTarget?: { lat: number; lng: number; zoom: number };
+}
+
+export default function MapView({ flyToTarget }: MapViewProps = {}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const cleanupRef = useRef<(() => void) | null>(null);
@@ -372,6 +376,9 @@ export default function MapView() {
               >
                 Find quieter alternatives
               </button>
+              <a href="/destination/${nearest.slug}" style="display:block; text-align:center; margin-top:6px; font-size:12px; color:#3b82f6; text-decoration:underline;">
+                View ${nearest.name} details
+              </a>
             </div>
           `)
           .addTo(map);
@@ -472,6 +479,15 @@ export default function MapView() {
       setLoading(true);
       const abortController = new AbortController();
       triggerBboxFetch(map, abortController.signal).finally(() => setLoading(false));
+
+      // Fly to target coordinates if provided via URL search params
+      if (flyToTarget) {
+        map.flyTo({
+          center: [flyToTarget.lng, flyToTarget.lat],
+          zoom: flyToTarget.zoom,
+          duration: 2000,
+        });
+      }
     });
 
     return () => {

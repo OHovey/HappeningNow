@@ -37,11 +37,19 @@ export function getSavedViewport(): SavedViewport | null {
   }
 }
 
+interface BackToMapProps {
+  /** Fallback coordinates when no saved viewport exists (e.g., destination lat/lng). */
+  fallbackLat?: number;
+  fallbackLng?: number;
+  fallbackZoom?: number;
+}
+
 /**
  * Floating "Back to Map" button for detail pages.
  * Navigates to / with saved viewport state as URL search params.
+ * Falls back to provided coordinates if no saved viewport exists.
  */
-export default function BackToMap() {
+export default function BackToMap({ fallbackLat, fallbackLng, fallbackZoom = 8 }: BackToMapProps = {}) {
   const router = useRouter();
 
   const handleClick = useCallback(() => {
@@ -58,10 +66,16 @@ export default function BackToMap() {
         params.set('categories', viewport.categories);
       }
       router.push(`/?${params.toString()}`);
+    } else if (fallbackLat !== undefined && fallbackLng !== undefined) {
+      const params = new URLSearchParams();
+      params.set('lat', String(fallbackLat));
+      params.set('lng', String(fallbackLng));
+      params.set('zoom', String(fallbackZoom));
+      router.push(`/?${params.toString()}`);
     } else {
       router.push('/');
     }
-  }, [router]);
+  }, [router, fallbackLat, fallbackLng, fallbackZoom]);
 
   return (
     <button
