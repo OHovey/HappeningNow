@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useRef } from 'react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
@@ -15,27 +15,34 @@ export default function MapShell() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const flyToTarget = useMemo(() => {
+  // Read flyTo params once and store in a ref so router.replace doesn't
+  // trigger a re-render that clears the value before the map loads.
+  const flyToRef = useRef<{ lat: number; lng: number; zoom: number } | undefined>(undefined);
+  const paramsReadRef = useRef(false);
+
+  if (!paramsReadRef.current) {
     const latStr = searchParams.get('lat');
     const lngStr = searchParams.get('lng');
     const zoomStr = searchParams.get('zoom');
 
-    if (!latStr || !lngStr || !zoomStr) return undefined;
+    if (latStr && lngStr && zoomStr) {
+      const lat = parseFloat(latStr);
+      const lng = parseFloat(lngStr);
+      const zoom = parseFloat(zoomStr);
 
-    const lat = parseFloat(latStr);
-    const lng = parseFloat(lngStr);
-    const zoom = parseFloat(zoomStr);
+      if (!isNaN(lat) && !isNaN(lng) && !isNaN(zoom)) {
+        flyToRef.current = { lat, lng, zoom };
+      }
+    }
+    paramsReadRef.current = true;
 
-    if (isNaN(lat) || isNaN(lng) || isNaN(zoom)) return undefined;
+    // Clear URL params after a delay so the map has time to read the flyTo target
+    if (flyToRef.current) {
+      setTimeout(() => {
+        router.replace(pathname, { scroll: false });
+      }, 100);
+    }
+  }
 
-    // Clear URL params so flyTo only triggers once
-    // Use setTimeout to avoid updating state during render
-    setTimeout(() => {
-      router.replace(pathname, { scroll: false });
-    }, 0);
-
-    return { lat, lng, zoom };
-  }, [searchParams, router, pathname]);
-
-  return <MapView flyToTarget={flyToTarget} />;
+  return <MapView flyToTarget={flyToRef.current} />;
 }

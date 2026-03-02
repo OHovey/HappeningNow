@@ -41,38 +41,39 @@ export const crowdHeatmapLayer: LayerSpecification = {
   type: 'heatmap',
   source: 'crowd-heatmap',
   paint: {
-    // Weight each point by its crowd score (1 = no weight, 10 = full weight)
+    // Weight each point by its crowd score (minimum 0.3 so all points are visible)
     'heatmap-weight': [
       'interpolate', ['linear'], ['get', 'crowd_score'],
-      1, 0,
+      1, 0.3,
       10, 1,
     ],
-    // Increase intensity as user zooms in
+    // Increase intensity as user zooms in (higher base for sparse data)
     'heatmap-intensity': [
       'interpolate', ['linear'], ['zoom'],
-      0, 1,
-      9, 3,
+      0, 2,
+      9, 5,
     ],
-    // Cool-to-warm color ramp on heatmap-density (0-1)
+    // Cool-to-warm color ramp — visible from low density for sparse datasets
     'heatmap-color': [
       'interpolate', ['linear'], ['heatmap-density'],
-      0, 'rgba(124, 58, 237, 0)',     // transparent purple
-      0.2, 'rgba(99, 102, 241, 0.4)', // indigo
-      0.4, 'rgba(59, 130, 246, 0.5)', // blue
-      0.6, 'rgba(245, 158, 11, 0.6)', // amber
-      0.8, 'rgba(249, 115, 22, 0.7)', // orange
-      1.0, 'rgba(239, 68, 68, 0.8)',  // red
+      0, 'rgba(124, 58, 237, 0)',
+      0.05, 'rgba(99, 102, 241, 0.25)',  // visible early for isolated points
+      0.2, 'rgba(59, 130, 246, 0.45)',   // blue
+      0.4, 'rgba(245, 158, 11, 0.55)',   // amber
+      0.6, 'rgba(249, 115, 22, 0.65)',   // orange
+      0.8, 'rgba(239, 68, 68, 0.75)',    // red
+      1.0, 'rgba(220, 38, 38, 0.85)',    // deep red
     ],
-    // Regional blob size increases with zoom (enlarged for visibility with ~30 sparse data points)
+    // Large blobs for visibility with ~30 sparse global data points
     'heatmap-radius': [
       'interpolate', ['linear'], ['zoom'],
-      0, 30,
-      3, 50,
-      6, 80,
-      9, 100,
+      0, 40,
+      3, 60,
+      6, 90,
+      9, 110,
     ],
-    // Subtle background wash
-    'heatmap-opacity': 0.6,
+    // Visible overlay
+    'heatmap-opacity': 0.7,
   },
 };
 

@@ -65,13 +65,15 @@ export default function BackToMap({ fallbackLat, fallbackLng, fallbackZoom = 8 }
       if (viewport.categories) {
         params.set('categories', viewport.categories);
       }
-      router.push(`/?${params.toString()}`);
+      // Use window.location for full page navigation to preserve search params
+      // (Next.js App Router router.push can strip search params)
+      window.location.href = `/?${params.toString()}`;
     } else if (fallbackLat !== undefined && fallbackLng !== undefined) {
       const params = new URLSearchParams();
       params.set('lat', String(fallbackLat));
       params.set('lng', String(fallbackLng));
       params.set('zoom', String(fallbackZoom));
-      router.push(`/?${params.toString()}`);
+      window.location.href = `/?${params.toString()}`;
     } else {
       router.push('/');
     }
