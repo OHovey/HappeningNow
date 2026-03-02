@@ -3,6 +3,11 @@
  *
  * Uses the server client for SSR/SSG data fetching.
  * All queries return typed results matching the schema in types.ts.
+ *
+ * Note: Type assertions (as Event[], as Destination, etc.) are used
+ * because the minimal Database type in types.ts does not provide full
+ * column-level type inference for supabase-js `.select('*')` calls.
+ * This matches the pattern used in the existing queries.ts.
  */
 
 import { createServerClient } from '@/lib/supabase/server';
@@ -53,7 +58,7 @@ export async function getFestivalsByRegionMonth(
     console.error('getFestivalsByRegionMonth error:', error);
     return [];
   }
-  return data ?? [];
+  return (data as Event[]) ?? [];
 }
 
 /**
@@ -72,7 +77,7 @@ export async function getFestivalsByCountry(country: string): Promise<Event[]> {
     console.error('getFestivalsByCountry error:', error);
     return [];
   }
-  return data ?? [];
+  return (data as Event[]) ?? [];
 }
 
 /**
@@ -96,7 +101,7 @@ export async function getFestivalsByCountryMonth(
     console.error('getFestivalsByCountryMonth error:', error);
     return [];
   }
-  return data ?? [];
+  return (data as Event[]) ?? [];
 }
 
 // ---------------------------------------------------------------------------
@@ -119,7 +124,7 @@ export async function getWildlifeByRegion(region: string): Promise<Event[]> {
     console.error('getWildlifeByRegion error:', error);
     return [];
   }
-  return data ?? [];
+  return (data as Event[]) ?? [];
 }
 
 /**
@@ -135,8 +140,10 @@ export async function getWildlifeBySpecies(species: string): Promise<Event[]> {
     .select('id')
     .ilike('species', species);
 
-  if (routes && routes.length > 0) {
-    const routeIds = routes.map((r) => r.id);
+  const typedRoutes = routes as Array<{ id: string }> | null;
+
+  if (typedRoutes && typedRoutes.length > 0) {
+    const routeIds = typedRoutes.map((r) => r.id);
     const { data, error } = await supabase
       .from('events')
       .select('*')
@@ -144,8 +151,9 @@ export async function getWildlifeBySpecies(species: string): Promise<Event[]> {
       .in('migration_route_id', routeIds)
       .order('name');
 
-    if (!error && data && data.length > 0) {
-      return data;
+    const typedData = data as Event[] | null;
+    if (!error && typedData && typedData.length > 0) {
+      return typedData;
     }
   }
 
@@ -161,7 +169,7 @@ export async function getWildlifeBySpecies(species: string): Promise<Event[]> {
     console.error('getWildlifeBySpecies error:', error);
     return [];
   }
-  return data ?? [];
+  return (data as Event[]) ?? [];
 }
 
 /**
@@ -185,7 +193,7 @@ export async function getWildlifeByRegionMonth(
     console.error('getWildlifeByRegionMonth error:', error);
     return [];
   }
-  return data ?? [];
+  return (data as Event[]) ?? [];
 }
 
 // ---------------------------------------------------------------------------
@@ -217,7 +225,8 @@ export async function getWhatToDoData(
     .eq('slug', destinationSlug)
     .limit(1);
 
-  const destination = destinations?.[0] ?? null;
+  const typedDestinations = destinations as Destination[] | null;
+  const destination = typedDestinations?.[0] ?? null;
 
   if (!destination) {
     return { events: [], destination: null, crowdScore: null, weatherSummary: null };
@@ -233,7 +242,7 @@ export async function getWhatToDoData(
       .lte('start_month', month)
       .gte('end_month', month)
       .order('name');
-    events = data ?? [];
+    events = (data as Event[]) ?? [];
   }
 
   if (events.length === 0 && destination.country) {
@@ -244,7 +253,7 @@ export async function getWhatToDoData(
       .lte('start_month', month)
       .gte('end_month', month)
       .order('name');
-    events = data ?? [];
+    events = (data as Event[]) ?? [];
   }
 
   // Extract crowd and weather for the specific month
@@ -275,7 +284,8 @@ export async function getDistinctRegions(): Promise<string[]> {
     .not('region', 'is', null);
 
   if (!data) return [];
-  const regions = new Set(data.map((e) => e.region).filter(Boolean) as string[]);
+  const typedData = data as Array<{ region: string | null }>;
+  const regions = new Set(typedData.map((e) => e.region).filter(Boolean) as string[]);
   return Array.from(regions).sort();
 }
 
@@ -290,7 +300,8 @@ export async function getDistinctCountries(): Promise<string[]> {
     .not('country', 'is', null);
 
   if (!data) return [];
-  const countries = new Set(data.map((e) => e.country).filter(Boolean) as string[]);
+  const typedData = data as Array<{ country: string | null }>;
+  const countries = new Set(typedData.map((e) => e.country).filter(Boolean) as string[]);
   return Array.from(countries).sort();
 }
 
@@ -304,7 +315,8 @@ export async function getDistinctSpecies(): Promise<string[]> {
     .select('species');
 
   if (!data) return [];
-  const species = new Set(data.map((r) => r.species).filter(Boolean));
+  const typedData = data as Array<{ species: string }>;
+  const species = new Set(typedData.map((r) => r.species).filter(Boolean));
   return Array.from(species).sort();
 }
 
@@ -314,7 +326,8 @@ export async function getDistinctSpecies(): Promise<string[]> {
 export async function getAllDestinationSlugs(): Promise<string[]> {
   const supabase = createServerClient();
   const { data } = await supabase.from('destinations').select('slug');
-  return (data ?? []).map((d) => d.slug);
+  const typedData = data as Array<{ slug: string }> | null;
+  return (typedData ?? []).map((d) => d.slug);
 }
 
 /**
@@ -323,7 +336,8 @@ export async function getAllDestinationSlugs(): Promise<string[]> {
 export async function getAllEventSlugs(): Promise<string[]> {
   const supabase = createServerClient();
   const { data } = await supabase.from('events').select('slug');
-  return (data ?? []).map((e) => e.slug);
+  const typedData = data as Array<{ slug: string }> | null;
+  return (typedData ?? []).map((e) => e.slug);
 }
 
 /**
@@ -332,5 +346,6 @@ export async function getAllEventSlugs(): Promise<string[]> {
 export async function getAllWildlifeSlugs(): Promise<string[]> {
   const supabase = createServerClient();
   const { data } = await supabase.from('migration_routes').select('slug');
-  return (data ?? []).map((r) => r.slug);
+  const typedData = data as Array<{ slug: string }> | null;
+  return (typedData ?? []).map((r) => r.slug);
 }
