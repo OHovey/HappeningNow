@@ -108,12 +108,12 @@ Plans:
   2. The ranked results also appear as highlighted markers on the embedded map, visually distinguishing them from unfiltered events
   3. User subscribes with a region preference and receives a confirmation that an alert is active for that region
   4. A new event submitted through the data pipeline appears on the live map within 24 hours without a manual build or deploy
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 05-01: Reverse search — /search page, Nominatim geocoding (server-side cached), PostGIS ST_DWithin date-overlap query, "worth the trip" scoring, ranked cards, map highlight
-- [ ] 05-02: Email growth — ConvertKit region alert signup, interest-based segmentation sequences, alert trigger workflow
-- [ ] 05-03: Data pipeline — Wikipedia scraping for festival discovery, PredictHQ API integration (free tier), deduplication and geocoding, automated ingestion workflow
+- [ ] 05-01-PLAN.md — Search backend: PostGIS search_events_nearby RPC, Photon geocode proxy, search API route, "worth the trip" scoring algorithm
+- [ ] 05-02-PLAN.md — Search UI: /search page with Google Flights-style bar, LocationInput autocomplete, ranked ResultCards with indicator tags, SearchMap with marker highlighting
+- [ ] 05-03-PLAN.md — Email alerts + data seed: region alert signup on search page with Kit custom fields, Wikipedia festival scraping script with Nominatim geocoding
 
 ## Progress
 
