@@ -63,8 +63,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Event & Wildlife Detail Pages
 
-- [ ] **PAGE-01**: `/event/[slug]` SSG detail pages with full event information
-- [ ] **PAGE-02**: `/wildlife/[slug]` SSG detail pages with viewing info, best times, tour links
+- [x] **PAGE-01**: `/event/[slug]` SSG detail pages with full event information
+- [x] **PAGE-02**: `/wildlife/[slug]` SSG detail pages with viewing info, best times, tour links
 - [x] **PAGE-03**: Event schema JSON-LD structured data on all event pages
 - [x] **PAGE-04**: Open Graph meta tags for social sharing on all detail pages
 - [x] **PAGE-05**: Breadcrumb navigation on all pages
@@ -74,9 +74,9 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **SEO-01**: `/festivals/[region]/[month]` pages (~120 pages) with filtered events + map + intro text
 - [x] **SEO-02**: `/festivals/[country]` pages (~80 pages) with country event list + calendar
 - [x] **SEO-03**: `/festivals/[country]/[month]` pages (~960 pages) with filtered event list
-- [ ] **SEO-04**: `/wildlife/[region]` pages (~15 pages) with wildlife events by region
-- [ ] **SEO-05**: `/wildlife/[species]` pages (~50 pages) with all viewing locations per species
-- [ ] **SEO-06**: `/wildlife/[region]/[month]` pages (~180 pages) with what to see where, when
+- [x] **SEO-04**: `/wildlife/[region]` pages (~15 pages) with wildlife events by region
+- [x] **SEO-05**: `/wildlife/[species]` pages (~50 pages) with all viewing locations per species
+- [x] **SEO-06**: `/wildlife/[region]/[month]` pages (~180 pages) with what to see where, when
 - [x] **SEO-07**: `/what-to-do/[destination]/[month]` pages (~2000+ pages) with combined events + crowd + weather
 - [x] **SEO-08**: Each programmatic page includes unique AI-generated intro (2-3 sentences) with strategy to avoid AI content detection
 - [x] **SEO-09**: Each page includes pre-filtered embedded map, event cards, affiliate links, internal links, email capture
@@ -201,17 +201,17 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SEO-01 | Phase 4 | Complete |
 | SEO-02 | Phase 4 | Complete |
 | SEO-03 | Phase 4 | Complete |
-| SEO-04 | Phase 4 | Pending |
-| SEO-05 | Phase 4 | Pending |
-| SEO-06 | Phase 4 | Pending |
+| SEO-04 | Phase 4 | Complete |
+| SEO-05 | Phase 4 | Complete |
+| SEO-06 | Phase 4 | Complete |
 | SEO-07 | Phase 4 | Complete |
 | SEO-08 | Phase 4 | Complete |
 | SEO-09 | Phase 4 | Complete |
 | SEO-10 | Phase 4 | Pending |
 | SEO-11 | Phase 4 | Pending |
 | SEO-12 | Phase 4 | Complete |
-| PAGE-01 | Phase 4 | Pending |
-| PAGE-02 | Phase 4 | Pending |
+| PAGE-01 | Phase 4 | Complete |
+| PAGE-02 | Phase 4 | Complete |
 | AIDX-01 | Phase 4 | Pending |
 | AIDX-02 | Phase 4 | Pending |
 | AIDX-03 | Phase 4 | Complete |
