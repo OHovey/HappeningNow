@@ -80,8 +80,8 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **SEO-07**: `/what-to-do/[destination]/[month]` pages (~2000+ pages) with combined events + crowd + weather
 - [x] **SEO-08**: Each programmatic page includes unique AI-generated intro (2-3 sentences) with strategy to avoid AI content detection
 - [x] **SEO-09**: Each page includes pre-filtered embedded map, event cards, affiliate links, internal links, email capture
-- [ ] **SEO-10**: XML sitemap generated from seo_pages table
-- [ ] **SEO-11**: robots.txt and sitemap submission config
+- [x] **SEO-10**: XML sitemap generated from seo_pages table
+- [x] **SEO-11**: robots.txt and sitemap submission config
 - [x] **SEO-12**: ISR (revalidate = 86400) for programmatic pages instead of full SSG to avoid Vercel build timeout
 
 ### Affiliate & Monetisation
@@ -99,8 +99,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### AI Discoverability
 
-- [ ] **AIDX-01**: llms.txt file at site root describing site purpose, data structure, and key pages for LLM crawlers
-- [ ] **AIDX-02**: llms-full.txt with comprehensive structured data about events, destinations, and wildlife for AI model ingestion
+- [x] **AIDX-01**: llms.txt file at site root describing site purpose, data structure, and key pages for LLM crawlers
+- [x] **AIDX-02**: llms-full.txt with comprehensive structured data about events, destinations, and wildlife for AI model ingestion
 - [x] **AIDX-03**: Clean, semantic HTML structure optimised for AI content extraction (clear headings, data attributes, structured tables)
 
 ### Performance & Polish
@@ -207,13 +207,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SEO-07 | Phase 4 | Complete |
 | SEO-08 | Phase 4 | Complete |
 | SEO-09 | Phase 4 | Complete |
-| SEO-10 | Phase 4 | Pending |
-| SEO-11 | Phase 4 | Pending |
+| SEO-10 | Phase 4 | Complete |
+| SEO-11 | Phase 4 | Complete |
 | SEO-12 | Phase 4 | Complete |
 | PAGE-01 | Phase 4 | Complete |
 | PAGE-02 | Phase 4 | Complete |
-| AIDX-01 | Phase 4 | Pending |
-| AIDX-02 | Phase 4 | Pending |
+| AIDX-01 | Phase 4 | Complete |
+| AIDX-02 | Phase 4 | Complete |
 | AIDX-03 | Phase 4 | Complete |
 | SRCH-01 | Phase 5 | Pending |
 | SRCH-02 | Phase 5 | Pending |
