@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createSubscriber, tagSubscriber, TAG_IDS } from '@/lib/convertkit';
+import { createSubscriber, tagSubscriber, setSubscriberCustomField, TAG_IDS } from '@/lib/convertkit';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -14,11 +14,29 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
-    const { email, interests, eventCategory } = body as {
+    const { email, interests, eventCategory, alert, region, categories } = body as {
       email?: string;
       interests?: string[];
       eventCategory?: string;
+      alert?: boolean;
+      region?: string;
+      categories?: string[];
     };
+
+    // Validate alert-specific fields
+    if (alert && (!region || typeof region !== 'string' || region.trim() === '')) {
+      return NextResponse.json(
+        { error: 'Region is required for alert subscriptions' },
+        { status: 400 }
+      );
+    }
+
+    if (categories && !Array.isArray(categories)) {
+      return NextResponse.json(
+        { error: 'Categories must be an array' },
+        { status: 400 }
+      );
+    }
 
     // Validate email
     if (!email || !EMAIL_REGEX.test(email)) {
@@ -47,6 +65,11 @@ export async function POST(request: Request) {
       if (tagId !== undefined) {
         await tagSubscriber(subscriber.id, tagId);
       }
+    }
+
+    // Set alert region custom field if alert subscription
+    if (alert && region) {
+      await setSubscriberCustomField(subscriber.id, 'alert_region', region);
     }
 
     return NextResponse.json({ success: true });

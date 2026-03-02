@@ -6,6 +6,7 @@ import { worthTheTripScore } from '@/lib/scoring';
 import type { SearchEventResult } from '@/lib/supabase/types';
 import SearchBar from '@/components/search/SearchBar';
 import SearchResults from '@/components/search/SearchResults';
+import AlertSignup from '@/components/search/AlertSignup';
 import dynamic from 'next/dynamic';
 
 const SearchMap = dynamic(() => import('@/components/search/SearchMap'), {
@@ -163,6 +164,12 @@ export default function SearchPage() {
               radiusKm={Math.round(radius / 1000)}
               hasLocation={!!selectedLocation}
             />
+            {selectedLocation && (
+              <AlertSignup
+                locationName={selectedLocation.name}
+                region={selectedLocation.name}
+              />
+            )}
           </div>
 
           {/* Map */}

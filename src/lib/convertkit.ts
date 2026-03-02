@@ -91,3 +91,29 @@ export async function tagSubscriber(
     throw new Error(`Kit API tag error (${res.status}): ${errorBody}`);
   }
 }
+
+/**
+ * Set a custom field on an existing subscriber.
+ * Uses Kit API v4: PUT /subscribers/{id} with custom_fields object.
+ * If Kit API key not configured, skip silently (graceful fallback).
+ */
+export async function setSubscriberCustomField(
+  subscriberId: number,
+  field: string,
+  value: string
+): Promise<void> {
+  if (!process.env.KIT_API_KEY) return; // Skip if not configured
+
+  const res = await fetch(`${BASE}/subscribers/${subscriberId}`, {
+    method: 'PUT',
+    headers: headers(),
+    body: JSON.stringify({
+      custom_fields: { [field]: value },
+    }),
+  });
+
+  if (!res.ok) {
+    const errorBody = await res.text();
+    throw new Error(`Kit API custom field error (${res.status}): ${errorBody}`);
+  }
+}
