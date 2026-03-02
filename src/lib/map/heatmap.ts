@@ -63,12 +63,13 @@ export const crowdHeatmapLayer: LayerSpecification = {
       0.8, 'rgba(249, 115, 22, 0.7)', // orange
       1.0, 'rgba(239, 68, 68, 0.8)',  // red
     ],
-    // Regional blob size increases with zoom
+    // Regional blob size increases with zoom (enlarged for visibility with ~30 sparse data points)
     'heatmap-radius': [
       'interpolate', ['linear'], ['zoom'],
-      0, 20,
-      5, 40,
-      9, 60,
+      0, 30,
+      3, 50,
+      6, 80,
+      9, 100,
     ],
     // Subtle background wash
     'heatmap-opacity': 0.6,

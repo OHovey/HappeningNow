@@ -133,10 +133,21 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
         'get_destinations_with_coords' as never,
       );
       if (rpcError) {
-        console.error('Failed to fetch destinations:', rpcError);
+        console.warn(
+          'Heatmap disabled: RPC error. If get_destinations_with_coords does not exist, run supabase/functions/get_destinations_with_coords.sql in Supabase SQL Editor.',
+          rpcError,
+        );
         return;
       }
       const dests = (data ?? []) as unknown as DestinationWithCoords[];
+      if (process.env.NODE_ENV === 'development') {
+        console.log(
+          `[Heatmap] Loaded ${dests.length} destinations.`,
+          dests.length > 0
+            ? `First: ${dests[0].name}, crowd_score sample: ${dests[0].crowd_data?.['1'] ?? 'N/A'}`
+            : 'No data.',
+        );
+      }
       setDestinations(dests);
       destinationsRef.current = dests;
     } catch (err) {
