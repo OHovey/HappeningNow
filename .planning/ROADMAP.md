@@ -89,15 +89,15 @@ Plans:
   3. An XML sitemap index is served at /sitemap.xml and accepted by Google Search Console without errors
   4. Every event and wildlife detail page has valid JSON-LD Event structured data verified by Google's Rich Results Test
   5. A page not pre-generated at build time is served via ISR on first request and cached at the CDN edge within 60 seconds
-**Plans**: TBD
+**Plans**: 6 plans
 
 Plans:
-- [ ] 04-01: Content differentiation spec — define unique content strategy per page type before any template is built; set noindex rules for stub pages
-- [ ] 04-02: Festival SEO pages — /festivals/[region]/[month], /festivals/[country], /festivals/[country]/[month] with ISR and generateStaticParams
-- [ ] 04-03: Wildlife SEO pages — /wildlife/[region], /wildlife/[species], /wildlife/[region]/[month] with ISR
-- [ ] 04-04: What-to-do pages — /what-to-do/[destination]/[month] (~2000+ pages) with ISR, AI-generated intros, full content components
-- [ ] 04-05: Sitemap and technical SEO — next-sitemap XML index from seo_pages table, robots.txt, canonical URLs, sitemap submission
-- [ ] 04-06: AI discoverability — llms.txt and llms-full.txt at site root, semantic HTML optimisation for LLM crawlers
+- [ ] 04-01-PLAN.md — SEO foundation: intro templates (20+ per type), thin-page noindex logic, shared SEO components, query layer
+- [ ] 04-02-PLAN.md — Festival SEO pages: /festivals/[slug] and /festivals/[slug]/[month] with ISR, region/country disambiguation
+- [ ] 04-03-PLAN.md — Wildlife SEO pages: /wildlife/region/[region], /wildlife/species/[species], /wildlife/region/[region]/[month] + canonical URLs on detail pages
+- [ ] 04-04-PLAN.md — What-to-do pages: /what-to-do/[destination]/[month] with events + weather + crowd data
+- [ ] 04-05-PLAN.md — Sitemaps and robots.txt: per-section XML sitemaps via Next.js built-in sitemap.ts, robots.ts
+- [ ] 04-06-PLAN.md — AI discoverability: llms.txt data catalog and llms-full.txt complete event database with affiliate links
 
 ### Phase 5: Growth and Data Scale
 **Goal**: Users can search for events near their location within a date range and get ranked results, email subscribers receive interest-matched content, and the event database can grow beyond manual curation through automated data ingestion
@@ -125,5 +125,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Map Foundation | 8/8 | Complete    | 2026-03-01 |
 | 2. Database and Affiliate Infrastructure | 5/5 | Complete | 2026-03-01 |
 | 3. Visual Differentiators | 4/4 | Complete   | 2026-03-02 |
-| 4. Programmatic SEO | 0/6 | Not started | - |
+| 4. Programmatic SEO | 0/6 | Planned | - |
 | 5. Growth and Data Scale | 0/3 | Not started | - |
