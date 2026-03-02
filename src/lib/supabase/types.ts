@@ -76,6 +76,27 @@ export interface EventWithCoords extends Omit<Event, 'location'> {
   peak_months?: number[] | null;
 }
 
+/** Event result from search_events_nearby RPC with extracted coordinates and distance. */
+export interface SearchEventResult {
+  id: string;
+  name: string;
+  slug: string;
+  category: "festival" | "wildlife";
+  description: string | null;
+  image_url: string | null;
+  start_month: number;
+  end_month: number;
+  lng: number;
+  lat: number;
+  country: string | null;
+  region: string | null;
+  scale: number;
+  crowd_level: "quiet" | "moderate" | "busy" | null;
+  booking_destination_id: string | null;
+  getyourguide_location_id: string | null;
+  distance_meters: number;
+}
+
 /** MigrationRoute with parsed GeoJSON route geometry (from RPC). */
 export interface MigrationRouteWithGeoJSON extends Omit<MigrationRoute, 'route'> {
   route_geojson: {
@@ -185,6 +206,17 @@ export interface Database {
       get_all_routes_with_geojson: {
         Args: Record<string, never>;
         Returns: MigrationRouteWithGeoJSON[];
+      };
+      search_events_nearby: {
+        Args: {
+          user_lng: number;
+          user_lat: number;
+          radius_meters: number;
+          start_m: number | null;
+          end_m: number | null;
+          filter_category: string | null;
+        };
+        Returns: SearchEventResult[];
       };
     };
     Enums: Record<string, never>;
