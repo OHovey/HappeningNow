@@ -71,9 +71,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Programmatic SEO
 
-- [ ] **SEO-01**: `/festivals/[region]/[month]` pages (~120 pages) with filtered events + map + intro text
-- [ ] **SEO-02**: `/festivals/[country]` pages (~80 pages) with country event list + calendar
-- [ ] **SEO-03**: `/festivals/[country]/[month]` pages (~960 pages) with filtered event list
+- [x] **SEO-01**: `/festivals/[region]/[month]` pages (~120 pages) with filtered events + map + intro text
+- [x] **SEO-02**: `/festivals/[country]` pages (~80 pages) with country event list + calendar
+- [x] **SEO-03**: `/festivals/[country]/[month]` pages (~960 pages) with filtered event list
 - [ ] **SEO-04**: `/wildlife/[region]` pages (~15 pages) with wildlife events by region
 - [ ] **SEO-05**: `/wildlife/[species]` pages (~50 pages) with all viewing locations per species
 - [ ] **SEO-06**: `/wildlife/[region]/[month]` pages (~180 pages) with what to see where, when
@@ -82,7 +82,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **SEO-09**: Each page includes pre-filtered embedded map, event cards, affiliate links, internal links, email capture
 - [ ] **SEO-10**: XML sitemap generated from seo_pages table
 - [ ] **SEO-11**: robots.txt and sitemap submission config
-- [ ] **SEO-12**: ISR (revalidate = 86400) for programmatic pages instead of full SSG to avoid Vercel build timeout
+- [x] **SEO-12**: ISR (revalidate = 86400) for programmatic pages instead of full SSG to avoid Vercel build timeout
 
 ### Affiliate & Monetisation
 
@@ -198,9 +198,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DEST-06 | Phase 3 | Complete |
 | DEST-07 | Phase 3 | Complete |
 | PERF-01 | Phase 3 | Complete |
-| SEO-01 | Phase 4 | Pending |
-| SEO-02 | Phase 4 | Pending |
-| SEO-03 | Phase 4 | Pending |
+| SEO-01 | Phase 4 | Complete |
+| SEO-02 | Phase 4 | Complete |
+| SEO-03 | Phase 4 | Complete |
 | SEO-04 | Phase 4 | Pending |
 | SEO-05 | Phase 4 | Pending |
 | SEO-06 | Phase 4 | Pending |
@@ -209,7 +209,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SEO-09 | Phase 4 | Complete |
 | SEO-10 | Phase 4 | Pending |
 | SEO-11 | Phase 4 | Pending |
-| SEO-12 | Phase 4 | Pending |
+| SEO-12 | Phase 4 | Complete |
 | PAGE-01 | Phase 4 | Pending |
 | PAGE-02 | Phase 4 | Pending |
 | AIDX-01 | Phase 4 | Pending |
