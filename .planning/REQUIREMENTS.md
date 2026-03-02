@@ -55,9 +55,9 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Reverse Search
 
 - [ ] **SRCH-01**: `/search` page with form: date range + location/airport + category filter + max travel distance
-- [ ] **SRCH-02**: Nominatim geocoding for location input
-- [ ] **SRCH-03**: PostGIS spatial query for events within radius of user location overlapping date range
-- [ ] **SRCH-04**: "Worth the trip" scoring algorithm (event scale x uniqueness / crowd level x distance)
+- [x] **SRCH-02**: Nominatim geocoding for location input
+- [x] **SRCH-03**: PostGIS spatial query for events within radius of user location overlapping date range
+- [x] **SRCH-04**: "Worth the trip" scoring algorithm (event scale x uniqueness / crowd level x distance)
 - [ ] **SRCH-05**: Results rendered as ranked cards with photo, travel time, crowd indicator, price range, affiliate links
 - [ ] **SRCH-06**: Results simultaneously shown as highlighted markers on the map
 
@@ -216,9 +216,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AIDX-02 | Phase 4 | Complete |
 | AIDX-03 | Phase 4 | Complete |
 | SRCH-01 | Phase 5 | Pending |
-| SRCH-02 | Phase 5 | Pending |
-| SRCH-03 | Phase 5 | Pending |
-| SRCH-04 | Phase 5 | Pending |
+| SRCH-02 | Phase 5 | Complete |
+| SRCH-03 | Phase 5 | Complete |
+| SRCH-04 | Phase 5 | Complete |
 | SRCH-05 | Phase 5 | Pending |
 | SRCH-06 | Phase 5 | Pending |
 | EMAIL-04 | Phase 5 | Pending |
