@@ -113,11 +113,11 @@ export function getRelatedWildlifeLinks(
     });
   }
 
-  // Region + adjacent months
+  // Region + adjacent months (wildlife uses numeric month routes)
   if (currentRegion && currentMonth) {
     for (const m of adjacentMonths(currentMonth)) {
       links.push({
-        href: `/wildlife/region/${slugify(currentRegion)}/${slugify(MONTH_NAMES[m])}`,
+        href: `/wildlife/region/${slugify(currentRegion)}/${m}`,
         label: `${currentRegion} wildlife in ${MONTH_NAMES[m]}`,
       });
     }
@@ -126,7 +126,7 @@ export function getRelatedWildlifeLinks(
   // Same region with current month
   if (currentRegion && currentMonth) {
     links.push({
-      href: `/wildlife/region/${slugify(currentRegion)}/${slugify(MONTH_NAMES[currentMonth])}`,
+      href: `/wildlife/region/${slugify(currentRegion)}/${currentMonth}`,
       label: `${currentRegion} wildlife in ${MONTH_NAMES[currentMonth]}`,
     });
   }
@@ -148,22 +148,28 @@ export function getRelatedWhatToDoLinks(
 ): InternalLink[] {
   const links: InternalLink[] = [];
 
-  // Same destination, adjacent months
+  // Same destination, adjacent months (numeric month in URL)
   for (const m of adjacentMonths(currentMonth)) {
     links.push({
-      href: `/what-to-do/${slugify(currentDestination)}/${slugify(MONTH_NAMES[m])}`,
+      href: `/what-to-do/${slugify(currentDestination)}/${m}`,
       label: `${currentDestination} in ${MONTH_NAMES[m]}`,
     });
   }
 
+  // Destination detail page
+  links.push({
+    href: `/destination/${slugify(currentDestination)}`,
+    label: `${currentDestination} travel guide`,
+  });
+
   // Other destinations for same month
   const otherDestinations = allDestinations
     .filter((d) => d.toLowerCase() !== currentDestination.toLowerCase())
-    .slice(0, 6);
+    .slice(0, 5);
 
   for (const dest of otherDestinations) {
     links.push({
-      href: `/what-to-do/${slugify(dest)}/${slugify(MONTH_NAMES[currentMonth])}`,
+      href: `/what-to-do/${slugify(dest)}/${currentMonth}`,
       label: `${dest} in ${MONTH_NAMES[currentMonth]}`,
     });
   }
