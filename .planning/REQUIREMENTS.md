@@ -77,7 +77,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **SEO-04**: `/wildlife/[region]` pages (~15 pages) with wildlife events by region
 - [ ] **SEO-05**: `/wildlife/[species]` pages (~50 pages) with all viewing locations per species
 - [ ] **SEO-06**: `/wildlife/[region]/[month]` pages (~180 pages) with what to see where, when
-- [ ] **SEO-07**: `/what-to-do/[destination]/[month]` pages (~2000+ pages) with combined events + crowd + weather
+- [x] **SEO-07**: `/what-to-do/[destination]/[month]` pages (~2000+ pages) with combined events + crowd + weather
 - [x] **SEO-08**: Each programmatic page includes unique AI-generated intro (2-3 sentences) with strategy to avoid AI content detection
 - [x] **SEO-09**: Each page includes pre-filtered embedded map, event cards, affiliate links, internal links, email capture
 - [ ] **SEO-10**: XML sitemap generated from seo_pages table
@@ -204,7 +204,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SEO-04 | Phase 4 | Pending |
 | SEO-05 | Phase 4 | Pending |
 | SEO-06 | Phase 4 | Pending |
-| SEO-07 | Phase 4 | Pending |
+| SEO-07 | Phase 4 | Complete |
 | SEO-08 | Phase 4 | Complete |
 | SEO-09 | Phase 4 | Complete |
 | SEO-10 | Phase 4 | Pending |

@@ -32,7 +32,12 @@ export async function generateMetadata({
     return { title: 'Event Not Found' };
   }
 
-  return buildEventMetadata(event);
+  return {
+    ...buildEventMetadata(event),
+    alternates: {
+      canonical: `https://happeningnow.travel/event/${slug}`,
+    },
+  };
 }
 
 /**

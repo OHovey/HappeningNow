@@ -44,7 +44,12 @@ export async function generateMetadata({
     return { title: 'Wildlife Not Found' };
   }
 
-  return buildWildlifeMetadata(route);
+  return {
+    ...buildWildlifeMetadata(route),
+    alternates: {
+      canonical: `https://happeningnow.travel/wildlife/${slug}`,
+    },
+  };
 }
 
 /**
