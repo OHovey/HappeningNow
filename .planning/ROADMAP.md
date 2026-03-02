@@ -71,12 +71,13 @@ Plans:
   3. User watches a migration route animate — a dot moves along the path for the selected month, and clicking it shows best viewing spots, peak dates, and tour links
   4. User navigates to a destination page and sees a 12-column calendar grid showing events, wildlife, crowd gradient, and weather summary per month
   5. Mobile Lighthouse performance score is above 90 on the destination page and homepage
-**Plans**: 3 plans
+**Plans**: 4 plans
 
 Plans:
 - [ ] 03-01-PLAN.md — Crowd heatmap overlay: shared crowd-colors utility, MapLibre heatmap layer with cool-to-warm ramp, toggle, month sync, click popup, crowd badge on events
 - [ ] 03-02-PLAN.md — Wildlife migration animations: route line layers with trail effect, animated position dots, species toggles/legend, click-to-detail
 - [ ] 03-03-PLAN.md — Destination drilldown pages: /destination/[slug] SSG, 12-month calendar grid, crowd gradient, weather, best-time-to-visit, Booking.com widget, Lighthouse > 90
+- [ ] 03-04-PLAN.md — Gap closure: destination flyTo animation on navigation, heatmap visibility fix
 
 ### Phase 4: Programmatic SEO
 **Goal**: Search engines can discover and index 3,500+ unique, content-rich pages covering festivals by region and month, wildlife by region and species, and destination month guides — all with structured data, canonical URLs, and a submitted sitemap
