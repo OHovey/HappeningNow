@@ -17,6 +17,7 @@ import BackToMap from '@/components/ui/BackToMap';
  * Generate static paths for all destinations at build time.
  */
 export async function generateStaticParams() {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return [];
   const slugs = await getAllDestinationSlugs();
   return slugs.map((slug) => ({ slug }));
 }

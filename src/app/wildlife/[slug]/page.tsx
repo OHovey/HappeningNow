@@ -22,6 +22,7 @@ interface WildlifePageProps {
  * Generate static paths for all wildlife migration routes.
  */
 export async function generateStaticParams() {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return [];
   const slugs = await getAllWildlifeSlugs();
   return slugs.map((slug) => ({ slug }));
 }
