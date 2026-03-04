@@ -3,6 +3,8 @@
  * Keep in sync with any schema migrations.
  */
 
+export type EventCategory = 'festival' | 'concert' | 'sport' | 'arts' | 'event' | 'wildlife';
+
 // ---------------------------------------------------------------------------
 // Row types (matching table columns)
 // ---------------------------------------------------------------------------
@@ -11,7 +13,7 @@ export interface Event {
   id: string;
   name: string;
   slug: string;
-  category: "festival" | "wildlife";
+  category: EventCategory;
   description: string | null;
   image_url: string | null;
   start_month: number;
@@ -95,7 +97,7 @@ export interface SearchEventResult {
   id: string;
   name: string;
   slug: string;
-  category: "festival" | "wildlife";
+  category: EventCategory;
   description: string | null;
   image_url: string | null;
   start_month: number;
@@ -128,7 +130,7 @@ export interface GeoJSONEventProperties {
   id: string;
   name: string;
   slug: string;
-  category: "festival" | "wildlife";
+  category: EventCategory;
   description: string | null;
   image_url: string | null;
   start_month: number;

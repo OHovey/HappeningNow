@@ -25,6 +25,18 @@
   --wildlife: #15803d;
   --wildlife-muted: #bbf7d0;
   --wildlife-surface: #f0fdf4;
+  --concert: #7e22ce;
+  --concert-muted: #e9d5ff;
+  --concert-surface: #faf5ff;
+  --sport: #dc2626;
+  --sport-muted: #fecaca;
+  --sport-surface: #fef2f2;
+  --arts: #db2777;
+  --arts-muted: #fbcfe8;
+  --arts-surface: #fdf2f8;
+  --event: #2563eb;
+  --event-muted: #bfdbfe;
+  --event-surface: #eff6ff;
   --other-accent: #4338ca;
   --other-surface: #eef2ff;
 
@@ -103,6 +115,18 @@
   --color-wildlife: var(--wildlife);
   --color-wildlife-muted: var(--wildlife-muted);
   --color-wildlife-surface: var(--wildlife-surface);
+  --color-concert: var(--concert);
+  --color-concert-muted: var(--concert-muted);
+  --color-concert-surface: var(--concert-surface);
+  --color-sport: var(--sport);
+  --color-sport-muted: var(--sport-muted);
+  --color-sport-surface: var(--sport-surface);
+  --color-arts: var(--arts);
+  --color-arts-muted: var(--arts-muted);
+  --color-arts-surface: var(--arts-surface);
+  --color-event: var(--event);
+  --color-event-muted: var(--event-muted);
+  --color-event-surface: var(--event-surface);
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
   --color-accent-surface: var(--accent-surface);

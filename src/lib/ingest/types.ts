@@ -3,6 +3,8 @@
  * All source adapters output RawEvent[], which the normaliser processes into DB rows.
  */
 
+import type { EventCategory } from '@/lib/supabase/types';
+
 export interface RawEvent {
   /** Event name as provided by the source */
   name: string;
@@ -10,8 +12,12 @@ export interface RawEvent {
   description: string | null;
   /** Image URL from source (nullable) */
   image_url: string | null;
-  /** Category: festival or wildlife */
-  category: 'festival' | 'wildlife';
+  /** Event category */
+  category: EventCategory;
+  /** Raw Ticketmaster segment name (for future use) */
+  tm_segment?: string | null;
+  /** Raw Ticketmaster genre name (for future use) */
+  tm_genre?: string | null;
   /** Exact start date if available (ISO 8601 date string) */
   start_date: string | null;
   /** Exact end date if available (ISO 8601 date string) */

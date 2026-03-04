@@ -14,6 +14,10 @@ interface EventPanelProps {
 
 const CATEGORY_GRADIENTS: Record<string, string> = {
   festival: 'linear-gradient(160deg, #c2410c 0%, #7c2d12 50%, #451a03 100%)',
+  concert: 'linear-gradient(160deg, #7e22ce 0%, #581c87 50%, #3b0764 100%)',
+  sport: 'linear-gradient(160deg, #dc2626 0%, #991b1b 50%, #7f1d1d 100%)',
+  arts: 'linear-gradient(160deg, #db2777 0%, #9d174d 50%, #831843 100%)',
+  event: 'linear-gradient(160deg, #2563eb 0%, #1e40af 50%, #1e3a8a 100%)',
   wildlife: 'linear-gradient(160deg, #15803d 0%, #065f46 50%, #022c22 100%)',
 };
 
@@ -25,7 +29,7 @@ export default function EventPanel({ event, onClose }: EventPanelProps) {
   const dateText = formatMonthRange(event.start_month, event.end_month);
   const locationText = [event.region, event.country].filter(Boolean).join(', ');
   const gradient = CATEGORY_GRADIENTS[event.category] || 'linear-gradient(160deg, #4338ca 0%, #312e81 50%, #1e1b4b 100%)';
-  const categoryColor = event.category === 'wildlife' ? 'var(--wildlife)' : 'var(--festival)';
+  const categoryColor = `var(--${event.category}, var(--festival))`;
 
   return (
     <div className="pb-8">

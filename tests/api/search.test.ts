@@ -70,6 +70,13 @@ describe('searchQuerySchema', () => {
       expect(result.data.category).toBe('festival');
     }
   });
+
+  it('accepts all 6 category values', () => {
+    for (const cat of ['festival', 'concert', 'sport', 'arts', 'event', 'wildlife']) {
+      const result = searchQuerySchema.safeParse({ lat: '0', lng: '0', category: cat });
+      expect(result.success).toBe(true);
+    }
+  });
 });
 
 describe('GET /api/search', () => {

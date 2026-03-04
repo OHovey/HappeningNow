@@ -1,16 +1,11 @@
 'use client';
 
-import { CATEGORY_COLORS } from '@/lib/constants';
+import { ALL_CATEGORIES, CATEGORY_COLORS, CATEGORY_LABELS } from '@/lib/constants';
 
 interface CategoryTogglesProps {
   activeCategories: string[];
   onCategoryChange: (categories: string[]) => void;
 }
-
-const CATEGORIES = [
-  { key: 'festival', label: 'Festivals', color: CATEGORY_COLORS.festival },
-  { key: 'wildlife', label: 'Wildlife', color: CATEGORY_COLORS.wildlife },
-] as const;
 
 export default function CategoryToggles({
   activeCategories,
@@ -34,8 +29,10 @@ export default function CategoryToggles({
       onTouchStart={(e) => e.stopPropagation()}
       onTouchMove={(e) => e.stopPropagation()}
     >
-      {CATEGORIES.map(({ key, label, color }) => {
+      {ALL_CATEGORIES.map((key) => {
         const isActive = activeCategories.includes(key);
+        const color = CATEGORY_COLORS[key];
+        const label = CATEGORY_LABELS[key];
 
         return (
           <button

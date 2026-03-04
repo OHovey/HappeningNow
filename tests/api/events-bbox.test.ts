@@ -104,6 +104,29 @@ describe('bboxQuerySchema', () => {
       }
     });
 
+    it('accepts "concert"', () => {
+      const result = bboxQuerySchema.safeParse({ bbox: '0,0,1,1', category: 'concert' });
+      expect(result.success).toBe(true);
+      if (result.success) {
+        expect(result.data.category).toBe('concert');
+      }
+    });
+
+    it('accepts "sport"', () => {
+      const result = bboxQuerySchema.safeParse({ bbox: '0,0,1,1', category: 'sport' });
+      expect(result.success).toBe(true);
+    });
+
+    it('accepts "arts"', () => {
+      const result = bboxQuerySchema.safeParse({ bbox: '0,0,1,1', category: 'arts' });
+      expect(result.success).toBe(true);
+    });
+
+    it('accepts "event"', () => {
+      const result = bboxQuerySchema.safeParse({ bbox: '0,0,1,1', category: 'event' });
+      expect(result.success).toBe(true);
+    });
+
     it('rejects invalid category', () => {
       const result = bboxQuerySchema.safeParse({ bbox: '0,0,1,1', category: 'music' });
       expect(result.success).toBe(false);

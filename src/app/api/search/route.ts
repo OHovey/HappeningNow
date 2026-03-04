@@ -12,7 +12,7 @@ export const searchQuerySchema = z.object({
   radius: z.coerce.number().min(1000).max(1000000).default(200000),
   start_month: z.coerce.number().int().min(1).max(12).optional(),
   end_month: z.coerce.number().int().min(1).max(12).optional(),
-  category: z.enum(['festival', 'wildlife']).optional(),
+  category: z.enum(['festival', 'concert', 'sport', 'arts', 'event', 'wildlife']).optional(),
 });
 
 export type SearchQuery = z.infer<typeof searchQuerySchema>;

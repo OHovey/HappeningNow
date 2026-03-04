@@ -3,7 +3,7 @@
 import type { SearchEventResult } from '@/lib/supabase/types';
 import { getIndicatorTags } from '@/lib/scoring';
 import { buildBookingLink, buildGetYourGuideLink } from '@/lib/affiliates';
-import { CATEGORY_COLORS } from '@/lib/constants';
+import { CATEGORY_COLORS, CATEGORY_EMOJIS } from '@/lib/constants';
 
 const TAG_STYLES: Record<string, { bg: string; text: string }> = {
   'Highly Unique': { bg: 'rgba(67, 56, 202, 0.1)', text: 'var(--accent)' },
@@ -19,7 +19,7 @@ interface ResultCardProps {
 
 export default function ResultCard({ event, isSelected, onClick }: ResultCardProps) {
   const tags = getIndicatorTags(event);
-  const categoryColor = CATEGORY_COLORS[event.category] ?? CATEGORY_COLORS.other;
+  const categoryColor = CATEGORY_COLORS[event.category] ?? CATEGORY_COLORS.event;
 
   const bookingUrl = event.booking_destination_id
     ? buildBookingLink({
@@ -67,7 +67,7 @@ export default function ResultCard({ event, isSelected, onClick }: ResultCardPro
             style={{ backgroundColor: categoryColor + '15' }}
           >
             <span className="text-2xl opacity-30" aria-hidden="true">
-              {event.category === 'festival' ? '\u{1F3AA}' : '\u{1F43E}'}
+              {CATEGORY_EMOJIS[event.category] ?? '\u{1F4C5}'}
             </span>
           </div>
         )}

@@ -5,7 +5,7 @@ import { createRoot } from 'react-dom/client';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-import { MAP_DEFAULTS, OPENFREEMAP_STYLE } from '@/lib/constants';
+import { MAP_DEFAULTS, OPENFREEMAP_STYLE, ALL_CATEGORIES } from '@/lib/constants';
 import { createEventSource } from '@/lib/map/sources';
 import {
   eventCircleLayer,
@@ -64,10 +64,7 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
   const migrationRoutesRef = useRef<MigrationRouteWithGeoJSON[]>([]);
 
   const [selectedMonth, setSelectedMonth] = useState<number>(getCurrentMonth());
-  const [activeCategories, setActiveCategories] = useState<string[]>([
-    'festival',
-    'wildlife',
-  ]);
+  const [activeCategories, setActiveCategories] = useState<string[]>([...ALL_CATEGORIES]);
   const [allGeoJSON, setAllGeoJSON] = useState<GeoJSON.FeatureCollection | null>(null);
   const [loading, setLoading] = useState(true);
   const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);

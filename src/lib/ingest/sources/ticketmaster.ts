@@ -7,6 +7,7 @@
  * Docs: https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/
  */
 
+import type { EventCategory } from '@/lib/supabase/types';
 import type { RawEvent, SourceResult } from '../types';
 
 const BASE_URL = 'https://app.ticketmaster.com/discovery/v2/events.json';
@@ -27,6 +28,27 @@ const MAX_PAGES = 3;
 /** Delay between API calls in ms to stay within rate limits */
 const CALL_DELAY_MS = 250;
 
+/** Major promoters — events from these are kept even for non-festival categories */
+const MAJOR_PROMOTERS = [
+  'live nation',
+  'aeg',
+  'aeg presents',
+  'goldenvoice',
+  'insomniac',
+  'c3 presents',
+  'bowery presents',
+  'another planet entertainment',
+  'msg entertainment',
+  'anschutz entertainment',
+  'ticketmaster',
+  'stubhub',
+  'livenation',
+  'promotion in motion',
+  'concerts west',
+  'jam productions',
+  'sfx entertainment',
+];
+
 function sleep(ms: number): Promise<void> {
   return new Promise((r) => setTimeout(r, ms));
 }
@@ -44,7 +66,10 @@ interface TmEvent {
   classifications?: Array<{
     segment?: { name?: string };
     genre?: { name?: string };
+    subGenre?: { name?: string };
   }>;
+  promoter?: { name?: string };
+  promoters?: Array<{ name?: string }>;
   _embedded?: {
     venues?: Array<{
       name?: string;
@@ -82,6 +107,53 @@ function pickBestImage(images: TmEvent['images']): string | null {
   return preferred?.url || images[0]?.url || null;
 }
 
+/** Check if event has a major promoter attached */
+function hasMajorPromoter(tm: TmEvent): boolean {
+  const names: string[] = [];
+  if (tm.promoter?.name) names.push(tm.promoter.name.toLowerCase());
+  if (tm.promoters) {
+    for (const p of tm.promoters) {
+      if (p.name) names.push(p.name.toLowerCase());
+    }
+  }
+  return names.some(n => MAJOR_PROMOTERS.some(mp => n.includes(mp)));
+}
+
+/** Classify a TM event into our category system and decide whether to keep it */
+function classifyTmEvent(tm: TmEvent): { category: EventCategory; keep: boolean; segment: string | null; genre: string | null } {
+  const segment = tm.classifications?.[0]?.segment?.name ?? null;
+  const genre = tm.classifications?.[0]?.genre?.name ?? null;
+  const subGenre = tm.classifications?.[0]?.subGenre?.name ?? null;
+  const nameLower = tm.name.toLowerCase();
+  const isMajor = hasMajorPromoter(tm);
+
+  // Festival detection: genre is "Festival" OR (Music segment + name/subgenre contains "fest")
+  if (
+    genre?.toLowerCase() === 'festival' ||
+    (segment === 'Music' && (nameLower.includes('fest') || subGenre?.toLowerCase().includes('fest')))
+  ) {
+    return { category: 'festival', keep: true, segment, genre };
+  }
+
+  // Music → concert (keep only with major promoter)
+  if (segment === 'Music') {
+    return { category: 'concert', keep: isMajor, segment, genre };
+  }
+
+  // Sports
+  if (segment === 'Sports') {
+    return { category: 'sport', keep: isMajor, segment, genre };
+  }
+
+  // Arts & Theatre
+  if (segment === 'Arts & Theatre') {
+    return { category: 'arts', keep: isMajor, segment, genre };
+  }
+
+  // Everything else (Film, Miscellaneous, etc.)
+  return { category: 'event', keep: isMajor, segment, genre };
+}
+
 function parseTmEvent(tm: TmEvent): RawEvent | null {
   const venue = tm._embedded?.venues?.[0];
   const lat = venue?.location?.latitude ? parseFloat(venue.location.latitude) : null;
@@ -95,6 +167,9 @@ function parseTmEvent(tm: TmEvent): RawEvent | null {
   const locationName = venue?.city?.name || venue?.name || null;
   if (!lat && !lng && !locationName) return null;
 
+  const { category, keep, segment, genre } = classifyTmEvent(tm);
+  if (!keep) return null;
+
   const country = venue?.country?.name || null;
   const region = venue?.state?.name || venue?.city?.name || null;
 
@@ -102,7 +177,9 @@ function parseTmEvent(tm: TmEvent): RawEvent | null {
     name: tm.name,
     description: null,
     image_url: pickBestImage(tm.images),
-    category: 'festival',
+    category,
+    tm_segment: segment,
+    tm_genre: genre,
     start_date: startDate,
     end_date: endDate,
     start_month: null, // derived from dates in normaliser

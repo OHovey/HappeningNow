@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
-import { CATEGORY_COLORS } from '@/lib/constants';
+import { ALL_CATEGORIES, CATEGORY_COLORS, CATEGORY_LABELS } from '@/lib/constants';
 import { getSpeciesColor } from '@/lib/map/migration-layers';
 
 interface MapFilterBarProps {
@@ -16,11 +16,6 @@ interface MapFilterBarProps {
 }
 
 type DropdownType = 'layers' | null;
-
-const CATEGORIES = [
-  { key: 'festival', label: 'Festivals', color: CATEGORY_COLORS.festival },
-  { key: 'wildlife', label: 'Wildlife', color: CATEGORY_COLORS.wildlife },
-] as const;
 
 export default function MapFilterBar({
   activeCategories,
@@ -113,9 +108,11 @@ export default function MapFilterBar({
         <div className="h-6 w-px shrink-0" style={{ background: 'var(--border-subtle)' }} />
 
         {/* 2. Category toggles (inline) */}
-        <div className="flex items-center gap-1 px-1.5">
-          {CATEGORIES.map(({ key, label, color }) => {
+        <div className="flex items-center gap-1 px-1.5 overflow-x-auto scrollbar-none">
+          {ALL_CATEGORIES.map((key) => {
             const isActive = activeCategories.includes(key);
+            const color = CATEGORY_COLORS[key];
+            const label = CATEGORY_LABELS[key];
 
             return (
               <button

@@ -24,7 +24,7 @@ export const bboxQuerySchema = z.object({
     };
   }),
   month: z.coerce.number().int().min(1).max(12).optional(),
-  category: z.enum(['festival', 'wildlife']).optional(),
+  category: z.enum(['festival', 'concert', 'sport', 'arts', 'event', 'wildlife']).optional(),
 });
 
 export type BboxQuery = z.infer<typeof bboxQuerySchema>;

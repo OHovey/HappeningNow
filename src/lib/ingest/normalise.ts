@@ -237,6 +237,8 @@ export async function normaliseAndUpsert(rawEvents: RawEvent[]): Promise<Normali
         status: 'active' as const,
         booking_destination_id: raw.booking_destination_id,
         getyourguide_location_id: raw.getyourguide_location_id,
+        tm_segment: raw.tm_segment ?? null,
+        tm_genre: raw.tm_genre ?? null,
       };
 
       if (existingId) {
