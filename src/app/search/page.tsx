@@ -1,5 +1,7 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import SearchPage from '@/components/search/SearchPage';
+import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
 
 export const metadata: Metadata = {
   title: 'Search Events Near You | HappeningNow.travel',
@@ -8,5 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default function SearchRoute() {
-  return <SearchPage />;
+  return (
+    <Suspense fallback={<LoadingSkeleton variant="list" />}>
+      <SearchPage />
+    </Suspense>
+  );
 }
