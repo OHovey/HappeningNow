@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function SearchRoute() {
   return (
-    <Suspense fallback={<LoadingSkeleton variant="list" />}>
+    <Suspense fallback={<LoadingSkeleton variant="card" />}>
       <SearchPage />
     </Suspense>
   );
