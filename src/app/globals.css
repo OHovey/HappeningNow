@@ -1,29 +1,243 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Surface palette — warm cream/stone foundation */
+  --background: #faf8f5;
+  --foreground: #1c1917;
+  --surface: #f5f0eb;
+  --surface-elevated: #ffffff;
+  --surface-sunken: #ece5dc;
+
+  /* Border system */
+  --border: #e7e0d8;
+  --border-subtle: #f0ebe4;
+
+  /* Text hierarchy */
+  --text-primary: #1c1917;
+  --text-secondary: #57534e;
+  --text-tertiary: #a8a29e;
+  --text-inverse: #faf8f5;
+
+  /* Category accents — richer, earthier than before */
+  --festival: #c2410c;
+  --festival-muted: #fed7aa;
+  --festival-surface: #fff7ed;
+  --wildlife: #15803d;
+  --wildlife-muted: #bbf7d0;
+  --wildlife-surface: #f0fdf4;
+  --other-accent: #4338ca;
+  --other-surface: #eef2ff;
+
+  /* Interactive accents */
+  --accent: #4338ca;
+  --accent-hover: #3730a3;
+  --accent-surface: #eef2ff;
+
+  /* Booking CTA — warm navy */
+  --cta-booking: #1e3a5f;
+  --cta-booking-hover: #15294a;
+
+  /* GYG CTA — rich terracotta */
+  --cta-tours: #b45309;
+  --cta-tours-hover: #92400e;
+
+  /* Crowd gradient — warmer version */
+  --crowd-1: #7c6fae;
+  --crowd-5: #468c6c;
+  --crowd-10: #9a2e2e;
+
+  /* Overlay & glass */
+  --glass: rgba(250, 248, 245, 0.85);
+  --glass-border: rgba(231, 224, 216, 0.6);
+  --backdrop: rgba(28, 25, 23, 0.45);
+
+  /* Shadows — warm-tinted */
+  --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.06);
+  --shadow-md: 0 4px 12px rgba(28, 25, 23, 0.08);
+  --shadow-lg: 0 8px 24px rgba(28, 25, 23, 0.1);
+  --shadow-xl: 0 16px 40px rgba(28, 25, 23, 0.12);
+  --shadow-inner: inset 0 1px 3px rgba(28, 25, 23, 0.08);
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1c1917;
+    --foreground: #e7e5e4;
+    --surface: #292524;
+    --surface-elevated: #373331;
+    --surface-sunken: #0c0a09;
+    --border: #44403c;
+    --border-subtle: #292524;
+    --text-primary: #e7e5e4;
+    --text-secondary: #a8a29e;
+    --text-tertiary: #78716c;
+    --text-inverse: #1c1917;
+    --glass: rgba(28, 25, 23, 0.85);
+    --glass-border: rgba(68, 64, 60, 0.6);
+    --backdrop: rgba(0, 0, 0, 0.55);
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-festival-orange: #f97316;
-  --color-wildlife-green: #22c55e;
-  --color-other-blue: #3b82f6;
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-inverse: var(--text-inverse);
+  --color-festival: var(--festival);
+  --color-festival-muted: var(--festival-muted);
+  --color-festival-surface: var(--festival-surface);
+  --color-wildlife: var(--wildlife);
+  --color-wildlife-muted: var(--wildlife-muted);
+  --color-wildlife-surface: var(--wildlife-surface);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-surface: var(--accent-surface);
+  --color-glass: var(--glass);
+  --color-glass-border: var(--glass-border);
+  --color-backdrop: var(--backdrop);
+  --color-festival-orange: var(--festival);
+  --color-wildlife-green: var(--wildlife);
+  --color-other-blue: var(--other-accent);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-display: var(--font-playfair);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans, 'Geist', system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Editorial serif for headings */
+h1, h2, h3 {
+  font-family: var(--font-display, 'Playfair Display', Georgia, serif);
+}
+
+/* Frosted glass utility */
+.glass-panel {
+  background: var(--glass);
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-md);
+}
+
+/* Warm card surface */
+.card-surface {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Map overlay controls */
+.map-control {
+  background: var(--glass);
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  transition: all 200ms ease;
+}
+
+.map-control:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.map-control[aria-pressed="true"] {
+  background: var(--surface-elevated);
+  box-shadow: var(--shadow-lg), var(--shadow-inner);
+}
+
+/* Subtle noise texture overlay for hero sections */
+.grain-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* Hide scrollbar utility */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Smooth page transitions */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Push MapLibre built-in controls below the filter bar */
+.maplibregl-ctrl-top-right {
+  top: 56px !important;
+}
+
+/* Marker preview popup — strip MapLibre default chrome */
+.marker-preview-popup {
+  z-index: 20 !important;
+}
+.marker-preview-popup .maplibregl-popup-content {
+  padding: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: transparent;
+  box-shadow: var(--shadow-lg);
+}
+.marker-preview-popup .maplibregl-popup-close-button {
+  z-index: 1;
+  font-size: 18px;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  right: 4px;
+  top: 4px;
+}
+.marker-preview-popup .maplibregl-popup-close-button:hover {
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+}
+.marker-preview-popup .maplibregl-popup-tip {
+  border-top-color: var(--surface-elevated);
 }

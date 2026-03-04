@@ -55,6 +55,13 @@ const mockEvent: Event = {
   booking_destination_id: null,
   getyourguide_location_id: null,
   migration_route_id: null,
+  start_date: null,
+  end_date: null,
+  status: 'active',
+  last_confirmed_at: null,
+  confidence: 1.0,
+  source: 'manual',
+  source_id: null,
   created_at: '2024-01-01',
 };
 

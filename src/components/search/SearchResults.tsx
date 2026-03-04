@@ -35,8 +35,15 @@ export default function SearchResults({
 
   if (!hasLocation) {
     return (
-      <div className="flex h-48 items-center justify-center rounded-xl bg-white p-6 text-center shadow-sm">
-        <p className="text-sm text-gray-400">
+      <div
+        className="flex h-48 items-center justify-center p-6 text-center"
+        style={{
+          background: 'var(--surface-elevated)',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--radius-xl)',
+        }}
+      >
+        <p className="text-sm text-text-tertiary">
           Search for events by entering a location above
         </p>
       </div>
@@ -45,8 +52,15 @@ export default function SearchResults({
 
   if (results.length === 0) {
     return (
-      <div className="flex h-48 items-center justify-center rounded-xl bg-white p-6 text-center shadow-sm">
-        <p className="text-sm text-gray-400">
+      <div
+        className="flex h-48 items-center justify-center p-6 text-center"
+        style={{
+          background: 'var(--surface-elevated)',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--radius-xl)',
+        }}
+      >
+        <p className="text-sm text-text-tertiary">
           No events found within {radiusKm}km of {locationName ?? 'this location'}
         </p>
       </div>
@@ -55,7 +69,7 @@ export default function SearchResults({
 
   return (
     <div className="max-h-[calc(100vh-220px)] space-y-3 overflow-y-auto pr-1">
-      <p className="text-xs text-gray-400">
+      <p className="text-xs font-medium text-text-tertiary">
         {results.length} event{results.length !== 1 ? 's' : ''} found
       </p>
       {results.map((event) => (

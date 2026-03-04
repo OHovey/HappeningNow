@@ -4,7 +4,7 @@
  */
 export default function FtcDisclosure() {
   return (
-    <span className="inline-flex items-center gap-1 text-xs text-gray-400">
+    <span className="inline-flex items-center gap-1 text-[11px] tracking-wide text-text-tertiary">
       <svg
         className="h-3 w-3"
         fill="none"

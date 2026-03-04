@@ -12,10 +12,6 @@ interface BookingWidgetProps {
 
 /**
  * Booking.com search box embed with lazy script loading.
- *
- * Uses the Booking.com flexiproduct widget when affiliate ID is available.
- * Falls back to a deep link CTA when the widget cannot load.
- * Script loaded via next/script strategy="lazyOnload" for Lighthouse performance.
  */
 export default function BookingWidget({ destId, destName, bestMonth }: BookingWidgetProps) {
   const affiliateId = process.env.NEXT_PUBLIC_BOOKING_AFFILIATE_ID;
@@ -28,9 +24,19 @@ export default function BookingWidget({ destId, destName, bestMonth }: BookingWi
 
   return (
     <section aria-label="Book accommodation" className="space-y-3">
-      <h2 className="text-lg font-semibold text-gray-900">Find a Place to Stay</h2>
+      <h2 className="text-lg text-text-primary" style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}>
+        Find a Place to Stay
+      </h2>
 
-      <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+      <div
+        className="p-5"
+        style={{
+          background: 'var(--surface-elevated)',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--radius-lg)',
+          boxShadow: 'var(--shadow-sm)',
+        }}
+      >
         {affiliateId ? (
           <>
             <ins
@@ -46,7 +52,12 @@ export default function BookingWidget({ destId, destName, bestMonth }: BookingWi
                 href={fallbackLink}
                 target="_blank"
                 rel="noopener noreferrer sponsored"
-                className="flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+                className="flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.01]"
+                style={{
+                  background: 'var(--cta-booking)',
+                  borderRadius: 'var(--radius-lg)',
+                  boxShadow: 'var(--shadow-sm)',
+                }}
               >
                 Search {destName} on Booking.com
               </a>
@@ -61,21 +72,15 @@ export default function BookingWidget({ destId, destName, bestMonth }: BookingWi
             href={fallbackLink}
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+            className="flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.01]"
+            style={{
+              background: 'var(--cta-booking)',
+              borderRadius: 'var(--radius-lg)',
+              boxShadow: 'var(--shadow-sm)',
+            }}
           >
-            <svg
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-              />
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
             </svg>
             Search {destName} on Booking.com
           </a>

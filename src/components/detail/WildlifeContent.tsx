@@ -11,8 +11,13 @@ const MiniMap = dynamic(() => import('@/components/detail/MiniMap'), {
   ssr: false,
   loading: () => (
     <div
-      className="w-full rounded-lg bg-gray-100 animate-pulse"
-      style={{ aspectRatio: '16 / 9', maxHeight: 200 }}
+      className="w-full animate-pulse"
+      style={{
+        aspectRatio: '16 / 9',
+        maxHeight: 200,
+        background: 'var(--surface)',
+        borderRadius: 'var(--radius-lg)',
+      }}
     />
   ),
 });
@@ -55,8 +60,8 @@ export default function WildlifeContent({ route }: WildlifeContentProps) {
       {/* Description */}
       {route.description && (
         <section>
-          <h2 className="text-xl font-semibold text-gray-900 mb-3">About</h2>
-          <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+          <h2 className="text-xl text-text-primary mb-3" style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}>About</h2>
+          <p className="text-text-secondary leading-relaxed whitespace-pre-line">
             {route.description}
           </p>
         </section>
@@ -64,11 +69,18 @@ export default function WildlifeContent({ route }: WildlifeContentProps) {
 
       {/* Peak Viewing Months */}
       <section>
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">
+        <h2 className="text-xl text-text-primary mb-3" style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}>
           Peak Viewing Season
         </h2>
-        <div className="rounded-lg bg-green-50 p-4">
-          <p className="text-green-800 font-semibold text-lg">{peakDisplay}</p>
+        <div
+          className="p-5"
+          style={{
+            background: 'var(--wildlife-surface)',
+            borderRadius: 'var(--radius-lg)',
+            border: '1px solid var(--wildlife-muted)',
+          }}
+        >
+          <p className="text-lg font-semibold" style={{ color: 'var(--wildlife)' }}>{peakDisplay}</p>
           {route.peak_months && route.peak_months.length > 1 && (
             <div className="mt-3 flex flex-wrap gap-2">
               {route.peak_months.map((m) => {
@@ -76,11 +88,12 @@ export default function WildlifeContent({ route }: WildlifeContentProps) {
                 return (
                   <span
                     key={m}
-                    className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${
-                      isCurrentMonth
-                        ? 'bg-green-600 text-white'
-                        : 'bg-green-100 text-green-700'
-                    }`}
+                    className="inline-flex items-center px-3 py-1 text-sm font-semibold"
+                    style={{
+                      borderRadius: 'var(--radius-full)',
+                      background: isCurrentMonth ? 'var(--wildlife)' : 'rgba(21, 128, 61, 0.1)',
+                      color: isCurrentMonth ? 'white' : 'var(--wildlife)',
+                    }}
                   >
                     {MONTH_NAMES_SHORT[m]}
                     {isCurrentMonth && ' (now)'}
@@ -95,7 +108,7 @@ export default function WildlifeContent({ route }: WildlifeContentProps) {
       {/* Migration Route Map */}
       {routeCoordinates.length >= 2 && (
         <section>
-          <h2 className="text-xl font-semibold text-gray-900 mb-3">
+          <h2 className="text-xl text-text-primary mb-3" style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}>
             Migration Route
           </h2>
           <MiniMap
@@ -103,7 +116,7 @@ export default function WildlifeContent({ route }: WildlifeContentProps) {
             routeCoordinates={routeCoordinates}
             activePosition={activePosition}
           />
-          <p className="mt-2 text-xs text-gray-500">
+          <p className="mt-2 text-xs text-text-tertiary">
             The highlighted dot shows the approximate migration position for the current month.
           </p>
         </section>
@@ -111,28 +124,22 @@ export default function WildlifeContent({ route }: WildlifeContentProps) {
 
       {/* Affiliate CTAs - wildlife tours */}
       <section>
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">
+        <h2 className="text-xl text-text-primary mb-3" style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}>
           Experience it live
         </h2>
         <a
           href={gygUrl}
           target="_blank"
           rel="noopener noreferrer sponsored"
-          className="flex w-full items-center justify-center gap-2 rounded-lg bg-green-600 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-green-700 active:bg-green-800"
+          className="flex w-full items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.01] active:scale-[0.99]"
+          style={{
+            background: 'var(--wildlife)',
+            borderRadius: 'var(--radius-lg)',
+            boxShadow: 'var(--shadow-sm)',
+          }}
         >
-          <svg
-            className="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           Find {route.species} tours
         </a>

@@ -3,8 +3,8 @@ import { searchQuerySchema } from '@/app/api/search/route';
 
 // Mock Supabase before importing GET handler
 const mockRpc = vi.fn();
-vi.mock('@/lib/supabase/server', () => ({
-  createServerClient: () => ({
+vi.mock('@supabase/supabase-js', () => ({
+  createClient: () => ({
     rpc: mockRpc,
   }),
 }));

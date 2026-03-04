@@ -28,6 +28,7 @@ export default function LocationInput({ initialValue, onSelect }: LocationInputP
   const [suggestions, setSuggestions] = useState<PhotonFeature[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [highlightIndex, setHighlightIndex] = useState(-1);
 
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -47,6 +48,7 @@ export default function LocationInput({ initialValue, onSelect }: LocationInputP
     }
 
     setLoading(true);
+    setErrorMsg(null);
     try {
       const res = await fetch(`/api/geocode?q=${encodeURIComponent(q)}`);
       if (!res.ok) throw new Error('Geocode failed');
@@ -55,9 +57,13 @@ export default function LocationInput({ initialValue, onSelect }: LocationInputP
       setSuggestions(features);
       setIsOpen(features.length > 0);
       setHighlightIndex(-1);
+      if (features.length === 0) {
+        setErrorMsg(`No results for "${q}". Try a different search.`);
+      }
     } catch {
       setSuggestions([]);
       setIsOpen(false);
+      setErrorMsg('Could not search locations. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -118,7 +124,7 @@ export default function LocationInput({ initialValue, onSelect }: LocationInputP
       <div className="relative">
         {/* Location pin icon */}
         <svg
-          className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
+          className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-tertiary"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -143,7 +149,13 @@ export default function LocationInput({ initialValue, onSelect }: LocationInputP
           onFocus={handleFocus}
           placeholder="Where are you going?"
           autoComplete="off"
-          className="w-full rounded-lg border border-gray-200 bg-gray-50 py-2 pl-9 pr-3 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400"
+          className="w-full py-2.5 pl-9 pr-3 text-sm text-text-primary placeholder-text-tertiary"
+          style={{
+            background: 'var(--surface)',
+            border: '1px solid var(--border)',
+            borderRadius: 'var(--radius-md)',
+            outline: 'none',
+          }}
           role="combobox"
           aria-expanded={isOpen}
           aria-autocomplete="list"
@@ -157,13 +169,19 @@ export default function LocationInput({ initialValue, onSelect }: LocationInputP
         <ul
           id="location-suggestions"
           role="listbox"
-          className="absolute z-50 mt-1 w-full overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg"
+          className="absolute z-50 mt-1.5 w-full overflow-hidden"
+          style={{
+            background: 'var(--surface-elevated)',
+            border: '1px solid var(--border)',
+            borderRadius: 'var(--radius-md)',
+            boxShadow: 'var(--shadow-lg)',
+          }}
         >
           {loading && (
-            <li className="px-4 py-2 text-sm text-gray-400">Searching...</li>
+            <li className="px-4 py-2.5 text-sm text-text-tertiary">Searching...</li>
           )}
           {!loading && suggestions.length === 0 && (
-            <li className="px-4 py-2 text-sm text-gray-400">No results</li>
+            <li className="px-4 py-2.5 text-sm text-text-tertiary">No results</li>
           )}
           {suggestions.map((feature, i) => (
             <li
@@ -171,11 +189,13 @@ export default function LocationInput({ initialValue, onSelect }: LocationInputP
               id={`suggestion-${i}`}
               role="option"
               aria-selected={i === highlightIndex}
-              className={`cursor-pointer px-4 py-2 text-sm ${
-                i === highlightIndex ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
-              }`}
+              className="cursor-pointer px-4 py-2.5 text-sm transition-colors"
+              style={{
+                background: i === highlightIndex ? 'var(--accent-surface)' : 'transparent',
+                color: i === highlightIndex ? 'var(--accent)' : 'var(--text-primary)',
+              }}
               onMouseDown={(e) => {
-                e.preventDefault(); // prevent blur before click registers
+                e.preventDefault();
                 selectSuggestion(feature);
               }}
             >
@@ -187,7 +207,23 @@ export default function LocationInput({ initialValue, onSelect }: LocationInputP
 
       {/* Loading state below input */}
       {loading && !isOpen && query.length >= 2 && (
-        <p className="mt-1 text-xs text-gray-400">Searching...</p>
+        <p className="mt-1.5 flex items-center gap-1.5 text-xs text-text-tertiary">
+          <span className="inline-block h-3 w-3 animate-spin rounded-full border border-text-tertiary/30 border-t-text-secondary" />
+          Searching...
+        </p>
+      )}
+
+      {/* Error feedback */}
+      {errorMsg && !isOpen && !loading && (
+        <p
+          className="mt-1.5 flex items-center gap-1.5 text-xs"
+          style={{ color: 'var(--festival)' }}
+        >
+          <svg className="h-3 w-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          {errorMsg}
+        </p>
       )}
     </div>
   );

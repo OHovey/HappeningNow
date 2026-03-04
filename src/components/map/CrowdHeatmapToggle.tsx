@@ -7,7 +7,7 @@ interface CrowdHeatmapToggleProps {
 
 /**
  * Toggle button for the crowd heatmap overlay.
- * Styled consistently with CategoryToggles: rounded pill, shadow, clear icon.
+ * Styled as a frosted glass map control.
  */
 export default function CrowdHeatmapToggle({
   enabled,
@@ -19,17 +19,12 @@ export default function CrowdHeatmapToggle({
       onPointerDown={(e) => e.stopPropagation()}
       onTouchStart={(e) => e.stopPropagation()}
       onTouchMove={(e) => e.stopPropagation()}
-      className={`
-        flex items-center gap-1.5 rounded-full px-3 py-2
-        min-h-[44px] text-sm font-medium transition-all duration-200
-        ${
-          enabled
-            ? 'bg-white shadow-md text-gray-900'
-            : 'bg-white/50 text-gray-400 hover:bg-white/70'
-        }
-      `}
+      className="map-control flex items-center gap-2 px-3.5 py-2.5 min-h-[44px] text-sm font-medium transition-all duration-200"
       aria-label={enabled ? 'Hide crowd heatmap' : 'Show crowd heatmap'}
       aria-pressed={enabled}
+      style={{
+        color: enabled ? 'var(--text-primary)' : 'var(--text-tertiary)',
+      }}
     >
       {/* Heat/flame icon */}
       <svg

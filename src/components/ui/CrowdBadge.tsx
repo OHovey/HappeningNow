@@ -7,18 +7,18 @@ interface CrowdBadgeProps {
 const CROWD_CONFIG = {
   quiet: {
     label: 'Low crowds',
-    bg: 'bg-green-500',
-    color: '#22c55e',
+    bg: 'bg-emerald-800/90',
+    dot: 'bg-emerald-400',
   },
   moderate: {
-    label: 'Moderate crowds',
-    bg: 'bg-amber-500',
-    color: '#f59e0b',
+    label: 'Moderate',
+    bg: 'bg-amber-800/90',
+    dot: 'bg-amber-400',
   },
   busy: {
     label: 'Peak crowds',
-    bg: 'bg-red-500',
-    color: '#ef4444',
+    bg: 'bg-red-900/90',
+    dot: 'bg-red-400',
   },
 } as const;
 
@@ -31,10 +31,15 @@ export default function CrowdBadge({ level }: CrowdBadgeProps) {
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full ${config.bg} px-2.5 py-1 text-xs font-medium text-white`}
+      className={`inline-flex items-center gap-1.5 rounded-full ${config.bg} px-2.5 py-1 text-[11px] font-semibold tracking-wide uppercase text-white/95`}
+      style={{
+        backdropFilter: 'blur(8px)',
+        letterSpacing: '0.04em',
+      }}
     >
       <span
-        className="inline-block h-2 w-2 rounded-full bg-white/60"
+        className={`inline-block h-1.5 w-1.5 rounded-full ${config.dot}`}
+        style={{ boxShadow: '0 0 4px currentColor' }}
         aria-hidden="true"
       />
       {config.label}

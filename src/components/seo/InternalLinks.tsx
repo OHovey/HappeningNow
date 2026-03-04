@@ -9,10 +9,6 @@ const MAX_DISPLAYED_LINKS = 8;
 
 /**
  * Related pages section with internal links.
- *
- * Renders a "Related Pages" (or custom title) section with styled
- * link items. Uses Next.js Link for client-side navigation.
- * Displays a maximum of 8 links.
  */
 export default function InternalLinks({
   links,
@@ -24,20 +20,25 @@ export default function InternalLinks({
 
   return (
     <nav aria-label="Related pages">
-      <h2 className="text-xl font-semibold text-gray-900 mb-4">{title}</h2>
+      <h2 className="text-xl text-text-primary mb-4" style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}>{title}</h2>
       <ul className="grid gap-2 sm:grid-cols-2">
         {displayedLinks.map((link) => (
           <li key={link.href}>
             <Link
               href={link.href}
-              className="flex items-center gap-2 rounded-lg border border-gray-200 px-4 py-3 text-sm text-gray-700 transition-colors hover:bg-gray-50 hover:text-blue-600"
+              className="flex items-center gap-2.5 px-4 py-3 text-sm text-text-secondary transition-all hover:text-accent hover:scale-[1.01]"
+              style={{
+                background: 'var(--surface-elevated)',
+                border: '1px solid var(--border)',
+                borderRadius: 'var(--radius-md)',
+              }}
             >
               <svg
-                className="h-4 w-4 flex-shrink-0 text-gray-400"
+                className="h-3.5 w-3.5 flex-shrink-0 text-text-tertiary"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                strokeWidth={2}
+                strokeWidth={2.5}
                 aria-hidden="true"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />

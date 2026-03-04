@@ -10,20 +10,11 @@ interface EventCardGridProps {
 
 /**
  * Grid of event cards with prominent affiliate CTAs.
- *
- * Renders a responsive grid (1/2/3 cols) of event cards. Each card includes:
- * - Event name (h3), date range, location, category badge, crowd badge
- * - Bold "Book a stay" CTA (Booking.com) - hidden for wildlife events
- * - Bold "Find tours" CTA (GetYourGuide)
- * - Link to event detail page
- * - FTC disclosure
- *
- * Uses article elements for event cards per AIDX-03.
  */
 export default function EventCardGrid({ events }: EventCardGridProps) {
   if (!events || events.length === 0) {
     return (
-      <p className="text-center text-gray-500 py-8">
+      <p className="text-center text-text-tertiary py-8">
         No events found for this selection.
       </p>
     );
@@ -31,8 +22,8 @@ export default function EventCardGrid({ events }: EventCardGridProps) {
 
   return (
     <section data-section="events">
-      <h2 className="text-2xl font-semibold text-gray-900 mb-6">Events</h2>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <h2 className="text-2xl text-text-primary mb-6" style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}>Events</h2>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {events.map((event) => (
           <EventCard key={event.id} event={event} />
         ))}
@@ -56,24 +47,33 @@ function EventCard({ event }: { event: Event }) {
   });
 
   return (
-    <article className="flex flex-col rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
+    <article
+      className="flex flex-col p-4 transition-all hover:scale-[1.01]"
+      style={{
+        background: 'var(--surface-elevated)',
+        border: '1px solid var(--border)',
+        borderRadius: 'var(--radius-lg)',
+        boxShadow: 'var(--shadow-sm)',
+      }}
+    >
       {/* Header: name + badges */}
       <div className="mb-3">
         <Link
           href={`/event/${event.slug}`}
-          className="text-lg font-semibold text-gray-900 hover:text-blue-600 transition-colors"
+          className="text-lg font-semibold text-text-primary hover:text-accent transition-colors"
         >
-          <h3>{event.name}</h3>
+          <h3 style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}>{event.name}</h3>
         </Link>
 
         <div className="mt-2 flex flex-wrap items-center gap-2">
           {/* Category badge */}
           <span
-            className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${
-              isWildlife
-                ? 'bg-green-100 text-green-800'
-                : 'bg-orange-100 text-orange-800'
-            }`}
+            className="inline-block px-2.5 py-0.5 text-xs font-semibold"
+            style={{
+              borderRadius: 'var(--radius-full)',
+              background: isWildlife ? 'var(--wildlife-surface)' : 'var(--festival-surface)',
+              color: isWildlife ? 'var(--wildlife)' : 'var(--festival)',
+            }}
           >
             {event.category}
           </span>
@@ -84,7 +84,7 @@ function EventCard({ event }: { event: Event }) {
       </div>
 
       {/* Date and location */}
-      <div className="mb-4 space-y-1 text-sm text-gray-600">
+      <div className="mb-4 space-y-1 text-sm text-text-secondary">
         <p>{formatMonthRange(event.start_month, event.end_month)}</p>
         {(event.country || event.region) && (
           <p>
@@ -101,7 +101,8 @@ function EventCard({ event }: { event: Event }) {
               href={bookingUrl}
               target="_blank"
               rel="noopener noreferrer sponsored"
-              className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-blue-600 px-3 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+              className="flex flex-1 items-center justify-center gap-1.5 px-3 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+              style={{ background: 'var(--cta-booking)', borderRadius: 'var(--radius-lg)' }}
             >
               Book a stay
             </a>
@@ -110,13 +111,14 @@ function EventCard({ event }: { event: Event }) {
             href={gygUrl}
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-orange-500 px-3 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
+            className="flex flex-1 items-center justify-center gap-1.5 px-3 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+            style={{ background: 'var(--cta-tours)', borderRadius: 'var(--radius-lg)' }}
           >
             Find tours
           </a>
         </div>
 
-        <p className="text-center text-xs text-gray-400">
+        <p className="text-center text-[11px] text-text-tertiary">
           We may earn a commission from these links
         </p>
       </div>

@@ -65,8 +65,6 @@ export default function BackToMap({ fallbackLat, fallbackLng, fallbackZoom = 8 }
       if (viewport.categories) {
         params.set('categories', viewport.categories);
       }
-      // Use window.location for full page navigation to preserve search params
-      // (Next.js App Router router.push can strip search params)
       window.location.href = `/?${params.toString()}`;
     } else if (fallbackLat !== undefined && fallbackLng !== undefined) {
       const params = new URLSearchParams();
@@ -82,11 +80,19 @@ export default function BackToMap({ fallbackLat, fallbackLng, fallbackZoom = 8 }
   return (
     <button
       onClick={handleClick}
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-white px-4 py-3 text-sm font-semibold text-gray-700 shadow-lg transition-colors hover:bg-gray-50 active:bg-gray-100"
+      className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-5 py-3 text-sm font-semibold text-text-primary transition-all hover:scale-[1.03] active:scale-[0.98]"
+      style={{
+        background: 'var(--glass)',
+        backdropFilter: 'blur(12px) saturate(1.4)',
+        WebkitBackdropFilter: 'blur(12px) saturate(1.4)',
+        border: '1px solid var(--glass-border)',
+        borderRadius: 'var(--radius-full)',
+        boxShadow: 'var(--shadow-lg)',
+      }}
       aria-label="Back to Map"
     >
       <svg
-        className="h-5 w-5"
+        className="h-4 w-4"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"

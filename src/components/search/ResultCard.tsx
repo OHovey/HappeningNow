@@ -5,10 +5,10 @@ import { getIndicatorTags } from '@/lib/scoring';
 import { buildBookingLink, buildGetYourGuideLink } from '@/lib/affiliates';
 import { CATEGORY_COLORS } from '@/lib/constants';
 
-const TAG_STYLES: Record<string, string> = {
-  'Highly Unique': 'bg-purple-100 text-purple-700',
-  'Unique': 'bg-indigo-100 text-indigo-700',
-  'Low Crowds': 'bg-green-100 text-green-700',
+const TAG_STYLES: Record<string, { bg: string; text: string }> = {
+  'Highly Unique': { bg: 'rgba(67, 56, 202, 0.1)', text: 'var(--accent)' },
+  'Unique': { bg: 'rgba(67, 56, 202, 0.08)', text: 'var(--accent)' },
+  'Low Crowds': { bg: 'var(--wildlife-surface)', text: 'var(--wildlife)' },
 };
 
 interface ResultCardProps {
@@ -44,12 +44,16 @@ export default function ResultCard({ event, isSelected, onClick }: ResultCardPro
           onClick();
         }
       }}
-      className={`flex cursor-pointer gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:shadow-md ${
-        isSelected ? 'ring-2 ring-blue-500' : ''
-      }`}
+      className="flex cursor-pointer gap-3 p-3 transition-all"
+      style={{
+        background: 'var(--surface-elevated)',
+        border: isSelected ? '2px solid var(--accent)' : '1px solid var(--border)',
+        borderRadius: 'var(--radius-lg)',
+        boxShadow: isSelected ? 'var(--shadow-md)' : 'var(--shadow-sm)',
+      }}
     >
       {/* Image thumbnail */}
-      <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg">
+      <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden" style={{ borderRadius: 'var(--radius-md)' }}>
         {event.image_url ? (
           <img
             src={event.image_url}
@@ -60,7 +64,7 @@ export default function ResultCard({ event, isSelected, onClick }: ResultCardPro
         ) : (
           <div
             className="flex h-full w-full items-center justify-center"
-            style={{ backgroundColor: categoryColor + '20' }}
+            style={{ backgroundColor: categoryColor + '15' }}
           >
             <span className="text-2xl opacity-30" aria-hidden="true">
               {event.category === 'festival' ? '\u{1F3AA}' : '\u{1F43E}'}
@@ -69,7 +73,7 @@ export default function ResultCard({ event, isSelected, onClick }: ResultCardPro
         )}
         {/* Category accent bar */}
         <div
-          className="absolute bottom-0 left-0 h-1 w-full"
+          className="absolute bottom-0 left-0 h-0.5 w-full"
           style={{ backgroundColor: categoryColor }}
         />
       </div>
@@ -81,19 +85,19 @@ export default function ResultCard({ event, isSelected, onClick }: ResultCardPro
           <a
             href={`/event/${event.slug}`}
             onClick={(e) => e.stopPropagation()}
-            className="text-sm font-semibold text-gray-900 hover:text-blue-600 hover:underline"
+            className="text-sm font-semibold text-text-primary transition-colors hover:text-accent"
           >
             {event.name}
           </a>
 
           {/* Country */}
           {event.country && (
-            <p className="text-xs text-gray-400">{event.country}</p>
+            <p className="text-xs text-text-tertiary">{event.country}</p>
           )}
 
           {/* Description (2-line clamp) */}
           {event.description && (
-            <p className="mt-0.5 line-clamp-2 text-xs text-gray-500">
+            <p className="mt-0.5 line-clamp-2 text-xs text-text-secondary">
               {event.description}
             </p>
           )}
@@ -101,16 +105,22 @@ export default function ResultCard({ event, isSelected, onClick }: ResultCardPro
 
         {/* Indicator tags */}
         <div className="mt-1.5 flex flex-wrap gap-1">
-          {tags.map((tag) => (
-            <span
-              key={tag}
-              className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-medium ${
-                TAG_STYLES[tag] ?? 'bg-gray-100 text-gray-500'
-              }`}
-            >
-              {tag}
-            </span>
-          ))}
+          {tags.map((tag) => {
+            const style = TAG_STYLES[tag] ?? { bg: 'var(--surface)', text: 'var(--text-tertiary)' };
+            return (
+              <span
+                key={tag}
+                className="inline-block px-2 py-0.5 text-[10px] font-semibold"
+                style={{
+                  background: style.bg,
+                  color: style.text,
+                  borderRadius: 'var(--radius-full)',
+                }}
+              >
+                {tag}
+              </span>
+            );
+          })}
         </div>
 
         {/* Affiliate CTAs */}
@@ -121,7 +131,8 @@ export default function ResultCard({ event, isSelected, onClick }: ResultCardPro
               target="_blank"
               rel="noopener noreferrer sponsored"
               onClick={(e) => e.stopPropagation()}
-              className="rounded bg-blue-600 px-2 py-0.5 text-[10px] font-medium text-white hover:bg-blue-700"
+              className="px-2 py-0.5 text-[10px] font-semibold text-white transition-opacity hover:opacity-90"
+              style={{ background: 'var(--cta-booking)', borderRadius: 'var(--radius-sm)' }}
             >
               Booking.com
             </a>
@@ -131,7 +142,8 @@ export default function ResultCard({ event, isSelected, onClick }: ResultCardPro
             target="_blank"
             rel="noopener noreferrer sponsored"
             onClick={(e) => e.stopPropagation()}
-            className="rounded bg-orange-500 px-2 py-0.5 text-[10px] font-medium text-white hover:bg-orange-600"
+            className="px-2 py-0.5 text-[10px] font-semibold text-white transition-opacity hover:opacity-90"
+            style={{ background: 'var(--cta-tours)', borderRadius: 'var(--radius-sm)' }}
           >
             GetYourGuide
           </a>

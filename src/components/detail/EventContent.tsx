@@ -11,8 +11,13 @@ const MiniMap = dynamic(() => import('@/components/detail/MiniMap'), {
   ssr: false,
   loading: () => (
     <div
-      className="w-full rounded-lg bg-gray-100 animate-pulse"
-      style={{ aspectRatio: '16 / 9', maxHeight: 200 }}
+      className="w-full animate-pulse"
+      style={{
+        aspectRatio: '16 / 9',
+        maxHeight: 200,
+        background: 'var(--surface)',
+        borderRadius: 'var(--radius-lg)',
+      }}
     />
   ),
 });
@@ -24,10 +29,6 @@ interface EventContentProps {
 
 /**
  * Event detail content: description, dates, location, mini map, and affiliate CTAs.
- * Rendered below the EventHero in a max-width container.
- *
- * For wildlife events linked to a migration route, renders the route line
- * and an amber active-position dot on the MiniMap.
  */
 export default function EventContent({ event, coordinates }: EventContentProps) {
   const dateRange = formatMonthRange(event.start_month, event.end_month);
@@ -71,31 +72,57 @@ export default function EventContent({ event, coordinates }: EventContentProps) 
       {/* Description */}
       {event.description && (
         <section>
-          <h2 className="text-xl font-semibold text-gray-900 mb-3">About</h2>
-          <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+          <h2 className="text-xl text-text-primary mb-3" style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}>About</h2>
+          <p className="text-text-secondary leading-relaxed whitespace-pre-line">
             {event.description}
           </p>
         </section>
       )}
 
-      {/* Dates and Location */}
-      <section className="grid gap-4 sm:grid-cols-2">
-        <div className="rounded-lg bg-gray-50 p-4">
-          <h3 className="text-sm font-medium text-gray-500 mb-1">When</h3>
-          <p className="text-gray-900 font-semibold">{dateRange}</p>
+      {/* Dates and Location — inline on mobile, cards on desktop */}
+      <section>
+        {/* Mobile: compact inline row */}
+        <div
+          className="flex items-center gap-3 p-3 sm:hidden"
+          style={{ background: 'var(--surface)', borderRadius: 'var(--radius-lg)' }}
+        >
+          <div className="flex items-center gap-1.5 text-sm">
+            <svg className="h-3.5 w-3.5 text-text-tertiary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span className="font-semibold text-text-primary">{dateRange}</span>
+          </div>
+          <span className="text-text-tertiary">·</span>
+          <div className="flex items-center gap-1.5 text-sm">
+            <svg className="h-3.5 w-3.5 text-text-tertiary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span className="font-semibold text-text-primary">
+              {[event.region, event.country].filter(Boolean).join(', ') || 'Location TBD'}
+            </span>
+          </div>
         </div>
-        <div className="rounded-lg bg-gray-50 p-4">
-          <h3 className="text-sm font-medium text-gray-500 mb-1">Where</h3>
-          <p className="text-gray-900 font-semibold">
-            {[event.region, event.country].filter(Boolean).join(', ') || 'Location TBD'}
-          </p>
+
+        {/* Desktop: separate cards */}
+        <div className="hidden sm:grid sm:grid-cols-2 sm:gap-3">
+          <div className="p-4" style={{ background: 'var(--surface)', borderRadius: 'var(--radius-lg)' }}>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-text-tertiary mb-1.5">When</h3>
+            <p className="text-text-primary font-semibold">{dateRange}</p>
+          </div>
+          <div className="p-4" style={{ background: 'var(--surface)', borderRadius: 'var(--radius-lg)' }}>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-text-tertiary mb-1.5">Where</h3>
+            <p className="text-text-primary font-semibold">
+              {[event.region, event.country].filter(Boolean).join(', ') || 'Location TBD'}
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Mini Map */}
       {mapCenter && (
         <section>
-          <h2 className="text-xl font-semibold text-gray-900 mb-3">
+          <h2 className="text-xl text-text-primary mb-3" style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}>
             {hasRoute ? 'Migration Route' : 'Location'}
           </h2>
           <MiniMap
@@ -105,7 +132,7 @@ export default function EventContent({ event, coordinates }: EventContentProps) 
             activePosition={activePosition}
           />
           {hasRoute && (
-            <p className="mt-2 text-xs text-gray-500">
+            <p className="mt-2 text-xs text-text-tertiary">
               The highlighted dot shows the approximate migration position for the current month.
             </p>
           )}
@@ -114,7 +141,7 @@ export default function EventContent({ event, coordinates }: EventContentProps) 
 
       {/* Affiliate CTAs */}
       <section>
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">
+        <h2 className="text-xl text-text-primary mb-3" style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}>
           Plan your trip
         </h2>
         <AffiliateLinks event={eventProps} />

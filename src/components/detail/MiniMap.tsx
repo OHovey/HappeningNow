@@ -10,26 +10,16 @@ interface WaypointLabel {
 }
 
 interface MiniMapProps {
-  /** Center coordinates [lng, lat] */
   coordinates: [lng: number, lat: number];
-  /** Zoom level (default 10) */
   zoom?: number;
-  /** Optional migration route coordinates for wildlife */
   routeCoordinates?: number[][];
-  /** Optional active position along the migration route (current-month highlight) */
   activePosition?: [lng: number, lat: number];
-  /** Optional labeled waypoints along the route */
   waypointLabels?: WaypointLabel[];
 }
 
 /**
  * Small embedded MapLibre map for detail pages.
- *
- * Shows a single marker at the given coordinates. For wildlife pages,
- * optionally renders a migration route line, waypoint labels, and a
- * highlighted dot for the current-month position.
- *
- * Must be loaded with next/dynamic ssr:false in consuming pages.
+ * Forces a resize after mount to ensure full container width rendering.
  */
 export default function MiniMap({
   coordinates,
@@ -55,13 +45,19 @@ export default function MiniMap({
 
     mapRef.current = map;
 
+    // Force resize after style loads to fill full container width
+    map.once('style.load', () => {
+      map.resize();
+    });
+
     map.on('load', () => {
-      // Primary marker at main coordinates
-      new maplibregl.Marker({ color: '#ef4444' })
+      // Additional resize to catch late container dimension changes
+      requestAnimationFrame(() => map.resize());
+
+      new maplibregl.Marker({ color: '#c2410c' })
         .setLngLat(coordinates)
         .addTo(map);
 
-      // Migration route line
       if (routeCoordinates && routeCoordinates.length >= 2) {
         map.addSource('route', {
           type: 'geojson',
@@ -79,18 +75,14 @@ export default function MiniMap({
           id: 'route-line',
           type: 'line',
           source: 'route',
-          layout: {
-            'line-join': 'round',
-            'line-cap': 'round',
-          },
+          layout: { 'line-join': 'round', 'line-cap': 'round' },
           paint: {
-            'line-color': '#22c55e',
+            'line-color': '#15803d',
             'line-width': 3,
             'line-opacity': 0.7,
           },
         });
 
-        // Fit bounds to show full route
         const bounds = new maplibregl.LngLatBounds();
         for (const coord of routeCoordinates) {
           bounds.extend(coord as [number, number]);
@@ -98,29 +90,21 @@ export default function MiniMap({
         map.fitBounds(bounds, { padding: 40, maxZoom: 8 });
       }
 
-      // Waypoint labels
       if (waypointLabels && waypointLabels.length > 0) {
         for (const wp of waypointLabels) {
           const el = document.createElement('div');
-          el.className =
-            'bg-white/90 text-gray-700 text-[10px] font-medium px-1.5 py-0.5 rounded shadow-sm whitespace-nowrap pointer-events-none';
+          el.style.cssText =
+            'background:rgba(250,248,245,0.9);color:var(--text-secondary);font-size:10px;font-weight:600;padding:2px 6px;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,0.1);white-space:nowrap;pointer-events:none;';
           el.textContent = wp.label;
-
-          new maplibregl.Marker({ element: el })
-            .setLngLat(wp.coordinates)
-            .addTo(map);
+          new maplibregl.Marker({ element: el }).setLngLat(wp.coordinates).addTo(map);
         }
       }
 
-      // Active position highlight (current-month dot)
       if (activePosition) {
         const dot = document.createElement('div');
-        dot.className =
-          'w-4 h-4 rounded-full bg-amber-500 border-2 border-white shadow-md';
-
-        new maplibregl.Marker({ element: dot })
-          .setLngLat(activePosition)
-          .addTo(map);
+        dot.style.cssText =
+          'width:16px;height:16px;border-radius:50%;background:#b45309;border:2px solid white;box-shadow:0 0 8px rgba(180,83,9,0.4);';
+        new maplibregl.Marker({ element: dot }).setLngLat(activePosition).addTo(map);
       }
     });
 
@@ -133,8 +117,13 @@ export default function MiniMap({
   return (
     <div
       ref={containerRef}
-      className="w-full rounded-lg overflow-hidden"
-      style={{ aspectRatio: '16 / 9', maxHeight: 200 }}
+      className="w-full overflow-hidden"
+      style={{
+        height: 220,
+        minHeight: 180,
+        borderRadius: 'var(--radius-lg)',
+        border: '1px solid var(--border)',
+      }}
       aria-label="Location map"
       role="img"
     />

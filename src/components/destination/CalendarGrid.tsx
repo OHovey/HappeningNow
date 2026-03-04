@@ -25,8 +25,6 @@ function expandMonthRange(start: number, end: number): number[] {
 
 /**
  * 12-month calendar grid showing crowd levels, events, and weather for each month.
- * Desktop: single horizontal row (grid-cols-12).
- * Mobile: collapses to grid-cols-3 / grid-cols-4.
  */
 export default function CalendarGrid({ destination, events }: CalendarGridProps) {
   const { months: bestMonths } = computeBestMonths(

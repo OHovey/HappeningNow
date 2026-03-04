@@ -14,9 +14,7 @@ const SITE_URL = 'https://happeningnow.travel';
 /**
  * Breadcrumb navigation with BreadcrumbList JSON-LD structured data.
  *
- * Pattern: Home > Region > Event/Species Name
- * Region links point to future SEO listing URLs (e.g. /festivals/southeast-asia).
- * Last item renders as a span (current page), not a link.
+ * Includes generous padding so it never looks crammed against viewport edges.
  */
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
   const jsonLd = {
@@ -34,26 +32,40 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
 
   return (
     <>
-      <nav aria-label="Breadcrumb">
-        <ol className="flex flex-wrap items-center gap-1 text-sm text-gray-500">
+      <nav
+        aria-label="Breadcrumb"
+        className="px-4 py-3 sm:px-6 md:px-8"
+        style={{
+          background: 'var(--surface)',
+          borderBottom: '1px solid var(--border-subtle)',
+        }}
+      >
+        <ol className="flex flex-wrap items-center gap-1.5 text-sm text-text-tertiary">
           {items.map((crumb, index) => {
             const isLast = index === items.length - 1;
 
             return (
-              <li key={index} className="flex items-center gap-1">
+              <li key={index} className="flex items-center gap-1.5">
                 {index > 0 && (
-                  <span aria-hidden="true" className="text-gray-400">
-                    &gt;
-                  </span>
+                  <svg
+                    className="h-3 w-3 text-text-tertiary/40"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2.5}
+                    aria-hidden="true"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
                 )}
                 {isLast ? (
-                  <span aria-current="page" className="text-gray-900 font-medium">
+                  <span aria-current="page" className="font-medium text-text-primary">
                     {crumb.name}
                   </span>
                 ) : (
                   <Link
                     href={crumb.href ?? '/'}
-                    className="hover:text-gray-700 transition-colors"
+                    className="transition-colors hover:text-text-secondary"
                   >
                     {crumb.name}
                   </Link>

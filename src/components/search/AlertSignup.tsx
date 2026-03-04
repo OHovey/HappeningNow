@@ -67,8 +67,15 @@ export default function AlertSignup({ locationName, region }: AlertSignupProps) 
 
   if (formState === 'success') {
     return (
-      <div className="mt-6 rounded-xl border border-emerald-200 bg-emerald-50 p-4">
-        <p className="text-sm font-medium text-emerald-800">
+      <div
+        className="mt-6 p-4"
+        style={{
+          background: 'var(--wildlife-surface)',
+          border: '1px solid var(--wildlife-muted)',
+          borderRadius: 'var(--radius-lg)',
+        }}
+      >
+        <p className="text-sm font-medium" style={{ color: 'var(--wildlife)' }}>
           You&apos;ll get alerts for events near {locationName}
         </p>
       </div>
@@ -76,8 +83,16 @@ export default function AlertSignup({ locationName, region }: AlertSignupProps) 
   }
 
   return (
-    <div className="mt-6 rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
-      <h3 className="mb-3 text-sm font-semibold text-gray-800">
+    <div
+      className="mt-6 p-5"
+      style={{
+        background: 'var(--surface-elevated)',
+        border: '1px solid var(--border)',
+        borderRadius: 'var(--radius-lg)',
+        boxShadow: 'var(--shadow-sm)',
+      }}
+    >
+      <h3 className="mb-3 text-sm font-semibold text-text-primary" style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}>
         Get alerts for events near {locationName}
       </h3>
 
@@ -85,12 +100,13 @@ export default function AlertSignup({ locationName, region }: AlertSignupProps) 
         {/* Category checkboxes */}
         <div className="flex flex-wrap gap-3">
           {ALERT_CATEGORIES.map((cat) => (
-            <label key={cat} className="flex items-center gap-1.5 text-xs text-gray-600">
+            <label key={cat} className="flex items-center gap-1.5 text-xs text-text-secondary cursor-pointer">
               <input
                 type="checkbox"
                 checked={categories.has(cat.toLowerCase())}
                 onChange={() => toggleCategory(cat)}
-                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                className="rounded"
+                style={{ accentColor: 'var(--accent)' }}
               />
               {cat}
             </label>
@@ -105,19 +121,29 @@ export default function AlertSignup({ locationName, region }: AlertSignupProps) 
             onChange={(e) => setEmail(e.target.value)}
             placeholder="your@email.com"
             required
-            className="flex-1 rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="flex-1 px-3 py-2 text-sm text-text-primary placeholder-text-tertiary"
+            style={{
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
+              borderRadius: 'var(--radius-md)',
+              outline: 'none',
+            }}
           />
           <button
             type="submit"
             disabled={formState === 'loading'}
-            className="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+            className="px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+            style={{
+              background: 'var(--accent)',
+              borderRadius: 'var(--radius-md)',
+            }}
           >
             {formState === 'loading' ? 'Saving...' : 'Alert me'}
           </button>
         </div>
 
         {formState === 'error' && (
-          <p className="text-xs text-red-600">{errorMessage}</p>
+          <p className="text-xs" style={{ color: 'var(--festival)' }}>{errorMessage}</p>
         )}
       </form>
     </div>

@@ -1,5 +1,9 @@
-import { createServerClient } from '@/lib/supabase/server';
+import { createClient } from '@supabase/supabase-js';
 import type { Event, EventWithCoords, DestinationWithCoords, MigrationRouteWithGeoJSON } from '@/lib/supabase/types';
+
+function createServerClient() {
+  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
+}
 
 /**
  * Fetch a single event by slug with extracted coordinates.

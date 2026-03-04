@@ -16,18 +16,6 @@ interface SeoPageLayoutProps {
 
 /**
  * Shared layout wrapper for all programmatic SEO pages.
- *
- * Structure:
- * 1. Breadcrumbs with JSON-LD
- * 2. H1 heading
- * 3. Intro text
- * 4. Email capture (after intro, before main content)
- * 5. Children slot (page-specific: map, event cards, etc.)
- * 6. Internal links (related pages)
- * 7. Back to map button
- *
- * Uses semantic HTML per AIDX-03: h1/h2/h3 hierarchy,
- * main/section/article elements, data-section attributes.
  */
 export default function SeoPageLayout({
   title,
@@ -38,22 +26,33 @@ export default function SeoPageLayout({
   children,
 }: SeoPageLayoutProps) {
   return (
-    <main className="mx-auto max-w-5xl px-4 py-8">
+    <main className="mx-auto max-w-5xl px-4 py-8" style={{ color: 'var(--text-primary)' }}>
       {/* Breadcrumbs with JSON-LD */}
       <Breadcrumbs items={breadcrumbs} />
 
       {/* Page heading */}
-      <h1 className="mt-4 text-3xl font-bold text-gray-900 sm:text-4xl">
+      <h1
+        className="mt-4 text-3xl sm:text-4xl text-text-primary"
+        style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}
+      >
         {title}
       </h1>
 
       {/* Intro paragraph */}
-      <p className="mt-4 text-lg text-gray-600 leading-relaxed">
+      <p className="mt-4 text-lg text-text-secondary leading-relaxed">
         {intro}
       </p>
 
       {/* Email capture - after intro, before main content */}
-      <section data-section="email-capture" className="mt-6 rounded-lg border border-gray-200 bg-gray-50 p-4">
+      <section
+        data-section="email-capture"
+        className="mt-6 p-5"
+        style={{
+          background: 'var(--surface)',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--radius-lg)',
+        }}
+      >
         <EmailCapture eventCategory={eventCategory} />
       </section>
 
@@ -71,16 +70,14 @@ export default function SeoPageLayout({
       <div className="mt-8 text-center">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 rounded-lg border border-gray-300 px-6 py-3 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
+          className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-text-primary transition-all hover:scale-[1.01]"
+          style={{
+            border: '1px solid var(--border)',
+            borderRadius: 'var(--radius-lg)',
+            background: 'var(--surface-elevated)',
+          }}
         >
-          <svg
-            className="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-            aria-hidden="true"
-          >
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
           Back to Map

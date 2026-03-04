@@ -16,12 +16,6 @@ interface FilteredMapProps {
 
 /**
  * Interactive embedded map filtered to page context.
- *
- * Uses MapLibre with OpenFreeMap tiles. Shows markers for the
- * page's events only. Supports pan/zoom/click interaction.
- *
- * Includes a noscript/SSR fallback listing event locations for
- * Googlebot (no JS crawling per RESEARCH.md Pitfall 4).
  */
 function FilteredMapInner({ events, center, zoom }: FilteredMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -54,12 +48,12 @@ function FilteredMapInner({ events, center, zoom }: FilteredMapProps) {
           'circle-color': [
             'match',
             ['get', 'category'],
-            'festival', '#f97316',
-            'wildlife', '#22c55e',
-            '#3b82f6',
+            'festival', '#c2410c',
+            'wildlife', '#15803d',
+            '#4338ca',
           ],
           'circle-stroke-width': 2,
-          'circle-stroke-color': '#ffffff',
+          'circle-stroke-color': '#faf8f5',
           'circle-opacity': 0.9,
         },
       });
@@ -74,7 +68,7 @@ function FilteredMapInner({ events, center, zoom }: FilteredMapProps) {
 
         new maplibregl.Popup({ closeButton: false, maxWidth: '200px' })
           .setLngLat(coords)
-          .setHTML(`<p class="font-medium text-sm">${name}</p>`)
+          .setHTML(`<p style="font-weight:600;font-size:13px;color:#1c1917;font-family:system-ui;">${name}</p>`)
           .addTo(map);
       });
 
@@ -114,16 +108,27 @@ function FilteredMapInner({ events, center, zoom }: FilteredMapProps) {
 
   return (
     <section data-section="map" className="relative">
-      <h2 className="text-2xl font-semibold text-gray-900 mb-4">Map</h2>
+      <h2 className="text-2xl text-text-primary mb-4" style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}>Map</h2>
       <div
         ref={containerRef}
-        className="h-[400px] w-full rounded-lg border border-gray-200 overflow-hidden"
+        className="h-[400px] w-full overflow-hidden"
+        style={{
+          borderRadius: 'var(--radius-lg)',
+          border: '1px solid var(--border)',
+        }}
         aria-label="Map showing event locations"
       />
       {/* SSR/noscript fallback for Googlebot */}
       <noscript>
-        <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-          <p className="text-sm text-gray-600">
+        <div
+          className="p-4"
+          style={{
+            background: 'var(--surface)',
+            border: '1px solid var(--border)',
+            borderRadius: 'var(--radius-lg)',
+          }}
+        >
+          <p className="text-sm text-text-secondary">
             Event locations: {locationNames.join(', ')}
             {events.features.length > 10 && ` and ${events.features.length - 10} more`}.
           </p>
@@ -139,8 +144,18 @@ import dynamic from 'next/dynamic';
 const FilteredMap = dynamic(() => Promise.resolve(FilteredMapInner), {
   ssr: false,
   loading: () => (
-    <div className="h-[400px] w-full rounded-lg border border-gray-200 bg-gray-100 flex items-center justify-center">
-      <p className="text-sm text-gray-500">Loading map...</p>
+    <div
+      className="h-[400px] w-full flex items-center justify-center"
+      style={{
+        background: 'var(--surface)',
+        border: '1px solid var(--border)',
+        borderRadius: 'var(--radius-lg)',
+      }}
+    >
+      <div className="flex flex-col items-center gap-2">
+        <div className="h-6 w-6 animate-spin rounded-full border-2 border-text-tertiary/20 border-t-text-secondary" />
+        <p className="text-xs text-text-tertiary">Loading map</p>
+      </div>
     </div>
   ),
 });

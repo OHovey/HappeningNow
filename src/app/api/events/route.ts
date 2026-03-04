@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { createServerClient } from '@/lib/supabase/server';
+import { createClient } from '@supabase/supabase-js';
 
 /**
  * Zod schema for bbox event query parameters.
@@ -47,7 +47,7 @@ export async function GET(request: Request) {
   }
 
   const { bbox, month, category } = parsed.data;
-  const supabase = createServerClient();
+  const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
   const { data, error } = await supabase.rpc('get_events_bbox', {
     min_lng: bbox.min_lng,
     min_lat: bbox.min_lat,

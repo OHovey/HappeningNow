@@ -16,6 +16,20 @@ export interface Event {
   image_url: string | null;
   start_month: number;
   end_month: number;
+  /** Exact start date for dated events (Ticketmaster etc). Null for month-based events. */
+  start_date: string | null;
+  /** Exact end date for dated events. Null for month-based events. */
+  end_date: string | null;
+  /** Event lifecycle status */
+  status: "active" | "archived" | "cancelled" | "postponed" | "review_needed";
+  /** When was this event last confirmed by a data source */
+  last_confirmed_at: string | null;
+  /** Confidence score: 1.0 = authoritative API, 0.5-0.9 = scraped */
+  confidence: number;
+  /** Which data source created/last updated this event */
+  source: "ticketmaster" | "wikipedia" | "apify_tourism" | "apify_wildlife" | "manual" | null;
+  /** External ID from the source (for deduplication) */
+  source_id: string | null;
   /** PostGIS geometry stored as WKB — not directly usable in TS; use GeoJSON exports */
   location: unknown;
   country: string | null;
@@ -119,12 +133,16 @@ export interface GeoJSONEventProperties {
   image_url: string | null;
   start_month: number;
   end_month: number;
+  start_date?: string | null;
+  end_date?: string | null;
   scale: number;
   crowd_level: "quiet" | "moderate" | "busy" | null;
   country: string | null;
   region: string | null;
   booking_destination_id: string | null;
   getyourguide_location_id: string | null;
+  status?: string;
+  source?: string | null;
 }
 
 export interface GeoJSONEvent {
@@ -145,17 +163,38 @@ export interface EventGeoJSON {
 // Supabase Database type (for typed client queries)
 // ---------------------------------------------------------------------------
 
+export interface AffiliateLink {
+  id: string;
+  destination_id: string;
+  brand: string;
+  date_start: string | null;
+  date_end: string | null;
+  original_url: string;
+  affiliate_url: string;
+  created_at: string;
+}
+
 export interface Database {
   public: {
     Tables: {
       events: {
         Row: Event;
-        Insert: Omit<Event, "id" | "created_at" | "scale"> & {
+        Insert: Omit<Event, "id" | "created_at" | "scale" | "status" | "confidence"> & {
           id?: string;
           created_at?: string;
           scale?: number;
+          status?: Event["status"];
+          confidence?: number;
         };
         Update: Partial<Omit<Event, "id">>;
+      };
+      affiliate_links: {
+        Row: AffiliateLink;
+        Insert: Omit<AffiliateLink, "id" | "created_at"> & {
+          id?: string;
+          created_at?: string;
+        };
+        Update: Partial<Omit<AffiliateLink, "id">>;
       };
       destinations: {
         Row: Destination;

@@ -12,8 +12,14 @@ import dynamic from 'next/dynamic';
 const SearchMap = dynamic(() => import('@/components/search/SearchMap'), {
   ssr: false,
   loading: () => (
-    <div className="flex h-full w-full items-center justify-center bg-gray-100">
-      <p className="text-sm text-gray-400">Loading map...</p>
+    <div
+      className="flex h-full w-full items-center justify-center"
+      style={{ background: 'var(--surface-sunken)' }}
+    >
+      <div className="flex flex-col items-center gap-2">
+        <div className="h-6 w-6 animate-spin rounded-full border-2 border-text-tertiary/20 border-t-text-secondary" />
+        <p className="text-xs font-medium text-text-tertiary">Loading map</p>
+      </div>
     </div>
   ),
 });
@@ -133,7 +139,7 @@ export default function SearchPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ background: 'var(--background)' }}>
       {/* Search bar */}
       <div className="mx-auto max-w-7xl px-4 pt-6">
         <SearchBar
@@ -174,7 +180,14 @@ export default function SearchPage() {
 
           {/* Map */}
           <div className="hidden h-[calc(100vh-220px)] sticky top-4 lg:block lg:w-1/2">
-            <div className="h-full rounded-xl overflow-hidden shadow-lg">
+            <div
+              className="h-full overflow-hidden"
+              style={{
+                borderRadius: 'var(--radius-xl)',
+                boxShadow: 'var(--shadow-lg)',
+                border: '1px solid var(--border)',
+              }}
+            >
               <SearchMap
                 results={results}
                 selectedResultId={selectedResultId}

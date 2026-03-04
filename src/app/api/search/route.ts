@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { createServerClient } from '@/lib/supabase/server';
+import { createClient } from '@supabase/supabase-js';
 
 /**
  * Zod schema for search query parameters.
@@ -35,7 +35,7 @@ export async function GET(request: Request) {
   }
 
   const { lat, lng, radius, start_month, end_month, category } = parsed.data;
-  const supabase = createServerClient();
+  const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
   const { data, error } = await supabase.rpc('search_events_nearby', {
     user_lat: lat,
     user_lng: lng,

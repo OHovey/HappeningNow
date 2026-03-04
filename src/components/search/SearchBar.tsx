@@ -45,6 +45,14 @@ interface SearchBarProps {
   onRadiusChange: (r: number) => void;
 }
 
+const selectStyles: React.CSSProperties = {
+  background: 'var(--surface)',
+  border: '1px solid var(--border)',
+  borderRadius: 'var(--radius-md)',
+  color: 'var(--text-primary)',
+  outline: 'none',
+};
+
 export default function SearchBar({
   locationName,
   onLocationSelect,
@@ -58,10 +66,18 @@ export default function SearchBar({
   onRadiusChange,
 }: SearchBarProps) {
   return (
-    <div className="flex flex-col gap-3 rounded-xl bg-white p-4 shadow-lg sm:flex-row sm:flex-wrap sm:items-end">
+    <div
+      className="flex flex-col gap-3 p-5 sm:flex-row sm:flex-wrap sm:items-end"
+      style={{
+        background: 'var(--surface-elevated)',
+        border: '1px solid var(--border)',
+        borderRadius: 'var(--radius-xl)',
+        boxShadow: 'var(--shadow-lg)',
+      }}
+    >
       {/* Location */}
       <div className="flex-1 min-w-[200px]">
-        <label htmlFor="location-input" className="mb-1 block text-xs font-medium text-gray-500">
+        <label htmlFor="location-input" className="mb-1.5 block text-xs font-semibold tracking-wide uppercase text-text-tertiary">
           Location
         </label>
         <LocationInput
@@ -72,14 +88,15 @@ export default function SearchBar({
 
       {/* Start month */}
       <div className="w-full sm:w-auto">
-        <label htmlFor="start-month" className="mb-1 block text-xs font-medium text-gray-500">
+        <label htmlFor="start-month" className="mb-1.5 block text-xs font-semibold tracking-wide uppercase text-text-tertiary">
           From
         </label>
         <select
           id="start-month"
           value={startMonth ?? ''}
           onChange={(e) => onStartMonthChange(e.target.value ? parseInt(e.target.value, 10) : null)}
-          className="w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400 sm:w-24"
+          className="w-full px-3 py-2.5 text-sm sm:w-24"
+          style={selectStyles}
         >
           {MONTHS.map((m) => (
             <option key={m.value} value={m.value}>
@@ -91,14 +108,15 @@ export default function SearchBar({
 
       {/* End month */}
       <div className="w-full sm:w-auto">
-        <label htmlFor="end-month" className="mb-1 block text-xs font-medium text-gray-500">
+        <label htmlFor="end-month" className="mb-1.5 block text-xs font-semibold tracking-wide uppercase text-text-tertiary">
           To
         </label>
         <select
           id="end-month"
           value={endMonth ?? ''}
           onChange={(e) => onEndMonthChange(e.target.value ? parseInt(e.target.value, 10) : null)}
-          className="w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400 sm:w-24"
+          className="w-full px-3 py-2.5 text-sm sm:w-24"
+          style={selectStyles}
         >
           {MONTHS.map((m) => (
             <option key={m.value} value={m.value}>
@@ -110,14 +128,15 @@ export default function SearchBar({
 
       {/* Category */}
       <div className="w-full sm:w-auto">
-        <label htmlFor="category-select" className="mb-1 block text-xs font-medium text-gray-500">
+        <label htmlFor="category-select" className="mb-1.5 block text-xs font-semibold tracking-wide uppercase text-text-tertiary">
           Category
         </label>
         <select
           id="category-select"
           value={category ?? ''}
           onChange={(e) => onCategoryChange(e.target.value || null)}
-          className="w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400 sm:w-28"
+          className="w-full px-3 py-2.5 text-sm sm:w-28"
+          style={selectStyles}
         >
           {CATEGORIES.map((c) => (
             <option key={c.value} value={c.value}>
@@ -129,14 +148,15 @@ export default function SearchBar({
 
       {/* Distance */}
       <div className="w-full sm:w-auto">
-        <label htmlFor="distance-select" className="mb-1 block text-xs font-medium text-gray-500">
+        <label htmlFor="distance-select" className="mb-1.5 block text-xs font-semibold tracking-wide uppercase text-text-tertiary">
           Distance
         </label>
         <select
           id="distance-select"
           value={String(radius)}
           onChange={(e) => onRadiusChange(parseInt(e.target.value, 10))}
-          className="w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400 sm:w-28"
+          className="w-full px-3 py-2.5 text-sm sm:w-28"
+          style={selectStyles}
         >
           {DISTANCES.map((d) => (
             <option key={d.value} value={d.value}>

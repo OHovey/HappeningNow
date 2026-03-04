@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState, useCallback } from 'react';
+import { createRoot } from 'react-dom/client';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
@@ -34,12 +35,12 @@ import type {
 import { createBrowserClient } from '@/lib/supabase/client';
 import { buildGetYourGuideLink, formatMonthRange } from '@/lib/affiliates';
 import TimelineScrubber from '@/components/map/TimelineScrubber';
-import CategoryToggles from '@/components/map/CategoryToggles';
-import CrowdHeatmapToggle from '@/components/map/CrowdHeatmapToggle';
-import SpeciesToggles from '@/components/map/SpeciesToggles';
 import SpeciesLegend from '@/components/map/SpeciesLegend';
+import MapFilterBar from '@/components/map/MapFilterBar';
+import MarkerPopup from '@/components/map/MarkerPopup';
 import BottomSheet from '@/components/ui/BottomSheet';
 import EventPanel from '@/components/panel/EventPanel';
+import Link from 'next/link';
 
 const EMPTY_GEOJSON: GeoJSON.FeatureCollection = {
   type: 'FeatureCollection',
@@ -69,6 +70,7 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
   ]);
   const [allGeoJSON, setAllGeoJSON] = useState<GeoJSON.FeatureCollection | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<GeoJSONEventProperties | null>(null);
   const [selectedRoute, setSelectedRoute] = useState<MigrationRouteWithGeoJSON | null>(null);
@@ -318,7 +320,7 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
         });
       });
 
-      // Event marker click handler -- open bottom sheet
+      // Event marker click handler -- show preview popup
       map.on('click', 'event-circles', (e) => {
         const features = map.queryRenderedFeatures(e.point, {
           layers: ['event-circles'],
@@ -326,9 +328,45 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
         if (!features.length) return;
 
         const props = features[0].properties as GeoJSONEventProperties;
-        setSelectedEvent(props);
-        setSelectedRoute(null);
-        setIsBottomSheetOpen(true);
+        const geometry = features[0].geometry;
+        if (geometry.type !== 'Point') return;
+
+        // Close any existing popup
+        popupRef.current?.remove();
+
+        // Create DOM container for React
+        const container = document.createElement('div');
+
+        const popup = new maplibregl.Popup({
+          closeButton: true,
+          maxWidth: '280px',
+          className: 'marker-preview-popup',
+          offset: 12,
+        })
+          .setLngLat(geometry.coordinates as [number, number])
+          .setDOMContent(container)
+          .addTo(map);
+
+        popupRef.current = popup;
+
+        // Render React component into popup
+        const root = createRoot(container);
+        root.render(
+          <MarkerPopup
+            event={props}
+            onViewDetails={() => {
+              popup.remove();
+              setSelectedEvent(props);
+              setSelectedRoute(null);
+              setIsBottomSheetOpen(true);
+            }}
+          />
+        );
+
+        // Cleanup React root when popup closes
+        popup.on('close', () => {
+          root.unmount();
+        });
       });
 
       // Heatmap click handler -- show crowd popup
@@ -457,6 +495,7 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
           layers: existingLayers,
         });
         if (features.length === 0) {
+          popupRef.current?.remove();
           setIsBottomSheetOpen(false);
         }
       });
@@ -552,6 +591,16 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
       abortController.abort();
     };
   }, [selectedMonth, activeCategories, triggerBboxFetch]);
+
+  // Show loading spinner only after 3s delay
+  useEffect(() => {
+    if (!loading) {
+      setShowLoadingSpinner(false);
+      return;
+    }
+    const timer = setTimeout(() => setShowLoadingSpinner(true), 3000);
+    return () => clearTimeout(timer);
+  }, [loading]);
 
   // Update source data when allGeoJSON or filters change (client-side refinement)
   useEffect(() => {
@@ -682,8 +731,12 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
 
     return () => {
       for (const { layer, handler } of handlers) {
-        if (map.getLayer(layer)) {
-          map.off('click', layer, handler);
+        try {
+          if (map.getLayer(layer)) {
+            map.off('click', layer, handler);
+          }
+        } catch {
+          // map already removed
         }
       }
     };
@@ -699,20 +752,38 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
       {/* Map container */}
       <div ref={containerRef} className="absolute inset-0" style={{ width: '100%', height: '100%' }} />
 
-      {/* Loading overlay */}
-      {loading && (
-        <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50">
-          <div className="rounded-lg bg-white px-6 py-4 shadow-lg">
-            <p className="text-sm text-gray-600">Loading events...</p>
-          </div>
+      {/* Filter bar — consolidated controls */}
+      <MapFilterBar
+        activeCategories={activeCategories}
+        onCategoryChange={setActiveCategories}
+        heatmapEnabled={heatmapEnabled}
+        onHeatmapToggle={setHeatmapEnabled}
+        activeSpecies={activeSpecies}
+        allSpecies={allSpecies}
+        onSpeciesChange={setActiveSpecies}
+      />
+
+      {/* Loading spinner — only shows after 3s delay */}
+      {showLoadingSpinner && (
+        <div className="glass-panel absolute bottom-20 left-4 z-10 flex items-center gap-2 px-3.5 py-2.5" style={{ borderRadius: 'var(--radius-full)' }}>
+          <div className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-text-tertiary/30 border-t-text-secondary" />
+          <span className="text-xs font-medium text-text-secondary">Loading</span>
         </div>
       )}
 
       {/* Error overlay with retry */}
       {error && (
-        <div className="absolute inset-x-0 top-4 z-10 flex justify-center">
-          <div className="mx-4 rounded-lg bg-red-50 px-4 py-3 shadow-lg">
-            <p className="text-sm text-red-700">{error}</p>
+        <div className="absolute inset-x-0 top-16 z-10 flex justify-center">
+          <div
+            className="mx-4 px-4 py-3"
+            style={{
+              background: '#fef2f2',
+              border: '1px solid #e7c8c0',
+              borderRadius: 'var(--radius-lg)',
+              boxShadow: 'var(--shadow-lg)',
+            }}
+          >
+            <p className="text-sm font-medium text-red-800">{error}</p>
             <button
               onClick={() => {
                 const map = mapRef.current;
@@ -722,7 +793,8 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
                   triggerBboxFetch(map, ctrl.signal).finally(() => setLoading(false));
                 }
               }}
-              className="mt-2 rounded bg-red-600 px-3 py-1 text-sm text-white hover:bg-red-700"
+              className="mt-2 rounded-full px-4 py-1.5 text-sm font-semibold text-white transition-colors"
+              style={{ background: 'var(--festival)' }}
             >
               Retry
             </button>
@@ -730,34 +802,20 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
         </div>
       )}
 
-      {/* Category toggles, heatmap toggle, and species toggles - top left */}
-      <div className="absolute left-3 top-3 z-10 flex flex-col gap-2">
-        <CategoryToggles
-          activeCategories={activeCategories}
-          onCategoryChange={setActiveCategories}
-        />
-        <CrowdHeatmapToggle
-          enabled={heatmapEnabled}
-          onToggle={setHeatmapEnabled}
-        />
-        {allSpecies.length > 0 && (
-          <SpeciesToggles
-            activeSpecies={activeSpecies}
-            allSpecies={allSpecies}
-            onSpeciesChange={setActiveSpecies}
-          />
-        )}
-      </div>
 
-      {/* Species legend - bottom right */}
+      {/* Species legend - bottom right, hidden on mobile */}
       {visibleSpecies.length > 0 && (
-        <div className="absolute bottom-20 right-3 z-10">
+        <div className="absolute bottom-24 right-3 z-10 hidden sm:block">
           <SpeciesLegend species={visibleSpecies} />
         </div>
       )}
 
-      {/* Timeline scrubber - bottom */}
-      <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/30 to-transparent pb-3 pt-6">
+
+      {/* Timeline scrubber - bottom, raised above attribution */}
+      <div
+        className="absolute inset-x-0 bottom-0 z-10 pb-7 pt-10 sm:pb-4"
+        style={{ background: 'linear-gradient(to top, rgba(28,25,23,0.5) 0%, rgba(28,25,23,0.25) 50%, transparent 100%)' }}
+      >
         <TimelineScrubber
           selectedMonth={selectedMonth}
           onMonthChange={setSelectedMonth}
@@ -812,7 +870,7 @@ function MigrationRoutePanel({ route, onClose }: MigrationRoutePanelProps) {
   return (
     <div className="pb-6">
       {/* Hero image / placeholder */}
-      <div className="relative h-48 w-full overflow-hidden">
+      <div className="grain-overlay relative h-48 w-full overflow-hidden">
         {route.image_url ? (
           <img
             src={route.image_url}
@@ -820,53 +878,33 @@ function MigrationRoutePanel({ route, onClose }: MigrationRoutePanelProps) {
             className="h-full w-full object-cover"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-green-400 to-green-600">
-            <span className="text-4xl opacity-30" aria-hidden="true">
-              {'~'}
-            </span>
+          <div
+            className="flex h-full w-full items-center justify-center"
+            style={{ background: 'linear-gradient(135deg, var(--wildlife) 0%, #065f46 100%)' }}
+          >
+            <svg className="h-12 w-12 text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
           </div>
         )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
       </div>
 
       {/* Content */}
-      <div className="space-y-4 px-5 pt-4">
+      <div className="space-y-4 px-5 pt-5">
         {/* Route name */}
-        <h2 className="text-xl font-bold text-gray-900">{route.name}</h2>
+        <h2 className="text-xl text-text-primary" style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}>{route.name}</h2>
 
         {/* Species and peak dates */}
-        <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500">
-          <span className="inline-flex items-center gap-1">
-            <svg
-              className="h-3.5 w-3.5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+        <div className="flex flex-wrap items-center gap-3 text-sm text-text-secondary">
+          <span className="inline-flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-full" style={{ background: 'var(--wildlife)' }} />
             {speciesLabel}
           </span>
           {peakText && (
-            <span className="inline-flex items-center gap-1">
-              <svg
-                className="h-3.5 w-3.5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
+            <span className="inline-flex items-center gap-1.5 text-text-tertiary">
+              <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               Peak: {peakText}
             </span>
@@ -875,36 +913,43 @@ function MigrationRoutePanel({ route, onClose }: MigrationRoutePanelProps) {
 
         {/* Description */}
         {route.description && (
-          <p className="text-sm leading-relaxed text-gray-600">
+          <p className="text-sm leading-relaxed text-text-secondary">
             {route.description}
           </p>
         )}
 
+        {/* View details button */}
+        <Link
+          href={`/wildlife/${route.slug}`}
+          className="flex w-full items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-text-primary transition-all hover:scale-[1.01] active:scale-[0.99]"
+          style={{
+            border: '1px solid var(--border)',
+            borderRadius: 'var(--radius-lg)',
+            background: 'var(--surface)',
+          }}
+        >
+          View details
+        </Link>
+
         {/* GYG affiliate CTA */}
-        <div className="space-y-3">
+        <div className="space-y-2">
           <a
             href={gygUrl}
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-orange-500 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600 active:bg-orange-700"
+            className="flex w-full items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.01] active:scale-[0.99]"
+            style={{
+              background: 'var(--cta-tours)',
+              borderRadius: 'var(--radius-lg)',
+              boxShadow: 'var(--shadow-sm)',
+            }}
           >
-            <svg
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             Find wildlife tours
           </a>
-          <p className="text-center text-xs text-gray-400">
+          <p className="text-center text-[11px] text-text-tertiary">
             We may earn a commission from these links
           </p>
         </div>

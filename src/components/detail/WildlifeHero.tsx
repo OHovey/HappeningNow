@@ -16,7 +16,7 @@ export default function WildlifeHero({ route }: WildlifeHeroProps) {
   const peakDisplay = formatPeakMonths(route.peak_months);
 
   return (
-    <div className="relative w-full overflow-hidden" style={{ aspectRatio: '3 / 1', minHeight: 200 }}>
+    <div className="grain-overlay relative w-full overflow-hidden" style={{ aspectRatio: '3 / 1', minHeight: 200 }}>
       {route.image_url ? (
         <Image
           src={route.image_url}
@@ -30,7 +30,7 @@ export default function WildlifeHero({ route }: WildlifeHeroProps) {
         <div
           className="absolute inset-0"
           style={{
-            background: `linear-gradient(135deg, ${CATEGORY_COLORS.wildlife}CC, ${CATEGORY_COLORS.wildlife}66)`,
+            background: `linear-gradient(135deg, ${CATEGORY_COLORS.wildlife}DD, #065f46)`,
           }}
         />
       )}
@@ -41,14 +41,17 @@ export default function WildlifeHero({ route }: WildlifeHeroProps) {
       {/* Text overlay - bottom left */}
       <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-10">
         <h1
-          className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2"
-          style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}
+          className="text-3xl md:text-4xl lg:text-5xl text-white mb-2"
+          style={{
+            fontFamily: 'var(--font-display, Georgia, serif)',
+            textShadow: '0 2px 12px rgba(0,0,0,0.4)',
+          }}
         >
           {route.species}
         </h1>
         <p
-          className="text-lg md:text-xl text-white/90"
-          style={{ textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}
+          className="text-lg md:text-xl text-white/85 font-light"
+          style={{ textShadow: '0 1px 4px rgba(0,0,0,0.4)' }}
         >
           {route.name}
           {peakDisplay && ` \u00B7 ${peakDisplay}`}

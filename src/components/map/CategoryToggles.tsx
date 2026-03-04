@@ -30,7 +30,7 @@ export default function CategoryToggles({
 
   return (
     <div
-      className="flex gap-2"
+      className="flex gap-1.5"
       onTouchStart={(e) => e.stopPropagation()}
       onTouchMove={(e) => e.stopPropagation()}
     >
@@ -41,23 +41,19 @@ export default function CategoryToggles({
           <button
             key={key}
             onClick={() => toggle(key)}
-            className={`
-              flex items-center gap-1.5 rounded-full px-3 py-2
-              min-h-[44px] text-sm font-medium transition-all duration-200
-              ${
-                isActive
-                  ? 'bg-white shadow-md text-gray-900'
-                  : 'bg-white/50 text-gray-400 hover:bg-white/70'
-              }
-            `}
+            className="map-control flex items-center gap-2 px-3.5 py-2.5 min-h-[44px] text-sm font-medium transition-all duration-200"
             aria-label={`${isActive ? 'Hide' : 'Show'} ${label.toLowerCase()}`}
             aria-pressed={isActive}
+            style={{
+              color: isActive ? 'var(--text-primary)' : 'var(--text-tertiary)',
+            }}
           >
             <span
-              className="inline-block h-3 w-3 rounded-full transition-opacity duration-200"
+              className="inline-block h-2.5 w-2.5 rounded-full transition-all duration-200"
               style={{
                 backgroundColor: color,
-                opacity: isActive ? 1 : 0.4,
+                opacity: isActive ? 1 : 0.3,
+                boxShadow: isActive ? `0 0 6px ${color}60` : 'none',
               }}
             />
             <span className="hidden sm:inline">{label}</span>

@@ -37,6 +37,12 @@ yarn-error.log*
 .env*
 !.env.local.example
 
+# playwright mcp logs
+.playwright-mcp/
+
+# supabase temp
+supabase/.temp/
+
 # vercel
 .vercel
 
