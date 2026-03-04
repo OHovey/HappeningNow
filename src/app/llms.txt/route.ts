@@ -16,6 +16,7 @@ import {
   slugify,
 } from '@/lib/supabase/seo-queries';
 
+export const dynamic = 'force-dynamic';
 export const revalidate = 86400;
 
 const BASE_URL = 'https://happeningnow.travel';

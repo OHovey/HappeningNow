@@ -12,6 +12,7 @@ import { createServerClient } from '@/lib/supabase/server';
 import { buildBookingLink, buildGetYourGuideLink, formatMonthRange } from '@/lib/affiliates';
 import type { Event, Destination, MigrationRoute } from '@/lib/supabase/types';
 
+export const dynamic = 'force-dynamic';
 export const revalidate = 86400;
 
 const BASE_URL = 'https://happeningnow.travel';
