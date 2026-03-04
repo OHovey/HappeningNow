@@ -6,6 +6,8 @@ export const revalidate = 3600;
 const BASE_URL = 'https://happeningnow.travel';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return [];
+
   const [eventSlugs, wildlifeSlugs, destinationSlugs] = await Promise.all([
     getAllEventSlugs(),
     getAllWildlifeSlugs(),

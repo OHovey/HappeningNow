@@ -19,6 +19,8 @@ export default async function sitemap({
 }: {
   id: number;
 }): Promise<MetadataRoute.Sitemap> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return [];
+
   const [regions, species] = await Promise.all([
     getDistinctRegions(),
     getDistinctSpecies(),

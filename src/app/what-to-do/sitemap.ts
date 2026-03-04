@@ -15,6 +15,8 @@ export default async function sitemap({
 }: {
   id: number;
 }): Promise<MetadataRoute.Sitemap> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return [];
+
   const destinations = await getAllDestinationSlugs();
 
   const entries: MetadataRoute.Sitemap = [];
