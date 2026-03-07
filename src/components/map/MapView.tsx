@@ -289,12 +289,9 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
       // Fetch destinations for heatmap
       fetchDestinations();
 
-      // Fetch migration routes and add layers
-      fetchMigrationRoutes().then((routes) => {
-        if (routes && routes.length > 0 && map.isStyleLoaded()) {
-          addRouteLayers(map, routes, getCurrentMonth());
-        }
-      });
+      // Migration routes disabled — raw GPS tracks create visual clutter.
+      // TODO: Re-enable after aggregating tracks into clean corridors.
+      // See .planning/todos/pending/2026-03-07-make-migration-route-data-useful-with-aggregated-corridors.md
 
       // Cluster click handler
       map.on('click', 'clusters', (e) => {
