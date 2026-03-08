@@ -8,8 +8,6 @@ import { getSpeciesColor } from '@/lib/map/migration-layers';
 interface MapFilterBarProps {
   activeCategories: string[];
   onCategoryChange: (categories: string[]) => void;
-  heatmapEnabled: boolean;
-  onHeatmapToggle: (enabled: boolean) => void;
   activeSpecies: string[];
   allSpecies: string[];
   onSpeciesChange: (species: string[]) => void;
@@ -20,8 +18,6 @@ type DropdownType = 'layers' | null;
 export default function MapFilterBar({
   activeCategories,
   onCategoryChange,
-  heatmapEnabled,
-  onHeatmapToggle,
   activeSpecies,
   allSpecies,
   onSpeciesChange,
@@ -187,29 +183,6 @@ export default function MapFilterBar({
                 width: '220px',
               }}
             >
-              {/* Crowd Heatmap toggle */}
-              <button
-                onClick={() => onHeatmapToggle(!heatmapEnabled)}
-                className="flex w-full items-center gap-2.5 px-3 py-2.5 text-xs font-medium transition-colors rounded-md hover:bg-black/5 dark:hover:bg-white/5"
-                style={{ color: heatmapEnabled ? 'var(--text-primary)' : 'var(--text-tertiary)' }}
-                aria-pressed={heatmapEnabled}
-              >
-                {/* Flame icon */}
-                <svg className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
-                </svg>
-                <span className="flex-1 text-left">Crowd Heatmap</span>
-                {/* On/Off indicator */}
-                <span
-                  className="h-2 w-2 rounded-full shrink-0"
-                  style={{
-                    background: heatmapEnabled ? 'var(--crowd-10)' : 'var(--border)',
-                    boxShadow: heatmapEnabled ? '0 0 6px var(--crowd-10)' : 'none',
-                  }}
-                />
-              </button>
-
               {/* Species section */}
               {allSpecies.length > 0 && (
                 <>

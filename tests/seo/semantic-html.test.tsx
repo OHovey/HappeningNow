@@ -62,6 +62,7 @@ const mockEvent: Event = {
   confidence: 1.0,
   source: 'manual',
   source_id: null,
+  location_approximate: false,
   created_at: '2024-01-01',
 };
 

@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { normaliseAndUpsert } from '@/lib/ingest/normalise';
 import { fetchTicketmasterEvents } from '@/lib/ingest/sources/ticketmaster';
 import { fetchWikipediaEvents } from '@/lib/ingest/sources/wikipedia';
+import { fetchApifyTourismEvents } from '@/lib/ingest/sources/apify-tourism';
+import { fetchApifyWildlifeEvents } from '@/lib/ingest/sources/apify-wildlife';
 
 /**
  * POST /api/ingest
@@ -60,6 +62,42 @@ export async function POST(request: Request) {
       if (wikiResult.events.length > 0) {
         const normalised = await normaliseAndUpsert(wikiResult.events);
         results.wikipedia = normalised;
+      }
+    }
+
+    // Apify sources (run in parallel when source=all)
+    const apifySources: { key: string; filter: string; fetcher: () => Promise<import('@/lib/ingest/types').SourceResult> }[] = [];
+
+    if (sourceFilter === 'all' || sourceFilter === 'apify_tourism') {
+      apifySources.push({ key: 'apify_tourism', filter: 'apify_tourism', fetcher: fetchApifyTourismEvents });
+    }
+    if (sourceFilter === 'all' || sourceFilter === 'apify_wildlife') {
+      apifySources.push({ key: 'apify_wildlife', filter: 'apify_wildlife', fetcher: fetchApifyWildlifeEvents });
+    }
+
+    if (apifySources.length > 0) {
+      const apifyResults = await Promise.allSettled(
+        apifySources.map(async ({ key, fetcher }) => {
+          console.log(`[ingest] Fetching ${key} events...`);
+          const sourceResult = await fetcher();
+          return { key, sourceResult };
+        }),
+      );
+
+      for (const settled of apifyResults) {
+        if (settled.status === 'fulfilled') {
+          const { key, sourceResult } = settled.value;
+          results[`${key}_fetched`] = sourceResult.events.length;
+          allErrors.push(...sourceResult.errors);
+
+          if (sourceResult.events.length > 0) {
+            const normalised = await normaliseAndUpsert(sourceResult.events);
+            results[key] = normalised;
+          }
+        } else {
+          const errMsg = settled.reason instanceof Error ? settled.reason.message : String(settled.reason);
+          allErrors.push(`Apify source failed: ${errMsg}`);
+        }
       }
     }
 

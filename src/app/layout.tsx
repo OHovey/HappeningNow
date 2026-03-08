@@ -42,6 +42,16 @@ export default function RootLayout({
             process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN || "happeningnow.travel"
           }
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function () {
+    var script = document.createElement("script");
+    script.async = 1;
+    script.src = 'https://emrld.cc/NTA1NzYy.js?t=505762';
+    document.head.appendChild(script);
+})();`,
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased`}

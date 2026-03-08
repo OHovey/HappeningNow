@@ -27,6 +27,7 @@ function makeEvent(overrides: Partial<Event> = {}): Event {
     confidence: 1.0,
     source: 'manual',
     source_id: null,
+    location_approximate: false,
     created_at: '2026-01-01T00:00:00Z',
     ...overrides,
   };

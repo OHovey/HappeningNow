@@ -85,6 +85,45 @@ async function geocode(
 }
 
 // ---------------------------------------------------------------------------
+// Country centroid fallback for approximate locations
+// ---------------------------------------------------------------------------
+
+const COUNTRY_CENTROIDS: Record<string, { lat: number; lng: number }> = {
+  'Thailand': { lat: 15.87, lng: 100.99 },
+  'Indonesia': { lat: -0.79, lng: 113.92 },
+  'India': { lat: 20.59, lng: 78.96 },
+  'Japan': { lat: 36.20, lng: 138.25 },
+  'China': { lat: 35.86, lng: 104.20 },
+  'Kenya': { lat: -0.02, lng: 37.91 },
+  'Tanzania': { lat: -6.37, lng: 34.89 },
+  'South Africa': { lat: -30.56, lng: 22.94 },
+  'Botswana': { lat: -22.33, lng: 24.68 },
+  'Costa Rica': { lat: 9.75, lng: -83.75 },
+  'Brazil': { lat: -14.24, lng: -51.93 },
+  'Peru': { lat: -9.19, lng: -75.02 },
+  'Mexico': { lat: 23.63, lng: -102.55 },
+  'Colombia': { lat: 4.57, lng: -74.30 },
+  'Australia': { lat: -25.27, lng: 133.78 },
+  'New Zealand': { lat: -40.90, lng: 174.89 },
+  'Nepal': { lat: 28.39, lng: 84.12 },
+  'Sri Lanka': { lat: 7.87, lng: 80.77 },
+  'Vietnam': { lat: 14.06, lng: 108.28 },
+  'Philippines': { lat: 12.88, lng: 121.77 },
+  'Malaysia': { lat: 4.21, lng: 101.98 },
+  'Cambodia': { lat: 12.57, lng: 104.99 },
+  'Myanmar': { lat: 21.91, lng: 95.96 },
+  'Madagascar': { lat: -18.77, lng: 46.87 },
+  'Uganda': { lat: 1.37, lng: 32.29 },
+  'Rwanda': { lat: -1.94, lng: 29.87 },
+  'Namibia': { lat: -22.96, lng: 18.49 },
+  'Iceland': { lat: 64.96, lng: -19.02 },
+  'Norway': { lat: 60.47, lng: 8.47 },
+  'Ecuador': { lat: -1.83, lng: -78.18 },
+};
+
+const APIFY_SOURCES = new Set(['apify_tourism', 'apify_wildlife']);
+
+// ---------------------------------------------------------------------------
 // Normalise & Upsert
 // ---------------------------------------------------------------------------
 
@@ -164,6 +203,19 @@ export async function normaliseAndUpsert(rawEvents: RawEvent[]): Promise<Normali
         }
       }
 
+      // Country centroid fallback for Apify sources
+      if (lat == null || lng == null) {
+        if (APIFY_SOURCES.has(raw.source) && raw.country) {
+          const centroid = COUNTRY_CENTROIDS[raw.country];
+          if (centroid) {
+            lat = centroid.lat;
+            lng = centroid.lng;
+            raw.location_approximate = true;
+            raw.confidence = 0.5;
+          }
+        }
+      }
+
       if (lat == null || lng == null) {
         result.errors.push(`No coordinates for: ${raw.name}`);
         result.skipped++;
@@ -233,6 +285,7 @@ export async function normaliseAndUpsert(rawEvents: RawEvent[]): Promise<Normali
         source: raw.source,
         source_id: raw.source_id,
         confidence: raw.confidence,
+        location_approximate: raw.location_approximate ?? false,
         last_confirmed_at: new Date().toISOString(),
         status: 'active' as const,
         booking_destination_id: raw.booking_destination_id,

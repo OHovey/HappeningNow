@@ -15,21 +15,16 @@ import {
 } from '@/lib/map/layers';
 import { startPulseAnimation } from '@/lib/map/animations';
 import { filterGeoJSON, getCurrentMonth } from '@/lib/map/filters';
-import {
-  buildCrowdHeatmapSource,
-  crowdHeatmapLayer,
-  toggleHeatmapVisibility,
-} from '@/lib/map/heatmap';
+// Heatmap disabled — tourist density will be tied to event pins instead.
+// See .planning/todos/pending/2026-03-08-tie-tourist-density-to-event-pins-instead-of-heatmap.md
 import {
   buildRouteSources,
   createRouteLayerPair,
   createDotLayer,
   createDotPulseLayer,
 } from '@/lib/map/migration-layers';
-import { crowdScoreToLabel } from '@/lib/crowd-colors';
 import type {
   GeoJSONEventProperties,
-  DestinationWithCoords,
   MigrationRouteWithGeoJSON,
 } from '@/lib/supabase/types';
 import { createBrowserClient } from '@/lib/supabase/client';
@@ -60,7 +55,6 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
   const cleanupRef = useRef<(() => void) | null>(null);
   const routePulseCleanupRef = useRef<(() => void) | null>(null);
   const popupRef = useRef<maplibregl.Popup | null>(null);
-  const destinationsRef = useRef<DestinationWithCoords[]>([]);
   const migrationRoutesRef = useRef<MigrationRouteWithGeoJSON[]>([]);
 
   const [selectedMonth, setSelectedMonth] = useState<number>(getCurrentMonth());
@@ -72,8 +66,6 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
   const [selectedEvent, setSelectedEvent] = useState<GeoJSONEventProperties | null>(null);
   const [selectedRoute, setSelectedRoute] = useState<MigrationRouteWithGeoJSON | null>(null);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
-  const [heatmapEnabled, setHeatmapEnabled] = useState(false);
-  const [destinations, setDestinations] = useState<DestinationWithCoords[]>([]);
   const [migrationRoutes, setMigrationRoutes] = useState<MigrationRouteWithGeoJSON[]>([]);
   const [activeSpecies, setActiveSpecies] = useState<string[]>([]);
 
@@ -122,37 +114,6 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
     [fetchBboxEvents]
   );
 
-  /**
-   * Fetch all destinations for the heatmap (once on mount).
-   */
-  const fetchDestinations = useCallback(async () => {
-    try {
-      const supabase = createBrowserClient();
-      const { data, error: rpcError } = await supabase.rpc(
-        'get_destinations_with_coords' as never,
-      );
-      if (rpcError) {
-        console.warn(
-          'Heatmap disabled: RPC error. If get_destinations_with_coords does not exist, run supabase/functions/get_destinations_with_coords.sql in Supabase SQL Editor.',
-          rpcError,
-        );
-        return;
-      }
-      const dests = (data ?? []) as unknown as DestinationWithCoords[];
-      if (process.env.NODE_ENV === 'development') {
-        console.log(
-          `[Heatmap] Loaded ${dests.length} destinations.`,
-          dests.length > 0
-            ? `First: ${dests[0].name}, crowd_score sample: ${dests[0].crowd_data?.['1'] ?? 'N/A'}`
-            : 'No data.',
-        );
-      }
-      setDestinations(dests);
-      destinationsRef.current = dests;
-    } catch (err) {
-      console.error('Failed to fetch destinations:', err);
-    }
-  }, []);
 
   /**
    * Fetch all migration routes with GeoJSON for route rendering.
@@ -268,16 +229,7 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
       // Add empty source initially; data will be set when bbox fetch completes
       map.addSource('events', createEventSource(EMPTY_GEOJSON));
 
-      // Add crowd heatmap source and layer BEFORE event layers (z-order: heatmap below events)
-      map.addSource('crowd-heatmap', {
-        type: 'geojson',
-        data: EMPTY_GEOJSON,
-      });
-      map.addLayer(crowdHeatmapLayer);
-      // Set initial visibility to none (heatmap off by default)
-      map.setLayoutProperty('crowd-heatmap', 'visibility', 'none');
-
-      // Add event layers on top of heatmap
+      // Add event layers
       map.addLayer(clusterLayer);
       map.addLayer(clusterCountLayer);
       map.addLayer(eventCircleLayer);
@@ -285,9 +237,6 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
 
       // Start pulse animation
       cleanupRef.current = startPulseAnimation(map);
-
-      // Fetch destinations for heatmap
-      fetchDestinations();
 
       // Migration routes disabled — raw GPS tracks create visual clutter.
       // TODO: Re-enable after aggregating tracks into clean corridors.
@@ -363,112 +312,6 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
         });
       });
 
-      // Heatmap click handler -- show crowd popup
-      map.on('click', 'crowd-heatmap', (e) => {
-        // Don't show popup if event markers were also clicked
-        const eventFeatures = map.queryRenderedFeatures(e.point, {
-          layers: ['event-circles', 'clusters'],
-        });
-        if (eventFeatures.length > 0) return;
-
-        // Find the nearest destination to click point
-        const dests = destinationsRef.current;
-        if (dests.length === 0) return;
-
-        let nearest: DestinationWithCoords | null = null;
-        let minDist = Infinity;
-
-        for (const d of dests) {
-          const dx = d.lng - e.lngLat.lng;
-          const dy = d.lat - e.lngLat.lat;
-          const dist = dx * dx + dy * dy;
-          if (dist < minDist) {
-            minDist = dist;
-            nearest = d;
-          }
-        }
-
-        if (!nearest) return;
-
-        const score = nearest.crowd_data?.[String(selectedMonth)] ?? 5;
-        const label = crowdScoreToLabel(score);
-
-        // Remove existing popup
-        popupRef.current?.remove();
-
-        const popup = new maplibregl.Popup({ closeButton: true, maxWidth: '260px' })
-          .setLngLat(e.lngLat)
-          .setHTML(`
-            <div style="font-family: system-ui, sans-serif; padding: 4px 0;">
-              <div style="font-weight: 600; font-size: 14px; margin-bottom: 6px;">${nearest.name}</div>
-              <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
-                <span style="font-size: 13px; color: #6b7280;">Crowd level:</span>
-                <span style="font-weight: 600; font-size: 13px;">${score}/10</span>
-                <span style="font-size: 12px; color: #9ca3af;">${label}</span>
-              </div>
-              <div style="font-size: 12px; color: #6b7280; margin-bottom: 8px;">
-                ${getVolumeDescription(score)}
-              </div>
-              <button
-                onclick="window.__findQuieterAlternative && window.__findQuieterAlternative('${nearest.slug}')"
-                style="
-                  background: #3b82f6; color: white; border: none; border-radius: 6px;
-                  padding: 6px 12px; font-size: 12px; font-weight: 500; cursor: pointer;
-                  width: 100%;
-                "
-              >
-                Find quieter alternatives
-              </button>
-              <a href="/destination/${nearest.slug}" style="display:block; text-align:center; margin-top:6px; font-size:12px; color:#3b82f6; text-decoration:underline;">
-                View ${nearest.name} details
-              </a>
-            </div>
-          `)
-          .addTo(map);
-
-        popupRef.current = popup;
-      });
-
-      // Wire up the "find quieter" global handler
-      (window as unknown as Record<string, unknown>).__findQuieterAlternative = (currentSlug: string) => {
-        const dests = destinationsRef.current;
-        const current = dests.find((d) => d.slug === currentSlug);
-        if (!current) return;
-
-        const currentScore = current.crowd_data?.[String(selectedMonth)] ?? 5;
-
-        // Find destinations with lower crowd scores
-        const quieter = dests
-          .filter((d) => d.slug !== currentSlug)
-          .map((d) => ({
-            ...d,
-            score: d.crowd_data?.[String(selectedMonth)] ?? 5,
-          }))
-          .filter((d) => d.score < currentScore)
-          .sort((a, b) => a.score - b.score);
-
-        if (quieter.length === 0) {
-          popupRef.current?.remove();
-          return;
-        }
-
-        // Pan to the quietest destination
-        const target = quieter[0];
-        popupRef.current?.remove();
-        map.flyTo({
-          center: [target.lng, target.lat],
-          zoom: Math.max(map.getZoom(), 4),
-          duration: 1500,
-        });
-      };
-
-      // Cursor changes on hover for heatmap
-      map.on('mouseenter', 'crowd-heatmap', () => {
-        map.getCanvas().style.cursor = 'pointer';
-      });
-      map.on('mouseleave', 'crowd-heatmap', () => {
-        map.getCanvas().style.cursor = '';
-      });
 
       // Click on map background (not on a marker or route) -- close bottom sheet
       map.on('click', (e) => {
@@ -619,29 +462,6 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
     }
   }, [allGeoJSON, selectedMonth, activeCategories]);
 
-  // Update heatmap source data when month changes or destinations are loaded
-  useEffect(() => {
-    const map = mapRef.current;
-    if (!map || destinations.length === 0) return;
-
-    if (!map.isStyleLoaded()) return;
-
-    const source = map.getSource('crowd-heatmap') as maplibregl.GeoJSONSource | undefined;
-    if (source) {
-      source.setData(buildCrowdHeatmapSource(destinations, selectedMonth));
-    }
-  }, [destinations, selectedMonth]);
-
-  // Toggle heatmap visibility
-  useEffect(() => {
-    const map = mapRef.current;
-    if (!map || !map.isStyleLoaded()) return;
-
-    // Check if layer exists before toggling
-    if (map.getLayer('crowd-heatmap')) {
-      toggleHeatmapVisibility(map, heatmapEnabled);
-    }
-  }, [heatmapEnabled]);
 
   // Update migration route sources when selectedMonth changes (dot position + trail split)
   useEffect(() => {
@@ -750,8 +570,6 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
       <MapFilterBar
         activeCategories={activeCategories}
         onCategoryChange={setActiveCategories}
-        heatmapEnabled={heatmapEnabled}
-        onHeatmapToggle={setHeatmapEnabled}
         activeSpecies={activeSpecies}
         allSpecies={allSpecies}
         onSpeciesChange={setActiveSpecies}
@@ -830,14 +648,6 @@ export default function MapView({ flyToTarget }: MapViewProps = {}) {
 }
 
 /** Helper for popup volume description */
-function getVolumeDescription(score: number): string {
-  if (score <= 2) return 'Very few tourists expected';
-  if (score <= 4) return 'Light tourist flow';
-  if (score <= 6) return 'Moderate tourist activity';
-  if (score <= 8) return 'Heavy tourist crowds';
-  return 'Extremely busy period';
-}
-
 // ---------------------------------------------------------------------------
 // Migration Route detail panel for bottom sheet
 // ---------------------------------------------------------------------------

@@ -32,6 +32,8 @@ export interface Event {
   source: "ticketmaster" | "wikipedia" | "apify_tourism" | "apify_wildlife" | "manual" | null;
   /** External ID from the source (for deduplication) */
   source_id: string | null;
+  /** Whether coordinates are approximate (e.g. country centroid for vague locations) */
+  location_approximate: boolean;
   /** PostGIS geometry stored as WKB — not directly usable in TS; use GeoJSON exports */
   location: unknown;
   country: string | null;

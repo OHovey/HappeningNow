@@ -46,6 +46,8 @@ export interface RawEvent {
   source_id: string | null;
   /** Confidence score: 1.0 = authoritative, 0.5-0.9 = scraped */
   confidence: number;
+  /** Whether coordinates are approximate (country centroid etc.) */
+  location_approximate?: boolean;
   /** Venue name (for display) */
   venue_name: string | null;
   /** Source URL for attribution */
